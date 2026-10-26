@@ -19,12 +19,13 @@
         --content-width: 1180px;
         --ink: #2b1a22;
         --muted: #6d5260;
-        --paper: #fff5f8;
+        --paper: #fff8f3;
         --surface: #ffffff;
-        --line: #f3d3df;
-        --accent: #c2185b;
+        --line: #eed8d0;
+        --accent: #ad1457;
         --accent-deep: #880e4f;
-        --highlight: #ec407a;
+        --highlight: #d4a72c;
+        --highlight-text: #8a6500;
         --focus: #6a1b9a;
         --shadow: 0 18px 45px rgb(136 14 79 / 10%);
       }
@@ -37,7 +38,7 @@
         margin: 0;
         color: var(--ink);
         background:
-          linear-gradient(90deg, transparent 0, transparent 24px, rgb(194 24 91 / 5%) 25px, transparent 26px) 0 0 / 100% 100%,
+          linear-gradient(90deg, transparent 0, transparent 24px, rgb(212 167 44 / 8%) 25px, transparent 26px) 0 0 / 100% 100%,
           var(--paper);
         font-family: Georgia, "Times New Roman", serif;
         font-size: clamp(1rem, 0.2vw + 0.95rem, 1.125rem);
@@ -80,7 +81,7 @@
         line-height: 1.25;
         text-transform: uppercase;
       }
-      .eyebrow { color: #f8bbd0; }
+      .eyebrow { color: #ffd54f; }
       .wordmark { margin: 0.2rem 0 0; font-size: 1.05rem; }
       .course-line { margin: 0.25rem 0 0; color: #fce4ec; font-size: 0.92rem; }
 
@@ -118,7 +119,7 @@
 
       .content-section { padding: 3.2rem 0; border-bottom: 1px solid var(--line); }
       .section-heading { display: flex; gap: 1rem; align-items: baseline; margin-bottom: 1.25rem; }
-      .section-number { color: var(--highlight); font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; font-weight: 700; }
+      .section-number { color: var(--highlight-text); font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; font-weight: 700; }
       .content-section p, .content-section li { max-width: 72ch; }
 
       /* EDIT HERE: Replace this example box with your essay, timeline, image gallery, map,
@@ -127,7 +128,7 @@
         margin-top: 1.5rem;
         padding: clamp(1.25rem, 4vw, 2.25rem);
         background: #fce4ec;
-        border: 2px dashed #d77a9f;
+        border: 2px dashed #d4a72c;
       }
       .edit-placeholder > :first-child { margin-top: 0; }
       .edit-placeholder > :last-child { margin-bottom: 0; }
@@ -145,7 +146,7 @@
         border-left: 6px solid var(--accent);
       }
       .assignment header { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem 1rem; align-items: baseline; }
-      .assignment-index { color: var(--highlight); font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; }
+      .assignment-index { color: var(--highlight-text); font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; }
       .assignment h3 { margin: 0; font-size: clamp(1.35rem, 2.5vw, 1.9rem); }
       .assignment .assignment-abstract { margin: 1rem 0 0; font-size: 1.04rem; }
       .assignment-repository { margin: 1.15rem 0 0; }
@@ -169,7 +170,7 @@
       .repository-link:hover { color: #fff; background: var(--accent-deep); border-color: var(--accent-deep); }
       .assignment-body { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
       .assignment-body > :last-child { margin-bottom: 0; }
-      .contents-nav { margin-top: 2rem; padding: 1.15rem 1.25rem; background: #fce4ec; border-left: 4px solid var(--highlight); }
+      .contents-nav { margin-top: 2rem; padding: 1.15rem 1.25rem; background: #fdf3dc; border-left: 4px solid var(--highlight); }
       .contents-nav ul { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.5rem 0 0; padding-left: 1.2rem; }
       .contents-nav[hidden] { display: none; }
 
@@ -229,17 +230,18 @@
           --line: #553443;
           --accent: #f48fb1;
           --accent-deep: #f8bbd0;
-          --highlight: #f06292;
+          --highlight: #e5bd68;
+          --highlight-text: #e5bd68;
           --focus: #ffd180;
           --shadow: 0 18px 45px rgb(0 0 0 / 24%);
         }
         .site-header { color: #fff5f8; background: #3d0a24; }
-        .eyebrow { color: #f8bbd0; }
+        .eyebrow { color: #f3d78c; }
         .course-line { color: #f3d9e4; }
         .edit-placeholder, .contents-nav { background: #3a1a2a; }
         .edit-callout, .abstract strong, summary { color: #f8bbd0; }
-        .repository-link { color: #3d0a24; background: #f48fb1; border-color: #f48fb1; }
-        .repository-link:hover { color: #3d0a24; background: #f8bbd0; border-color: #f8bbd0; }
+        .repository-link { color: #fff; background: #c2185b; border-color: #c2185b; }
+        .repository-link:hover { color: #fff; background: #ad1457; border-color: #ad1457; }
       }
 
       @media print {
