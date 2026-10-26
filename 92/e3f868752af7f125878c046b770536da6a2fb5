@@ -1,0 +1,19 @@
+index.html
+  s_3ccbdd10267d76::t_c15a22efb25a91 22,24-25,27-28,41,84,122,131,149,173,233-234,239,243-244
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "92e3f868752af7f125878c046b770536da6a2fb5",
+  "prompts": {},
+  "sessions": {
+    "s_3ccbdd10267d76": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9645aa98-5e83-4414-8116-b2d4e45adc44",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "jha-khushi <224996314+jha-khushi@users.noreply.github.com>"
+    }
+  }
+}
