@@ -1,0 +1,259 @@
+"""
+============================================================
+Topic: Extraction of Indian Cultural Elements Using RAG
+       (Retrieval-Augmented Generation pipeline)
+============================================================
+Author Name(s): Khushi Jha
+Semester: Monsoon Semester 2026
+Affiliation: Department of Humanities and Social Sciences,
+Indian Institute of Technology (Indian School of Mines) Dhanbad
+
+Pipeline (all models run locally through Ollama):
+  1. LOAD      read the cleaned literary texts in corpus/
+  2. CHUNK     split each text into overlapping passages (~250 words)
+  3. EMBED     turn every passage into a vector with nomic-embed-text
+  4. RETRIEVE  for each flora/fauna query, find the most similar passages
+  5. GENERATE  ask the local LLM (qwen2.5:7b) to list only the plant and
+               animal names that appear in those passages
+  6. VERIFY    keep a name only if it really occurs in its passage
+               (guards against the LLM inventing names)
+  7. SAVE      write results/extractions.json and ../flora_fauna.py
+
+Requirements: Ollama running locally with the two models pulled:
+    ollama pull nomic-embed-text
+    ollama pull qwen2.5:7b
+Run:  python rag_pipeline.py
+============================================================
+"""
+
+import json
+import re
+import urllib.request
+from collections import defaultdict
+from pathlib import Path
+
+import numpy as np
+
+HERE = Path(__file__).parent
+CORPUS = HERE / "corpus"
+RESULTS = HERE / "results"
+OLLAMA = "http://localhost:11434"
+EMBED_MODEL = "nomic-embed-text"
+LLM_MODEL = "qwen2.5:7b"
+
+CHUNK_WORDS = 250
+OVERLAP_WORDS = 50
+TOP_K = 30          # passages retrieved per query
+
+# Retrieval queries: one per category of flora and fauna.
+QUERIES = {
+    "flora": [
+        "trees in the forest: mango, banyan, asoka, sal, palm",
+        "flowers and blossoms: lotus, jasmine, kadamba, champak",
+        "creepers, vines, grass and herbs growing in the hermitage",
+        "crops and grains in the fields: rice, barley, sugar-cane",
+        "fruits, gardens and orchards",
+        "sandalwood, incense trees and fragrant plants",
+    ],
+    "fauna": [
+        "wild animals of the jungle: tiger, lion, elephant, deer",
+        "birds singing: cuckoo, peacock, parrot, swan, crane",
+        "snakes, crocodiles, tortoises and other reptiles",
+        "fish and creatures of the river and the sea",
+        "bees, insects and butterflies",
+        "domestic animals: cow, horse, buffalo, goat, dog, monkey",
+    ],
+}
+
+# Generic words that name a category, not a species; not counted as results.
+GENERIC = {
+    "tree", "trees", "plant", "plants", "flower", "flowers", "herb", "herbs",
+    "crop", "crops", "fruit", "fruits", "grass", "creeper", "vine", "leaf",
+    "leaves", "bud", "blossom", "seed", "forest", "wood", "garden", "grain",
+    "animal", "animals", "beast", "bird", "birds", "fish", "insect", "reptile",
+    "creature", "mammal", "game", "cattle", "herd", "flock", "fowl", "prey",
+    "bough", "branch", "root", "thorn", "weed", "shrub", "bush", "flesh",
+    "young", "calf", "cub", "egg", "nest", "feather", "hide", "horn", "tusk",
+}
+
+EXTRACTION_PROMPT = """You are a careful annotator of Indian literature.
+Read the PASSAGE and list every specific plant or animal that is named in it.
+
+Rules:
+- Include only names that literally appear in the passage. Do not guess.
+- Use the singular form, as written in the passage (e.g. "lotus", "mango",
+  "elephant", "cuckoo", "chataka bird").
+- Skip generic words such as tree, flower, bird, animal, beast, fish.
+- Skip metaphors where no real plant or animal is meant, and skip
+  mythical beings (e.g. naga, garuda, gandharva).
+- kingdom is "flora" for plants and "fauna" for animals.
+- category is one of: tree, flower, herb_or_grass, crop_or_fruit,
+  creeper (flora); mammal, bird, reptile, fish_or_aquatic, insect (fauna).
+
+Return JSON: {{"items": [{{"name": "...", "kingdom": "...", "category": "..."}}]}}
+Return {{"items": []}} if nothing is named.
+
+PASSAGE (from {source}):
+\"\"\"{passage}\"\"\"
+"""
+
+SCHEMA = {
+    "type": "object",
+    "properties": {
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "kingdom": {"type": "string", "enum": ["flora", "fauna"]},
+                    "category": {"type": "string"},
+                },
+                "required": ["name", "kingdom", "category"],
+            },
+        }
+    },
+    "required": ["items"],
+}
+
+
+def ollama(endpoint, payload):
+    req = urllib.request.Request(
+        f"{OLLAMA}/api/{endpoint}",
+        data=json.dumps(payload).encode(),
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=600) as resp:
+        return json.loads(resp.read())
+
+
+# ---- 1-2. Load and chunk -------------------------------------------------
+def load_chunks():
+    chunks = []
+    step = CHUNK_WORDS - OVERLAP_WORDS
+    for path in sorted(CORPUS.glob("*.txt")):
+        words = path.read_text(encoding="utf-8").split()
+        for i in range(0, max(len(words) - OVERLAP_WORDS, 1), step):
+            chunks.append({
+                "id": len(chunks),
+                "source": path.stem,
+                "text": " ".join(words[i:i + CHUNK_WORDS]),
+            })
+    return chunks
+
+
+# ---- 3. Embed (cached, so re-runs are fast) ------------------------------
+def embed(texts, prefix):
+    vectors = []
+    for i in range(0, len(texts), 32):
+        batch = [prefix + t for t in texts[i:i + 32]]
+        vectors += ollama("embed", {"model": EMBED_MODEL, "input": batch})["embeddings"]
+    v = np.array(vectors, dtype=np.float32)
+    return v / np.linalg.norm(v, axis=1, keepdims=True)
+
+
+def chunk_vectors(chunks):
+    cache = RESULTS / "chunk_embeddings.npy"
+    if cache.exists():
+        v = np.load(cache)
+        if len(v) == len(chunks):
+            return v
+    v = embed([c["text"] for c in chunks], "search_document: ")
+    np.save(cache, v)
+    return v
+
+
+# ---- 4. Retrieve ---------------------------------------------------------
+def retrieve(chunks, vectors):
+    hits = {}
+    for kingdom, queries in QUERIES.items():
+        qv = embed(queries, "search_query: ")
+        scores = qv @ vectors.T
+        for q, row in zip(queries, scores):
+            for idx in np.argsort(-row)[:TOP_K]:
+                hits.setdefault(int(idx), []).append(q)
+    return hits
+
+
+# ---- 5. Generate ---------------------------------------------------------
+def extract(chunk):
+    prompt = EXTRACTION_PROMPT.format(source=chunk["source"], passage=chunk["text"])
+    out = ollama("chat", {
+        "model": LLM_MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+        "format": SCHEMA,
+        "stream": False,
+        "options": {"temperature": 0},
+    })
+    try:
+        return json.loads(out["message"]["content"]).get("items", [])
+    except json.JSONDecodeError:
+        return []
+
+
+# ---- 6. Verify -----------------------------------------------------------
+def normalise(name):
+    name = re.sub(r"[^a-z\- ]", "", name.lower()).strip()
+    return re.sub(r"^(the|a|an) ", "", name)
+
+
+def find_in_text(name, text):
+    """Return the sentence in which `name` (or its plural) occurs, else None."""
+    pattern = re.compile(rf"\b{re.escape(name)}(s|es)?\b", re.IGNORECASE)
+    for sentence in re.split(r"(?<=[.!?;])\s+", text):
+        if pattern.search(sentence):
+            return sentence.strip()
+    return None
+
+
+def main():
+    RESULTS.mkdir(exist_ok=True)
+    chunks = load_chunks()
+    print(f"Loaded {len(chunks)} passages from {len(set(c['source'] for c in chunks))} texts")
+
+    vectors = chunk_vectors(chunks)
+    hits = retrieve(chunks, vectors)
+    print(f"Retrieved {len(hits)} unique passages for {sum(map(len, QUERIES.values()))} queries")
+
+    found = defaultdict(lambda: {"kingdom": None, "categories": defaultdict(int),
+                                 "sources": set(), "evidence": None})
+    rejected = []
+    for n, idx in enumerate(sorted(hits), 1):
+        chunk = chunks[idx]
+        for item in extract(chunk):
+            name = normalise(item.get("name", ""))
+            if not name or name in GENERIC or len(name) < 3:
+                continue
+            sentence = find_in_text(name, chunk["text"])
+            if sentence is None:                      # hallucinated / not in text
+                rejected.append({"name": name, "source": chunk["source"]})
+                continue
+            entry = found[name]
+            entry["kingdom"] = entry["kingdom"] or item.get("kingdom")
+            entry["categories"][item.get("category", "other")] += 1
+            entry["sources"].add(chunk["source"])
+            entry["evidence"] = entry["evidence"] or {"source": chunk["source"],
+                                                      "sentence": sentence}
+        if n % 20 == 0:
+            print(f"  processed {n}/{len(hits)} passages, {len(found)} names so far")
+
+    records = []
+    for name, e in sorted(found.items()):
+        records.append({
+            "name": name,
+            "kingdom": e["kingdom"],
+            "category": max(e["categories"], key=e["categories"].get),
+            "sources": sorted(e["sources"]),
+            "evidence": e["evidence"],
+        })
+
+    (RESULTS / "extractions.json").write_text(
+        json.dumps({"model": LLM_MODEL, "embedding_model": EMBED_MODEL,
+                    "passages_retrieved": len(hits), "records": records,
+                    "rejected_not_in_text": rejected},
+                   ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Kept {len(records)} verified names; rejected {len(rejected)} not found in text")
+
+
+if __name__ == "__main__":
+    main()
