@@ -330,14 +330,16 @@
             <article class="assignment" id="assignment-1" aria-labelledby="assignment-1-title">
               <header>
                 <span class="assignment-index">Assignment 01</span>
-                <h3 id="assignment-1-title">[EDIT: Title of your first assignment]</h3>
+                <h3 id="assignment-1-title">NLP: Indic Stop Words &mdash; Marathi</h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> [EDIT: Give a short description of this assignment: the question, material, method, and main insight.]</p>
-              <!-- EDIT: Replace this with the GitHub repository URL for this assignment. -->
-              <p class="assignment-repository"><a class="repository-link" href="https://github.com/your-username/your-assignment-1-repository" target="_blank" rel="noopener noreferrer">View this project&rsquo;s GitHub repository</a></p>
+              <p class="assignment-abstract"><strong>Abstract.</strong> Stop words are high-frequency function words that carry little content on their own and are usually removed before keyword extraction, topic modelling or frequency analysis. This file compiles a Marathi (Devanagari script) stop-word list grouped by grammatical category &mdash; conjunctions, pronouns, possessives, demonstratives, postpositions, auxiliary verbs and particles &mdash; with a small function that removes them from a sentence.</p>
+              <p class="assignment-repository">File: <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/marathi_stopwords.py" target="_blank" rel="noopener noreferrer">marathi_stopwords.py</a></p>
               <div class="assignment-body">
                 <p class="edit-callout">Visible assignment work</p>
-                <p>[EDIT: Place the actual first assignment here. Add paragraphs, images, a timeline, linked media, data, maps, or your own HTML. This space should show the work, not only describe it.]</p>
+                <p><strong>Sample from the list</strong> (162 words in total):</p>
+                <p lang="mr">आणि &middot; किंवा &middot; पण &middot; परंतु &middot; मी &middot; आम्ही &middot; तो &middot; ती &middot; ते &middot; माझा &middot; त्यांचे &middot; हा &middot; ही &middot; हे &middot; काय &middot; कोण &middot; मध्ये &middot; साठी &middot; पासून &middot; आहे &middot; होते &middot; नाही &middot; सुद्धा</p>
+                <p><strong>Example.</strong> Removing stop words from <span lang="mr">&ldquo;मी आज शाळेत गेले आणि माझी मैत्रीण पण तिथे होती&rdquo;</span> (&ldquo;Today I went to school and my friend was there too&rdquo;) leaves only the content words <span lang="mr">&ldquo;शाळेत मैत्रीण&rdquo;</span> (school, friend).</p>
+                <p><strong>Limitation.</strong> Marathi often attaches postpositions to the noun (<span lang="mr">घरात</span> = <span lang="mr">घर</span> + <span lang="mr">-त</span>, &ldquo;in the house&rdquo;), so matching whole words cannot strip these suffixes; a stemmer would be needed for that.</p>
               </div>
             </article>
 
