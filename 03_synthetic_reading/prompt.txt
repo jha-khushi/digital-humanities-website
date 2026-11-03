@@ -1,7 +1,7 @@
 PROMPT
 Prompt given to a local LLM (qwen2.5:7b, run through Ollama) for the synthetic reading of Rabindranath Tagore's "Subha".
 
-The story was divided into the same three equal parts used for the partial reading (Stage I, Stage II, Stage III). The prompt below was sent once for each stage, with that stage's text inserted in place of {STAGE_TEXT}. The model was run at temperature 0 and asked to return JSON.
+The story was divided into the same three equal parts used for the partial reading (Stage I, Stage II, Stage III). Each stage was sent in windows of 10 sentences, with the window inserted in place of {STAGE_TEXT}; the results of all windows in a stage were merged. (A first run that sent each stage whole, about 40 sentences, failed on Stage II: the 7B model began copying the passage word by word into every category. Shorter windows, a cap of 12 items per list and a repetition penalty fixed this.) The model was run at temperature 0 and asked to return JSON. Every returned expression was then checked against the text, and expressions not found in it were discarded.
 
 ----------------------------------------------------------------------
 
@@ -19,10 +19,11 @@ To operationalise this question, extract from the passage below all words and mu
 
 Rules:
 1. Extract only words and phrases that occur in the passage, in their original lexical form. Do not paraphrase, summarise, or add interpretation.
-2. Be exhaustive rather than selective, and cover the whole passage, not only its opening.
+2. Cover the whole passage, not only its opening.
 3. An expression may appear under more than one dimension if it genuinely functions in both.
 4. Do not include character names on their own.
-5. Return only JSON in exactly this form:
+5. List at most 12 of the most significant expressions per dimension. Never copy the passage word by word; ordinary function words (time, long, while, do) are not expressions.
+6. Return only JSON in exactly this form:
 
 {"voice_and_silence": [...], "nature_and_nonhuman_kinship": [...], "social_and_patriarchal_structure": [...], "affect_and_being": [...]}
 

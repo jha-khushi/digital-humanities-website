@@ -294,7 +294,6 @@
             <dd>IIT (ISM) Dhanbad</dd>
           </div>
         </dl>
-        <p class="student-note">Replace text in square brackets before publishing.</p>
       </aside>
 
       <main id="main-content">
@@ -302,7 +301,7 @@
         <section class="hero" aria-labelledby="portfolio-title">
           <p class="label project-kicker">Student portfolio</p>
           <h1 id="portfolio-title">Khushi Jha&rsquo;s Digital Humanities Portfolio</h1>
-          <p class="abstract"><strong>Portfolio introduction.</strong> [EDIT: In 2&ndash;4 sentences, introduce the interests, questions, materials, or methods that connect your assignments. Readers can explore each exhibition below.]</p>
+          <p class="abstract"><strong>Portfolio introduction.</strong> These four assignments ask what computational methods can and cannot do with Indian languages and literature. They move from preparing Hindi text for NLP, to retrieving Kalidasa&rsquo;s plants and animals with a local RAG pipeline, to a synthetic reading of Tagore&rsquo;s &ldquo;Subha&rdquo; that tests a literary argument with an LLM and visualisation, and finally to writing a SKILL that makes an LLM brief Indian constitutional judgments faithfully. Each exhibition below links to its files on GitHub.</p>
 
           <nav class="contents-nav" aria-label="Assignments on this page">
             <p class="label">On this page</p>
@@ -347,28 +346,57 @@
             <article class="assignment" id="assignment-2" aria-labelledby="assignment-2-title">
               <header>
                 <span class="assignment-index">Assignment 02</span>
-                <h3 id="assignment-2-title">[EDIT: Title of your second assignment]</h3>
+                <h3 id="assignment-2-title">Extraction of Indian Cultural Elements Using RAG: Flora and Fauna in Kalidasa</h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> [EDIT: Give a short description of this assignment: the question, material, method, and main insight.]</p>
-              <!-- EDIT: Replace this with the GitHub repository URL for this assignment. -->
-              <p class="assignment-repository"><a class="repository-link" href="https://github.com/your-username/your-assignment-2-repository" target="_blank" rel="noopener noreferrer">View this project&rsquo;s GitHub repository</a></p>
+              <p class="assignment-abstract"><strong>Abstract.</strong> Kalidasa&rsquo;s poetry and drama are famous for their dense natural world: hermitage groves, seasonal flowers and the birds of Sanskrit convention. Using a Retrieval-Augmented Generation (RAG) pipeline that runs entirely on a local machine, I built a repository of Kalidasa&rsquo;s seven works in Arthur W. Ryder&rsquo;s public-domain translation, retrieved the passages most relevant to plants and animals, and had a local LLM extract their names. Every name was checked against its source passage and validated, giving 28 plants and 29 animals.</p>
+              <p class="assignment-repository">Result file: <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/02_rag_flora_fauna/flora_fauna.py" target="_blank" rel="noopener noreferrer">flora_fauna.py</a></p>
+              <p class="assignment-repository">Pipeline:
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/02_rag_flora_fauna/corpus/kalidasa_shakuntala_and_other_works.txt" target="_blank" rel="noopener noreferrer">corpus (Kalidasa, tr. Ryder)</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/02_rag_flora_fauna/preprocess.py" target="_blank" rel="noopener noreferrer">preprocess.py</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/02_rag_flora_fauna/rag_pipeline.py" target="_blank" rel="noopener noreferrer">rag_pipeline.py</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/02_rag_flora_fauna/validate_results.py" target="_blank" rel="noopener noreferrer">validate_results.py</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/02_rag_flora_fauna/make_flora_fauna.py" target="_blank" rel="noopener noreferrer">make_flora_fauna.py</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/02_rag_flora_fauna/results/validated.json" target="_blank" rel="noopener noreferrer">validated.json</a> (each name with its evidence sentence)
+              </p>
               <div class="assignment-body">
                 <p class="edit-callout">Visible assignment work</p>
-                <p>[EDIT: Place the actual second assignment here. Delete this entire block if you do not need it, or copy a block to add more assignments.]</p>
+                <p><strong>Pipeline.</strong> (1) Pre-process: remove Project Gutenberg licence text and split the book into its seven works, leaving out the translator&rsquo;s introduction. (2) Chunk into 300 overlapping passages of about 250 words. (3) Embed each passage with <code>nomic-embed-text</code>. (4) Retrieve the 15 most similar passages for each of 12 queries (trees, flowers, creepers, crops, mammals, birds, reptiles, fish, insects&hellip;), 90 passages in all. (5) Generate: <code>qwen2.5:7b</code> lists the plant and animal names in each passage as JSON. (6) Verify that each name occurs in its passage, then validate it (the model, plus recorded author corrections) and merge variants. (7) Save as <code>flora_fauna.py</code>.</p>
+                <p><strong>Flora (28):</strong> trees: ashoka, bakul, mango, deodar, coral tree, fig, jujube, almond, bamboo, nipa; flowers: lotus, water-lily, lily, jasmine, siris, ketak (screw-pine), lodh, amaranth, trumpet-flower; grasses and herbs: sacred grass (kusha), panic grass, reed, madder, mushroom; crops and fruit: rice, plantain, rose-apple; creeper: spring creeper.</p>
+                <p><strong>Fauna (29):</strong> mammals: elephant, lion, tiger, deer, antelope, bear, boar, bison, buffalo, yak, cow, jackal, ape; birds: peacock, cuckoo, swan, ruddy goose (chakravaka), crane, heron, parrot, plover, starling, nightingale; reptiles: cobra, snake; others: bee, spider, carp, frog.</p>
+                <p><strong>What the validation step showed.</strong> Of 165 raw names from the LLM, only 101 were real plants or animals. The rest were ornaments (&ldquo;anklets&rdquo;, &ldquo;lotus-bracelet&rdquo;), places (&ldquo;Ganges river&rdquo;, &ldquo;hermitage&rdquo;), a character (&ldquo;Shakuntala&rdquo;) or the moon, and many were variants of one name (&ldquo;mango-blossoms&rdquo;, &ldquo;mango-twig&rdquo;). This is itself a finding: in Kalidasa, plants and animals are so bound up with ornament, ritual and the heroine&rsquo;s body (lotus-bracelets, bark dresses, the &ldquo;vine-bride&rdquo;) that a model reading for &ldquo;nature&rdquo; cannot easily separate the natural world from the cultural one.</p>
+                <p><strong>Limitations.</strong> Names come from an English translation (1912), so some are the translator&rsquo;s choices (&ldquo;nightingale&rdquo; and &ldquo;starling&rdquo; for Indian birds); retrieval finds only the most relevant passages, not every mention.</p>
               </div>
             </article>
 
             <article class="assignment" id="assignment-3" aria-labelledby="assignment-3-title">
               <header>
                 <span class="assignment-index">Assignment 03</span>
-                <h3 id="assignment-3-title">[EDIT: Title of your third assignment]</h3>
+                <h3 id="assignment-3-title">Synthetic Reading: Voice, Silence and Nature in Tagore&rsquo;s &ldquo;Subha&rdquo;</h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> [EDIT: Give a short description of this assignment: the question, material, method, and main insight.]</p>
-              <!-- EDIT: Replace this with the GitHub repository URL for this assignment. -->
-              <p class="assignment-repository"><a class="repository-link" href="https://github.com/your-username/your-assignment-3-repository" target="_blank" rel="noopener noreferrer">View this project&rsquo;s GitHub repository</a></p>
+              <p class="assignment-abstract"><strong>Abstract.</strong> &ldquo;Subha&rdquo; is the story of a mute village girl whose family treats her as a &ldquo;silent weight&rdquo; and finally marries her off without revealing her muteness. After a partial reading of 20% of the story, I asked how the text makes speech the condition for being recognised as a feeling person, and where Subha&rsquo;s own language goes when no human hears it. A local LLM extracted expressions along four dimensions (voice and silence, nature and non-human kinship, social and patriarchal structure, affect) across three stages of the story. The visualisation shows that Subha&rsquo;s language lives with the river and the cows, and that this vocabulary vanishes the moment marriage takes her to Calcutta, where the language of value, inspection and exchange takes over.</p>
+              <p class="assignment-repository">Files:
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/subha.txt" target="_blank" rel="noopener noreferrer">subha.txt</a> (corpus) &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/partial_reading.txt" target="_blank" rel="noopener noreferrer">partial_reading.txt</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/initial_impression.md" target="_blank" rel="noopener noreferrer">initial_impression.md</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/prompt.txt" target="_blank" rel="noopener noreferrer">prompt.txt</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/Subha_Themes.py" target="_blank" rel="noopener noreferrer">Subha_Themes.py</a> (extracted themes) &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/visualise.py" target="_blank" rel="noopener noreferrer">visualise.py</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/interpretation.md" target="_blank" rel="noopener noreferrer">interpretation.md</a>
+              </p>
               <div class="assignment-body">
                 <p class="edit-callout">Visible assignment work</p>
-                <p>[EDIT: Place the actual third assignment here. Duplicate this block if you have more assignments to exhibit.]</p>
+                <p><strong>Method (seven steps).</strong> (1) Partial reading: the story&rsquo;s 118 sentences were split into three equal parts and only 20% of each was read (first, random, last). (2) Initial impression and research problem, with frameworks from Spivak, ecofeminism and disability studies. (3) The full text was uploaded and cleaned. (4) A detailed prompt was written. (5) A local LLM (qwen2.5:7b via Ollama) extracted expressions, which were checked against the text and then annotated by the author. (6) Python visualisations. (7) Interpretation.</p>
+                <p><strong>Statement tested:</strong> as the story moves from Chandipur to Calcutta, the vocabulary of nature and non-human kinship gives way to the vocabulary of social and patriarchal structure.</p>
+                <figure>
+                  <img src="03_synthetic_reading/figures/theme_trace.png" alt="Line chart of four vocabulary dimensions across the 118 sentences of Subha. Voice and nature peak together late in Stage I; social structure surges with the marriage talk at the end of Stage II and peaks in Stage III, where the nature line falls to zero after the farewell to the river and cows." loading="lazy">
+                  <figcaption>Where each dimension&rsquo;s vocabulary occurs, sentence by sentence (9-sentence moving average).</figcaption>
+                </figure>
+                <figure>
+                  <img src="03_synthetic_reading/figures/theme_heatmap.png" alt="Heat map of expressions per dimension and stage: voice 18, 13, 11; nature 13, 8, 9; social structure 12, 8, 17; affect 10, 12, 10." loading="lazy">
+                  <figcaption>Number of extracted expressions per dimension and stage.</figcaption>
+                </figure>
+                <p><strong>Findings.</strong> Voice and nature peak together where &ldquo;there were only dumb Nature and a dumb girl&rdquo;: the cows &ldquo;understood her gentle murmuring better than all speech&rdquo;. Nature returns once as farewell to her &ldquo;dear river&rdquo; and to &ldquo;earth, her strong silent mother&rdquo;, then drops to zero in the Calcutta section. There social structure peaks: she is inspected, found to be a &ldquo;useful possession&rdquo; and &ldquo;delivered over&hellip; into another&rsquo;s hands&rdquo;. Her voice survives only as tears and gaze that &ldquo;no one understood&rdquo;.</p>
+                <p><strong>Interpretation.</strong> Read with Spivak&rsquo;s &ldquo;Can the Subaltern Speak?&rdquo;, Subha&rsquo;s problem is not that she cannot speak but that no structure exists to hear her: &ldquo;because she did not speak, therefore she did not feel&rdquo; is epistemic violence. Gayle Rubin&rsquo;s &ldquo;traffic in women&rdquo; explains the commercial vocabulary of the marriage, and ecofeminism (Plumwood) shows the double edge of her bond with nature: it sustains her, yet she ends as &ldquo;a stricken doe&rdquo; before &ldquo;the hunter&rsquo;s face&rdquo;. The full argument, limitations and works cited are in <a href="https://github.com/jha-khushi/digital-humanities-website/blob/main/03_synthetic_reading/interpretation.md" target="_blank" rel="noopener noreferrer">interpretation.md</a>.</p>
               </div>
             </article>
 
@@ -404,10 +432,10 @@
             <span class="section-number" aria-hidden="true">02</span>
             <h2 id="reflection-heading">Portfolio reflection</h2>
           </div>
-          <p>[EDIT: Reflect on the connections among your assignments. What did you learn about digital humanities methods, evidence, interpretation, or public presentation across the portfolio?]</p>
+          <p>The same lesson ran through all four assignments: a language model is a fast reader but not a reliable one, and digital humanities work is mostly the design of checks around it. The Hindi stop-word list had to decide where grammar ends and meaning begins (negation words carry sentiment). The RAG pipeline produced 165 &ldquo;plants and animals&rdquo;, of which only 101 were real; the rest showed how closely Kalidasa ties nature to ornament and ritual. In &ldquo;Subha&rdquo;, the model&rsquo;s first run collapsed, and the extracted categories were only meaningful after I annotated them against the text and my own research question. The SKILL for legal briefs turned these lessons into instructions: work only from the source, separate reporting from interpretation, and never invent a citation. Computation helped me see patterns, such as nature&rsquo;s vocabulary vanishing when Subha reaches Calcutta, but interpretation still needed theory and close reading.</p>
           <details>
             <summary>Optional: methods note</summary>
-            <p>[EDIT: Briefly document your workflow, tools, categories, decisions, or ethical considerations. Delete this box if it is not useful.]</p>
+            <p>Tools: Python 3, Ollama running <code>qwen2.5:7b</code> and <code>nomic-embed-text</code> locally (no text was sent to a cloud service), NumPy and Matplotlib, GitHub Pages. All literary texts are public domain (Project Gutenberg). Every LLM output was checked automatically against the source text, and every manual correction is recorded in the code (<code>validate_results.py</code>, <code>Subha_Themes.py</code>). Failed runs are kept for transparency.</p>
           </details>
         </section>
 
@@ -418,8 +446,14 @@
             <h2 id="sources-heading">Sources and acknowledgements</h2>
           </div>
           <ul class="citation-list">
-            <li>[EDIT: Author. <em>Title.</em> Publisher, year. URL if applicable.]</li>
-            <li>[EDIT: Image, archive, dataset, or tool credit.]</li>
+            <li>Kalidasa. <em>Translations of Shakuntala and Other Works</em>. Translated by Arthur W. Ryder, Everyman&rsquo;s Library, J. M. Dent, 1912. <a href="https://www.gutenberg.org/ebooks/16659">Project Gutenberg #16659</a>.</li>
+            <li>Tagore, Rabindranath. &ldquo;Subha.&rdquo; <em>Stories from Tagore</em>. Macmillan, 1918. <a href="https://www.gutenberg.org/ebooks/33525">Project Gutenberg #33525</a>.</li>
+            <li>Spivak, Gayatri Chakravorty. &ldquo;Can the Subaltern Speak?&rdquo; <em>Marxism and the Interpretation of Culture</em>, edited by Cary Nelson and Lawrence Grossberg, University of Illinois Press, 1988, pp. 271&ndash;313.</li>
+            <li>Rubin, Gayle. &ldquo;The Traffic in Women: Notes on the &lsquo;Political Economy&rsquo; of Sex.&rdquo; <em>Toward an Anthropology of Women</em>, edited by Rayna R. Reiter, Monthly Review Press, 1975, pp. 157&ndash;210.</li>
+            <li>Plumwood, Val. <em>Feminism and the Mastery of Nature</em>. Routledge, 1993.</li>
+            <li>Garland-Thomson, Rosemarie. <em>Extraordinary Bodies</em>. Columbia University Press, 1997.</li>
+            <li>Synthetic reading method: Ghosh and Shanmugapriya, <em>International Journal of Humanities and Arts Computing</em>, 2026, <a href="https://www.euppublishing.com/doi/pdf/10.3366/ijhac.2026.0378">doi:10.3366/ijhac.2026.0378</a>; example repository <a href="https://github.com/SouravGhosh-digital-humanities/Wifes_Letter_JSON_themes">Wifes_Letter_JSON_themes</a>.</li>
+            <li>Tools: <a href="https://ollama.com">Ollama</a>, Qwen2.5 (Alibaba Cloud), nomic-embed-text (Nomic AI), Matplotlib, GitHub Pages.</li>
           </ul>
         </section>
       </main>

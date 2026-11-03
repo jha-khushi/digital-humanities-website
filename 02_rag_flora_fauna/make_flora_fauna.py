@@ -1,10 +1,10 @@
 """
 Final step of the RAG pipeline: write flora_fauna.py.
 
-Reads the verified extractions in results/extractions.json and writes them
-in the format given in the assignment instructions (two lists,
+Reads the validated names in results/validated.json and writes them in
+the format given in the assignment instructions (two lists,
 flora_RAG_extraction and fauna_RAG_extraction), followed by the same names
-grouped by category and the source texts each name was found in.
+grouped by category and the Kalidasa works each name was found in.
 
 Run:  python make_flora_fauna.py
 """
@@ -14,7 +14,7 @@ from collections import defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).parent
-data = json.loads((HERE / "results" / "extractions.json").read_text(encoding="utf-8"))
+data = json.loads((HERE / "results" / "validated.json").read_text(encoding="utf-8"))
 records = data["records"]
 texts = sorted({s for r in records for s in r["sources"]})
 
@@ -33,8 +33,12 @@ Retrieval-Augmented Generation (RAG) pipeline. Passages were embedded with
 {data["embedding_model"]}, the passages most relevant to 12
 flora/fauna queries were retrieved, and a local LLM ({data["model"]},
 run through Ollama) listed the plant and animal names in each passage.
-Every name was then checked against the passage it came from; names
-not found in the text were discarded. See rag_pipeline.py.
+Every name was then checked against the passage it came from, and
+names not found in the text were discarded. A validation pass (the LLM
+plus recorded author corrections) removed non-living items such as
+ornaments, rivers and characters, and merged variants such as
+"jasmine-blossoms" under one base name. See rag_pipeline.py and
+validate_results.py.
 
 Semester: Monsoon Semester 2026
 
@@ -71,7 +75,7 @@ def main():
                 parts.append(f'    "{cat}": {json.dumps(sorted(names), ensure_ascii=False)},')
         parts.append("}\n")
 
-    parts.append("# Source texts in which each name was found")
+    parts.append("# Works of Kalidasa in which each name was found")
     parts.append("found_in = {")
     for r in sorted(records, key=lambda r: r["name"]):
         parts.append(f'    "{r["name"].title()}": {json.dumps(r["sources"])},')
