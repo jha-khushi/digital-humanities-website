@@ -25,11 +25,11 @@ Topic: Extraction of Indian Cultural Elements Using RAG
 
 Author Name(s): Khushi Jha
 
-Short Description: Names of flora and fauna extracted from {len(texts)}
-public-domain Indian literary texts in English translation (Kalidasa,
-the Hitopadesha, Nala and Damayanti, the Ramayana, Jataka tales, Indian
-and Deccan folk tales, and Rabindranath Tagore) with a Retrieval-Augmented
-Generation (RAG) pipeline. Passages were embedded with
+Short Description: Names of Indian flora and fauna extracted from
+Kalidasa's works in Arthur W. Ryder's public-domain English translation
+(Shakuntala, Urvashi, Malavika and Agnimitra, The Dynasty of Raghu,
+The Birth of the War-god, The Cloud-Messenger and The Seasons) with a
+Retrieval-Augmented Generation (RAG) pipeline. Passages were embedded with
 {data["embedding_model"]}, the passages most relevant to 12
 flora/fauna queries were retrieved, and a local LLM ({data["model"]},
 run through Ollama) listed the plant and animal names in each passage.

@@ -311,6 +311,7 @@
               <li><a href="#assignment-1">Assignment 01</a></li>
               <li><a href="#assignment-2">Assignment 02</a></li>
               <li><a href="#assignment-3">Assignment 03</a></li>
+              <li><a href="#assignment-4">Assignment 04</a></li>
             </ul>
           </nav>
         </section>
@@ -368,6 +369,30 @@
               <div class="assignment-body">
                 <p class="edit-callout">Visible assignment work</p>
                 <p>[EDIT: Place the actual third assignment here. Duplicate this block if you have more assignments to exhibit.]</p>
+              </div>
+            </article>
+
+            <article class="assignment" id="assignment-4" aria-labelledby="assignment-4-title">
+              <header>
+                <span class="assignment-index">Assignment 04</span>
+                <h3 id="assignment-4-title">Creating a SKILL for an LLM: Indian Case-Brief Writer</h3>
+              </header>
+              <p class="assignment-abstract"><strong>Abstract.</strong> A SKILL file is a set of Markdown instructions that turns a general-purpose LLM into a reliable assistant for one specific task. This skill teaches an LLM to write structured case briefs of Indian Supreme Court and High Court judgments, especially fundamental-rights cases such as the privacy line from <em>Kharak Singh</em> to <em>Govind</em> and <em>R. Rajagopal</em>. It requires the model to work only from the judgment text supplied, to separate the <em>ratio decidendi</em> from <em>obiter dicta</em> and majority from dissent, and to quote and cite nothing that is not in that text.</p>
+              <p class="assignment-repository">File: <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/04_skill/SKILL.md" target="_blank" rel="noopener noreferrer">SKILL.md</a></p>
+              <div class="assignment-body">
+                <p class="edit-callout">Visible assignment work</p>
+                <p><strong>Name of the work:</strong> writing citation-faithful case briefs of Indian constitutional-law judgments.</p>
+                <p><strong>What the skill makes the LLM do</strong> (eleven-step workflow):</p>
+                <ol>
+                  <li>Identify the case, court, bench and citation exactly as given, never inventing them.</li>
+                  <li>Separate the majority, concurring and dissenting opinions.</li>
+                  <li>Extract the material facts, the issues as questions of law, and both sides&rsquo; arguments.</li>
+                  <li>State the holding and reasoning, naming the constitutional provisions and tests used (e.g. Art. 21, reasonable restriction, proportionality).</li>
+                  <li>Isolate the <em>ratio decidendi</em>, distinguish <em>obiter dicta</em>, and place the case among earlier and later precedents.</li>
+                  <li>Check that every quotation and paragraph number really appears in the judgment before answering.</li>
+                </ol>
+                <p><strong>Output:</strong> a fixed Markdown brief (Facts &middot; Issues &middot; Arguments &middot; Holding &middot; Reasoning &middot; Ratio &middot; Obiter &middot; Dissent &middot; Place in doctrine &middot; Key quotations), with a comparison table when several cases are briefed together.</p>
+                <p><strong>Design choice.</strong> Most errors in AI legal summaries are invented citations and dissents presented as law. The skill therefore puts accuracy rules ahead of style and keeps the court&rsquo;s reasoning separate from any commentary.</p>
               </div>
             </article>
           </div>

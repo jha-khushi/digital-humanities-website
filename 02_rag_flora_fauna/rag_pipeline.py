@@ -9,8 +9,10 @@ Affiliation: Department of Humanities and Social Sciences,
 Indian Institute of Technology (Indian School of Mines) Dhanbad
 
 Pipeline (all models run locally through Ollama):
-  1. LOAD      read the cleaned literary texts in corpus/
-  2. CHUNK     split each text into overlapping passages (~250 words)
+  1. LOAD      read Kalidasa's works (Ryder's translation) from corpus/ and
+               split the book into its seven works; the translator's
+               introduction is left out because it is not Kalidasa's text
+  2. CHUNK     split each work into overlapping passages (~250 words)
   3. EMBED     turn every passage into a vector with nomic-embed-text
   4. RETRIEVE  for each flora/fauna query, find the most similar passages
   5. GENERATE  ask the local LLM (qwen2.5:7b) to list only the plant and
@@ -43,7 +45,7 @@ LLM_MODEL = "qwen2.5:7b"
 
 CHUNK_WORDS = 250
 OVERLAP_WORDS = 50
-TOP_K = 30          # passages retrieved per query
+TOP_K = 15          # passages retrieved per query
 
 # Retrieval queries: one per category of flora and fauna.
 QUERIES = {
@@ -128,17 +130,44 @@ def ollama(endpoint, payload):
 
 
 # ---- 1-2. Load and chunk -------------------------------------------------
+# Each work begins at a heading on a line of its own (after the contents page).
+WORKS = [
+    ("SHAKUNTALA", "Shakuntala"),
+    ("THE STORY OF SHAKUNTALA", "The Story of Shakuntala"),
+    ("THE TWO MINOR DRAMAS", "Malavika and Agnimitra; Urvashi"),
+    ("THE DYNASTY OF RAGHU", "The Dynasty of Raghu"),
+    ("THE BIRTH OF THE WAR-GOD", "The Birth of the War-god"),
+    ("THE CLOUD-MESSENGER", "The Cloud-Messenger"),
+    ("THE SEASONS", "The Seasons"),
+]
+
+
+def split_works(text):
+    """Return [(work title, work text)], skipping the introduction and contents."""
+    lines = text.splitlines()
+    body_start = next(i for i, l in enumerate(lines) if l.strip() == "A PLAY IN SEVEN ACTS") - 1
+    starts = []
+    for heading, title in WORKS:
+        idx = next(i for i, l in enumerate(lines)
+                   if i >= body_start and l.strip() == heading
+                   and all(i > s for s, _ in starts))
+        starts.append((idx, title))
+    starts.append((len(lines), None))
+    return [(title, "\n".join(lines[s:e])) for (s, title), (e, _) in zip(starts, starts[1:])]
+
+
 def load_chunks():
     chunks = []
     step = CHUNK_WORDS - OVERLAP_WORDS
     for path in sorted(CORPUS.glob("*.txt")):
-        words = path.read_text(encoding="utf-8").split()
-        for i in range(0, max(len(words) - OVERLAP_WORDS, 1), step):
-            chunks.append({
-                "id": len(chunks),
-                "source": path.stem,
-                "text": " ".join(words[i:i + CHUNK_WORDS]),
-            })
+        for title, work in split_works(path.read_text(encoding="utf-8")):
+            words = work.split()
+            for i in range(0, max(len(words) - OVERLAP_WORDS, 1), step):
+                chunks.append({
+                    "id": len(chunks),
+                    "source": title,
+                    "text": " ".join(words[i:i + CHUNK_WORDS]),
+                })
     return chunks
 
 
