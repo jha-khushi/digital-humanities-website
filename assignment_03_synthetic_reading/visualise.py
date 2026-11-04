@@ -6,7 +6,7 @@ Statement tested (from initial_impression.md):
   non-human kinship falls away while the vocabulary of social and
   patriarchal structure takes over.
 
-Reads the author-annotated themes in Subha_Themes.py and produces:
+Reads the author-annotated themes in subha_themes.py and produces:
   figures/theme_heatmap.png  - number of expressions per dimension per stage
   figures/theme_trace.png    - how often each dimension's expressions occur,
                                sentence by sentence, across the whole story
@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from partial_reading import three_parts
-from Subha_Themes import themes
+from subha_themes import themes
 
 HERE = Path(__file__).parent
 FIG = HERE / "figures"

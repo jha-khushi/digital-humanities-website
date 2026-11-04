@@ -38,7 +38,7 @@ After reading only 20% of the story, I thought "Subha" was about who gets counte
 
 - I read an anonymous 1918 English translation, not Tagore's Bengali, so my word-level findings describe the translation.
 - The numbers are small (141 expressions in about 2,250 words). The charts show tendencies, not statistical proof.
-- I defined the four categories myself, the 7B model's extraction was incomplete and sometimes wrong, and I then curated the lists (every change is noted in `Subha_Themes.py`). My research question shaped what was found, which is exactly what the synthetic-reading method asks the reader to acknowledge.
+- I defined the four categories myself, the 7B model's extraction was incomplete and sometimes wrong, and I then curated the lists (every change is noted in `subha_themes.py`). My research question shaped what was found, which is exactly what the synthetic-reading method asks the reader to acknowledge.
 - The first extraction run failed (the model began copying the text word by word). I kept it in `results/first_run_whole_stages.json` for transparency.
 
 ## Works cited

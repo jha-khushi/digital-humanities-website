@@ -9,12 +9,14 @@ Affiliation: Department of Humanities and Social Sciences,
 Indian Institute of Technology (Indian School of Mines) Dhanbad
 
 Pipeline (all models run locally through Ollama):
-  1. LOAD      read Kalidasa's works (Ryder's translation) from corpus/ and
-               split the book into its seven works; the translator's
-               introduction is left out because it is not Kalidasa's text
-  2. CHUNK     split each work into overlapping passages (~250 words)
+  1. LOAD      read the five books in corpus/ (cleaned by preprocess.py);
+               Kalidasa's book is split into its seven works and its
+               translator's introduction is left out
+  2. CHUNK     split each text into overlapping passages (~250 words)
   3. EMBED     turn every passage into a vector with nomic-embed-text
   4. RETRIEVE  for each flora/fauna query, find the most similar passages
+               in EACH book (so that the longest book cannot crowd out
+               the shorter ones)
   5. GENERATE  ask the local LLM (qwen2.5:7b) to list only the plant and
                animal names that appear in those passages
   6. VERIFY    keep a name only if it really occurs in its passage
@@ -45,21 +47,21 @@ LLM_MODEL = "qwen2.5:7b"
 
 CHUNK_WORDS = 250
 OVERLAP_WORDS = 50
-TOP_K = 15          # passages retrieved per query
+TOP_K = 10          # passages retrieved per query, per book
 
 # Retrieval queries: one per category of flora and fauna.
 QUERIES = {
     "flora": [
-        "trees in the forest: mango, banyan, asoka, sal, palm",
-        "flowers and blossoms: lotus, jasmine, kadamba, champak",
-        "creepers, vines, grass and herbs growing in the hermitage",
-        "crops and grains in the fields: rice, barley, sugar-cane",
+        "trees in the forest or village: mango, banyan, asoka, sal, palm, bamboo",
+        "flowers and blossoms: lotus, jasmine, kadamba, champak, rose",
+        "creepers, vines, grass and herbs",
+        "crops and grains in the fields: rice, barley, sugar-cane, corn",
         "fruits, gardens and orchards",
-        "sandalwood, incense trees and fragrant plants",
+        "sandalwood, henna, spices and fragrant plants",
     ],
     "fauna": [
-        "wild animals of the jungle: tiger, lion, elephant, deer",
-        "birds singing: cuckoo, peacock, parrot, swan, crane",
+        "wild animals of the jungle: tiger, lion, elephant, deer, jackal",
+        "birds singing: cuckoo, koel, peacock, parrot, swan, crane",
         "snakes, crocodiles, tortoises and other reptiles",
         "fish and creatures of the river and the sea",
         "bees, insects and butterflies",
@@ -130,8 +132,18 @@ def ollama(endpoint, payload):
 
 
 # ---- 1-2. Load and chunk -------------------------------------------------
-# Each work begins at a heading on a line of its own (after the contents page).
-WORKS = [
+# corpus file -> how its passages are labelled in the results
+BOOKS = {
+    "kalidasa_shakuntala_and_other_works": "Kalidasa",
+    "jataka_buddhist_birth_stories": "Jataka Tales",
+    "bankim_the_poison_tree": "Bankim Chandra Chattopadhyay, The Poison Tree",
+    "naidu_the_golden_threshold": "Sarojini Naidu, The Golden Threshold",
+    "tagore_the_gardener": "Rabindranath Tagore, The Gardener",
+}
+
+# Kalidasa's book holds seven works; each begins at a heading on a line of
+# its own (after the contents page).
+KALIDASA_WORKS = [
     ("SHAKUNTALA", "Shakuntala"),
     ("THE STORY OF SHAKUNTALA", "The Story of Shakuntala"),
     ("THE TWO MINOR DRAMAS", "Malavika and Agnimitra; Urvashi"),
@@ -142,16 +154,16 @@ WORKS = [
 ]
 
 
-def split_works(text):
+def split_kalidasa(text):
     """Return [(work title, work text)], skipping the introduction and contents."""
     lines = text.splitlines()
     body_start = next(i for i, l in enumerate(lines) if l.strip() == "A PLAY IN SEVEN ACTS") - 1
     starts = []
-    for heading, title in WORKS:
+    for heading, title in KALIDASA_WORKS:
         idx = next(i for i, l in enumerate(lines)
                    if i >= body_start and l.strip() == heading
                    and all(i > s for s, _ in starts))
-        starts.append((idx, title))
+        starts.append((idx, f"Kalidasa, {title}"))
     starts.append((len(lines), None))
     return [(title, "\n".join(lines[s:e])) for (s, title), (e, _) in zip(starts, starts[1:])]
 
@@ -159,12 +171,15 @@ def split_works(text):
 def load_chunks():
     chunks = []
     step = CHUNK_WORDS - OVERLAP_WORDS
-    for path in sorted(CORPUS.glob("*.txt")):
-        for title, work in split_works(path.read_text(encoding="utf-8")):
-            words = work.split()
+    for name, book in BOOKS.items():
+        text = (CORPUS / f"{name}.txt").read_text(encoding="utf-8")
+        parts = split_kalidasa(text) if name.startswith("kalidasa") else [(book, text)]
+        for title, part in parts:
+            words = part.split()
             for i in range(0, max(len(words) - OVERLAP_WORDS, 1), step):
                 chunks.append({
                     "id": len(chunks),
+                    "book": book,
                     "source": title,
                     "text": " ".join(words[i:i + CHUNK_WORDS]),
                 })
@@ -194,13 +209,17 @@ def chunk_vectors(chunks):
 
 # ---- 4. Retrieve ---------------------------------------------------------
 def retrieve(chunks, vectors):
+    """Top TOP_K passages per query within each book."""
+    book_of = np.array([c["book"] for c in chunks])
     hits = {}
     for kingdom, queries in QUERIES.items():
         qv = embed(queries, "search_query: ")
         scores = qv @ vectors.T
         for q, row in zip(queries, scores):
-            for idx in np.argsort(-row)[:TOP_K]:
-                hits.setdefault(int(idx), []).append(q)
+            for book in BOOKS.values():
+                idxs = np.where(book_of == book)[0]
+                for idx in idxs[np.argsort(-row[idxs])[:TOP_K]]:
+                    hits.setdefault(int(idx), []).append(q)
     return hits
 
 
@@ -238,14 +257,15 @@ def find_in_text(name, text):
 def main():
     RESULTS.mkdir(exist_ok=True)
     chunks = load_chunks()
-    print(f"Loaded {len(chunks)} passages from {len(set(c['source'] for c in chunks))} texts")
+    print(f"Loaded {len(chunks)} passages from {len(BOOKS)} books "
+          f"({len(set(c['source'] for c in chunks))} texts)")
 
     vectors = chunk_vectors(chunks)
     hits = retrieve(chunks, vectors)
     print(f"Retrieved {len(hits)} unique passages for {sum(map(len, QUERIES.values()))} queries")
 
     found = defaultdict(lambda: {"kingdom": None, "categories": defaultdict(int),
-                                 "sources": set(), "evidence": None})
+                                 "books": set(), "sources": set(), "evidence": None})
     rejected = []
     for n, idx in enumerate(sorted(hits), 1):
         chunk = chunks[idx]
@@ -260,6 +280,7 @@ def main():
             entry = found[name]
             entry["kingdom"] = entry["kingdom"] or item.get("kingdom")
             entry["categories"][item.get("category", "other")] += 1
+            entry["books"].add(chunk["book"])
             entry["sources"].add(chunk["source"])
             entry["evidence"] = entry["evidence"] or {"source": chunk["source"],
                                                       "sentence": sentence}
@@ -272,6 +293,7 @@ def main():
             "name": name,
             "kingdom": e["kingdom"],
             "category": max(e["categories"], key=e["categories"].get),
+            "books": sorted(e["books"]),
             "sources": sorted(e["sources"]),
             "evidence": e["evidence"],
         })

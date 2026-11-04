@@ -32,7 +32,7 @@ CATEGORIES = ["tree", "flower", "herb_or_grass", "crop_or_fruit", "creeper",
               "mammal", "bird", "reptile", "fish_or_aquatic", "insect", "amphibian"]
 
 PROMPT = """Decide whether each CANDIDATE below, as used in its SENTENCE from
-Kalidasa's works, names a real plant or a real animal.
+an Indian literary text, names a real plant or a real animal.
 
 For each candidate return:
 - "candidate": the candidate exactly as given
@@ -136,7 +136,8 @@ def main():
         model_view.update(validate(records[i:i + 15]))
         print(f"  validated {min(i + 15, len(records))}/{len(records)}")
 
-    merged = defaultdict(lambda: {"variants": set(), "works": set(), "evidence": None})
+    merged = defaultdict(lambda: {"variants": set(), "books": set(), "works": set(),
+                                  "evidence": None})
     log = []
     for r in records:
         name = r["name"]
@@ -157,11 +158,13 @@ def main():
         entry = merged[(base, kingdom)]
         entry["category"] = entry.get("category") or category
         entry["variants"].add(name)
+        entry["books"].update(r["books"])
         entry["works"].update(r["sources"])
         entry["evidence"] = entry["evidence"] or r["evidence"]
 
     final = [{"name": base, "kingdom": k, "category": e["category"],
-              "variants": sorted(e["variants"]), "sources": sorted(e["works"]),
+              "variants": sorted(e["variants"]), "books": sorted(e["books"]),
+              "sources": sorted(e["works"]),
               "evidence": e["evidence"]}
              for (base, k), e in sorted(merged.items())]
     (RESULTS / "validated.json").write_text(json.dumps(
