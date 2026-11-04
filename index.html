@@ -301,7 +301,7 @@
         <section class="hero" aria-labelledby="portfolio-title">
           <p class="label project-kicker">Student portfolio</p>
           <h1 id="portfolio-title">Khushi Jha&rsquo;s Digital Humanities Portfolio</h1>
-          <p class="abstract"><strong>Portfolio introduction.</strong> These four assignments ask what computational methods can and cannot do with Indian languages and literature. They move from preparing Hindi, Bengali, Gujarati and Tamil text for NLP, to retrieving Kalidasa&rsquo;s plants and animals with a local RAG pipeline, to a synthetic reading of Tagore&rsquo;s &ldquo;Subha&rdquo; that tests a literary argument with an LLM and visualisation, and finally to writing a SKILL that makes an LLM brief Indian constitutional judgments faithfully. Each exhibition below links to its files on GitHub.</p>
+          <p class="abstract"><strong>Portfolio introduction.</strong> These six assignments ask what computational methods can and cannot do with Indian languages and literature. They move from preparing Hindi, Bengali, Gujarati and Tamil text for NLP, to retrieving the plants and animals of five Indian books with a local RAG pipeline, to a synthetic reading of Tagore&rsquo;s &ldquo;Subha&rdquo; that tests a literary argument with an LLM and visualisation, and to writing a SKILL that makes an LLM brief Indian constitutional judgments faithfully. Two additional assignments extend this work: one tests the stop-word lists on real text, and one compares the natural worlds of the five books. Each exhibition below links to its files on GitHub.</p>
 
           <nav class="contents-nav" aria-label="Assignments on this page">
             <p class="label">On this page</p>
@@ -311,6 +311,8 @@
               <li><a href="#assignment-2">Assignment 02</a></li>
               <li><a href="#assignment-3">Assignment 03</a></li>
               <li><a href="#assignment-4">Assignment 04</a></li>
+              <li><a href="#assignment-5">Assignment 05</a></li>
+              <li><a href="#assignment-6">Assignment 06</a></li>
             </ul>
           </nav>
         </section>
@@ -363,12 +365,18 @@
             <article class="assignment" id="assignment-2" aria-labelledby="assignment-2-title">
               <header>
                 <span class="assignment-index">Assignment 02</span>
-                <h3 id="assignment-2-title">Extraction of Indian Cultural Elements Using RAG: Flora and Fauna in Kalidasa</h3>
+                <h3 id="assignment-2-title">Extraction of Indian Cultural Elements Using RAG: Flora and Fauna in Five Indian Books</h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> Kalidasa&rsquo;s poetry and drama are famous for their dense natural world: hermitage groves, seasonal flowers and the birds of Sanskrit convention. Using a Retrieval-Augmented Generation (RAG) pipeline that runs entirely on a local machine, I built a repository of Kalidasa&rsquo;s seven works in Arthur W. Ryder&rsquo;s public-domain translation, retrieved the passages most relevant to plants and animals, and had a local LLM extract their names. Every name was checked against its source passage and validated, giving 28 plants and 29 animals.</p>
+              <p class="assignment-abstract"><strong>Abstract.</strong> I built a repository of five Indian literary texts that differ in language of origin, period and genre: Kalidasa&rsquo;s Sanskrit drama and poetry, the Pali Jataka fables, Bankim Chandra Chattopadhyay&rsquo;s Bengali novel <em>The Poison Tree</em>, Sarojini Naidu&rsquo;s <em>The Golden Threshold</em> and Tagore&rsquo;s <em>The Gardener</em>. A Retrieval-Augmented Generation (RAG) pipeline that runs entirely on a local machine retrieved the passages most relevant to plants and animals in each book, and a local LLM extracted their names. Every name was checked against its source passage and validated, giving 65 plants and 68 animals.</p>
               <p class="assignment-repository">Result file: <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/flora_fauna.py" target="_blank" rel="noopener noreferrer">flora_fauna.py</a></p>
+              <p class="assignment-repository">Corpus:
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/corpus/kalidasa_shakuntala_and_other_works.txt" target="_blank" rel="noopener noreferrer">Kalidasa</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/corpus/jataka_buddhist_birth_stories.txt" target="_blank" rel="noopener noreferrer">Jataka Tales</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/corpus/bankim_the_poison_tree.txt" target="_blank" rel="noopener noreferrer">The Poison Tree</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/corpus/naidu_the_golden_threshold.txt" target="_blank" rel="noopener noreferrer">The Golden Threshold</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/corpus/tagore_the_gardener.txt" target="_blank" rel="noopener noreferrer">The Gardener</a>
+              </p>
               <p class="assignment-repository">Pipeline:
-                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/corpus/kalidasa_shakuntala_and_other_works.txt" target="_blank" rel="noopener noreferrer">corpus (Kalidasa, tr. Ryder)</a> &middot;
                 <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/preprocess.py" target="_blank" rel="noopener noreferrer">preprocess.py</a> &middot;
                 <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/rag_pipeline.py" target="_blank" rel="noopener noreferrer">rag_pipeline.py</a> &middot;
                 <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_02_rag_flora_fauna/validate_results.py" target="_blank" rel="noopener noreferrer">validate_results.py</a> &middot;
@@ -377,11 +385,11 @@
               </p>
               <div class="assignment-body">
                 <p class="edit-callout">Visible assignment work</p>
-                <p><strong>Pipeline.</strong> (1) Pre-process: remove Project Gutenberg licence text and split the book into its seven works, leaving out the translator&rsquo;s introduction. (2) Chunk into 300 overlapping passages of about 250 words. (3) Embed each passage with <code>nomic-embed-text</code>. (4) Retrieve the 15 most similar passages for each of 12 queries (trees, flowers, creepers, crops, mammals, birds, reptiles, fish, insects&hellip;), 90 passages in all. (5) Generate: <code>qwen2.5:7b</code> lists the plant and animal names in each passage as JSON. (6) Verify that each name occurs in its passage, then validate it (the model, plus recorded author corrections) and merge variants. (7) Save as <code>flora_fauna.py</code>.</p>
-                <p><strong>Flora (28):</strong> trees: ashoka, bakul, mango, deodar, coral tree, fig, jujube, almond, bamboo, nipa; flowers: lotus, water-lily, lily, jasmine, siris, ketak (screw-pine), lodh, amaranth, trumpet-flower; grasses and herbs: sacred grass (kusha), panic grass, reed, madder, mushroom; crops and fruit: rice, plantain, rose-apple; creeper: spring creeper.</p>
-                <p><strong>Fauna (29):</strong> mammals: elephant, lion, tiger, deer, antelope, bear, boar, bison, buffalo, yak, cow, jackal, ape; birds: peacock, cuckoo, swan, ruddy goose (chakravaka), crane, heron, parrot, plover, starling, nightingale; reptiles: cobra, snake; others: bee, spider, carp, frog.</p>
-                <p><strong>What the validation step showed.</strong> Of 165 raw names from the LLM, only 101 were real plants or animals. The rest were ornaments (&ldquo;anklets&rdquo;, &ldquo;lotus-bracelet&rdquo;), places (&ldquo;Ganges river&rdquo;, &ldquo;hermitage&rdquo;), a character (&ldquo;Shakuntala&rdquo;) or the moon, and many were variants of one name (&ldquo;mango-blossoms&rdquo;, &ldquo;mango-twig&rdquo;). This is itself a finding: in Kalidasa, plants and animals are so bound up with ornament, ritual and the heroine&rsquo;s body (lotus-bracelets, bark dresses, the &ldquo;vine-bride&rdquo;) that a model reading for &ldquo;nature&rdquo; cannot easily separate the natural world from the cultural one.</p>
-                <p><strong>Limitations.</strong> Names come from an English translation (1912), so some are the translator&rsquo;s choices (&ldquo;nightingale&rdquo; and &ldquo;starling&rdquo; for Indian birds); retrieval finds only the most relevant passages, not every mention.</p>
+                <p><strong>Pipeline.</strong> (1) Pre-process: remove the Project Gutenberg licence and keep only the literary text, cutting translators&rsquo; introductions, prefaces, indexes and footnotes. (2) Chunk into 844 overlapping passages of about 250 words. (3) Embed each passage with <code>nomic-embed-text</code>. (4) Retrieve the 10 most similar passages from <em>each book</em> for each of 12 queries (trees, flowers, creepers, crops, mammals, birds, reptiles, fish, insects&hellip;), 238 passages in all, so that long books cannot crowd out short ones. (5) Generate: <code>qwen2.5:7b</code> lists the plant and animal names in each passage as JSON. (6) Verify that each name occurs in its passage. (7) Validate it (the model, plus 88 recorded author corrections) and merge variants. (8) Save as <code>flora_fauna.py</code>.</p>
+                <p><strong>Flora (65):</strong> amaranth, ashoka, babul (acacia), bakul, bamboo, banyan, barley, bel (wood-apple), betel-nut, brinjal, casuarina, champa, coconut, coral tree, corn, cucumber, deodar, durva grass, fig, gourd, hemp, henna, hyacinth, jackfruit, jasmine, jujube, kadam, ketak (screw-pine), kusum, lichi, lily, linseed, lodh, lotus, madder, mango, mushroom, mustard, neem, nipa, oleander, orange, palm, panic grass, peach, plantain, plum, pomegranate, poppy, pumpkin, reed, rice, rose, rose-apple, sacred grass (kusha), saffron, sandalwood, silk cotton tree, siris, spring creeper, tamal, trumpet-flower, tulip, tulsi, water lily.</p>
+                <p><strong>Fauna (68):</strong> antelope, ape, bat, bear, bee, bison, boar, buffalo, bull, butterfly, carp, cat, centipede, cobra, cockroach, cow, crane, crow, cuckoo, dahuk (waterhen), deer, dhadikula, dog, dove, duck, elephant, firefly, fly, frog, gazelle, goat, goose, gull, halcyon, hare, heron, horse, jackal, kite, koel, lion, lizard, monkey, mouse, musk deer, musk-rat, nightingale, oriole, owl, ox, paddy bird (pond heron), panther, papiya (hawk-cuckoo), parrot, partridge, peacock, pig, pigeon, plover, quail, rat, sheep, snake, sparrow, spider, squirrel, starling, swan.</p>
+                <p><strong>What the validation step showed.</strong> Of 392 names proposed by the LLM, 33 did not occur in the passage at all, and 134 were not living things: ornaments (&ldquo;lotus-bracelet&rdquo;), food (&ldquo;sausages&rdquo;, &ldquo;molasses&rdquo;, which the model filed as an insect), objects (a <em>bonti</em>, the Bengali fish-cutter, filed as a fish), places, rivers and characters. Only 225 were real plants or animals. Some errors are themselves findings. In Kalidasa, nature is bound up with ornament and ritual (bark dresses, the &ldquo;vine-bride&rdquo;). In Bankim, the heroine Kunda is named after a jasmine, and the text plays on it: &ldquo;what if you should discover the flower, Kunda, under the trees?&rdquo;</p>
+                <p><strong>Limitations.</strong> Names come from English translations, so some are the translators&rsquo; choices (&ldquo;nightingale&rdquo; for an Indian bird). Retrieval finds the most relevant passages, not every mention, which is why Assignment 06 counts mentions in the full texts.</p>
               </div>
             </article>
 
@@ -440,6 +448,64 @@
                 <p><strong>Design choice.</strong> Most errors in AI legal summaries are invented citations and dissents presented as law. The skill therefore puts accuracy rules ahead of style and keeps the court&rsquo;s reasoning separate from any commentary.</p>
               </div>
             </article>
+
+            <article class="assignment" id="assignment-5" aria-labelledby="assignment-5-title">
+              <header>
+                <span class="assignment-index">Assignment 05</span>
+                <h3 id="assignment-5-title">Testing the Stop-Word Lists on Real Text: Why Tamil Resists a List</h3>
+              </header>
+              <p class="assignment-abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 01.</em> I tested the four stop-word lists from Assignment 01 by using them on comparable texts: the same four Wikipedia articles (India, Rabindranath Tagore, Monsoon, Ganges) in Hindi, Bengali, Gujarati and Tamil, about 48,000 tokens in all. The Hindi list removes 41.2% of all tokens, the Gujarati list 28.6%, the Bengali list 19.3% and the Tamil list only 14.5%. The difference comes from grammar: Hindi writes its postpositions as separate words, while Tamil and Bengali join case endings to the noun (<span lang="ta">இந்தியாவின்</span>, <span lang="bn">ভারতের</span>, &ldquo;of India&rdquo;), where a whitespace-based list cannot reach them.</p>
+              <p class="assignment-repository">Files:
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_05_stopword_evaluation/evaluate_stopwords.py" target="_blank" rel="noopener noreferrer">evaluate_stopwords.py</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_05_stopword_evaluation/findings.md" target="_blank" rel="noopener noreferrer">findings.md</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_05_stopword_evaluation/results/top_words.md" target="_blank" rel="noopener noreferrer">top_words.md</a> (frequency tables) &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_05_stopword_evaluation/results/coverage.json" target="_blank" rel="noopener noreferrer">coverage.json</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/tree/main/assignment_05_stopword_evaluation/texts" target="_blank" rel="noopener noreferrer">texts/</a>
+              </p>
+              <div class="assignment-body">
+                <p class="edit-callout">Visible assignment work</p>
+                <figure>
+                  <img src="assignment_05_stopword_evaluation/figures/coverage_pies.png" alt="Four donut charts: stop words make up 41% of tokens in Hindi, 19% in Bengali, 29% in Gujarati and 14% in Tamil." loading="lazy">
+                  <figcaption>Share of all word tokens removed by each list.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assignment_05_stopword_evaluation/figures/category_pies.png" alt="Four pie charts of stop-word categories. Postpositions are 46% of removed tokens in Hindi but 16% in Bengali, 15% in Gujarati and 9% in Tamil." loading="lazy">
+                  <figcaption>Which kinds of stop words do the work. Postpositions dominate only in Hindi.</figcaption>
+                </figure>
+                <p><strong>Findings.</strong> (1) Lists of similar size remove very different shares of text, so the gap is caused by grammar, not by list length. (2) Postpositions do 46% of the removal work in Hindi but only 9% in Tamil, where &ldquo;of India&rdquo; and &ldquo;in India&rdquo; are single words. (3) The most frequent words the lists did not remove point to additions, such as Hindi <span lang="hi">जाता</span>, Bengali <span lang="bn">সালে</span>, Gujarati <span lang="gu">તરીકે</span> and Tamil <span lang="ta">இல்</span>. (4) Between 59% and 71% of each list occurs in the texts. Colloquial forms such as <span lang="hi">तू</span> and <span lang="bn">তুই</span> never appear in encyclopaedia prose, so the right list depends on the genre.</p>
+                <p><strong>Conclusion.</strong> Stop-word removal is not language-neutral. It suits languages that write grammar as separate words, and for agglutinative languages such as Tamil it needs a morphological analyser rather than a longer list.</p>
+              </div>
+            </article>
+
+            <article class="assignment" id="assignment-6" aria-labelledby="assignment-6-title">
+              <header>
+                <span class="assignment-index">Assignment 06</span>
+                <h3 id="assignment-6-title">Comparing the Natural Worlds of Five Indian Books</h3>
+              </header>
+              <p class="assignment-abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 02.</em> The RAG pipeline found which plants and animals the five books name. This assignment counts how often each name is mentioned in the full text of every book, and compares the books. Each genre turns out to have its own nature: the Jataka fables are 77% animals, Sarojini Naidu&rsquo;s poems are 65% plants (38% flowers alone) and the densest at 17 mentions per 1,000 words, and Bankim&rsquo;s novel is full of household creatures (owls, sparrows, lizards, rats, cats). Only six names occur in all five books: deer, lotus, mango, peacock, rice and snake.</p>
+              <p class="assignment-repository">Files:
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_06_comparing_books/compare_books.py" target="_blank" rel="noopener noreferrer">compare_books.py</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_06_comparing_books/findings.md" target="_blank" rel="noopener noreferrer">findings.md</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_06_comparing_books/results/summary.md" target="_blank" rel="noopener noreferrer">summary.md</a> &middot;
+                <a class="repository-link" href="https://github.com/jha-khushi/digital-humanities-website/blob/main/assignment_06_comparing_books/results/mentions.json" target="_blank" rel="noopener noreferrer">mentions.json</a>
+              </p>
+              <div class="assignment-body">
+                <p class="edit-callout">Visible assignment work</p>
+                <figure>
+                  <img src="assignment_06_comparing_books/figures/flora_fauna_share.png" alt="Five donut charts of the share of plant mentions: Kalidasa 42%, Jataka Tales 23%, The Poison Tree 44%, The Golden Threshold 65%, The Gardener 45%." loading="lazy">
+                  <figcaption>Plants or animals? Share of mentions in each book.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assignment_06_comparing_books/figures/category_by_book.png" alt="Five pie charts of mentions by category. Mammals are 65% of the Jataka Tales; flowers are 38% of The Golden Threshold." loading="lazy">
+                  <figcaption>What kind of nature? Mentions by category.</figcaption>
+                </figure>
+                <figure>
+                  <img src="assignment_06_comparing_books/figures/cooccurrence_network.png" alt="Network of the 40 most frequent plant and animal names. Lotus, elephant and deer are the most connected; bee, swan, lily and jasmine cluster around the lotus." loading="lazy">
+                  <figcaption>Which plants and animals share a passage (at least twice). The lotus is the centre.</figcaption>
+                </figure>
+                <p><strong>Counting needs reading.</strong> Some names are also English words or characters. A first count gave Naidu&rsquo;s poems six bears, from &ldquo;we <em>bear</em> her along&rdquo;, and found the flower &ldquo;kunda&rdquo; 400 times in <em>The Poison Tree</em>, where Kunda is the heroine. Such names are counted only in plant or animal contexts. Every rule is in the code.</p>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -449,10 +515,10 @@
             <span class="section-number" aria-hidden="true">02</span>
             <h2 id="reflection-heading">Portfolio reflection</h2>
           </div>
-          <p>The same lesson ran through all four assignments: a language model is a fast reader but not a reliable one, and digital humanities work is mostly the design of checks around it. The stop-word lists had to decide where grammar ends and meaning begins (negation words carry sentiment). The RAG pipeline produced 165 &ldquo;plants and animals&rdquo;, of which only 101 were real; the rest showed how closely Kalidasa ties nature to ornament and ritual. In &ldquo;Subha&rdquo;, the model&rsquo;s first run collapsed, and the extracted categories were only meaningful after I annotated them against the text and my own research question. The SKILL for legal briefs turned these lessons into instructions: work only from the source, separate reporting from interpretation, and never invent a citation. Computation helped me see patterns, such as nature&rsquo;s vocabulary vanishing when Subha reaches Calcutta, but interpretation still needed theory and close reading.</p>
+          <p>The same lesson ran through all six assignments: a language model is a fast reader but not a reliable one, and digital humanities work is mostly the design of checks around it. The stop-word lists had to decide where grammar ends and meaning begins, and testing them showed that the method itself favours Hindi over Tamil. The RAG pipeline proposed 392 &ldquo;plants and animals&rdquo;, of which only 225 were real. Counting them across five books showed how much the meaning of a word depends on reading it in context: a verb, a pun, a heroine. In &ldquo;Subha&rdquo;, the model&rsquo;s first run collapsed, and the extracted categories were only meaningful after I annotated them against the text and my own research question. The SKILL for legal briefs turned these lessons into instructions: work only from the source, separate reporting from interpretation, and never invent a citation. Computation helped me see patterns, such as nature&rsquo;s vocabulary vanishing when Subha reaches Calcutta, but interpretation still needed theory and close reading.</p>
           <details>
             <summary>Optional: methods note</summary>
-            <p>Tools: Python 3, Ollama running <code>qwen2.5:7b</code> and <code>nomic-embed-text</code> locally (no text was sent to a cloud service), NumPy and Matplotlib, GitHub Pages. All literary texts are public domain (Project Gutenberg). Every LLM output was checked automatically against the source text, and every manual correction is recorded in the code (<code>validate_results.py</code>, <code>subha_themes.py</code>). Failed runs are kept for transparency.</p>
+            <p>Tools: Python 3, Ollama running <code>qwen2.5:7b</code> and <code>nomic-embed-text</code> locally (no text was sent to a cloud service), NumPy, Matplotlib and NetworkX, GitHub Pages. All literary texts are public domain (Project Gutenberg). Every LLM output was checked automatically against the source text, and every manual correction is recorded in the code (<code>validate_results.py</code>, <code>subha_themes.py</code>, <code>compare_books.py</code>). Failed runs are kept for transparency.</p>
           </details>
         </section>
 
@@ -464,13 +530,18 @@
           </div>
           <ul class="citation-list">
             <li>Kalidasa. <em>Translations of Shakuntala and Other Works</em>. Translated by Arthur W. Ryder, Everyman&rsquo;s Library, J. M. Dent, 1912. <a href="https://www.gutenberg.org/ebooks/16659">Project Gutenberg #16659</a>.</li>
+            <li>Rhys Davids, T. W., translator. <em>Buddhist Birth Stories; or, Jataka Tales</em>, vol. 1. Tr&uuml;bner, 1880. <a href="https://www.gutenberg.org/ebooks/51880">Project Gutenberg #51880</a>.</li>
+            <li>Chattopadhyay, Bankim Chandra. <em>The Poison Tree: A Tale of Hindu Life in Bengal</em>. Translated by Miriam S. Knight, 1884. <a href="https://www.gutenberg.org/ebooks/17455">Project Gutenberg #17455</a>.</li>
+            <li>Naidu, Sarojini. <em>The Golden Threshold</em>. Heinemann, 1905. <a href="https://www.gutenberg.org/ebooks/680">Project Gutenberg #680</a>.</li>
+            <li>Tagore, Rabindranath. <em>The Gardener</em>. Macmillan, 1913. <a href="https://www.gutenberg.org/ebooks/6686">Project Gutenberg #6686</a>.</li>
+            <li>Wikipedia contributors. &ldquo;India&rdquo;, &ldquo;Rabindranath Tagore&rdquo;, &ldquo;Monsoon&rdquo; and &ldquo;Ganges&rdquo; in the Hindi, Bengali, Gujarati and Tamil Wikipedias. CC BY-SA 4.0. Accessed 5 November 2026.</li>
             <li>Tagore, Rabindranath. &ldquo;Subha.&rdquo; <em>Stories from Tagore</em>. Macmillan, 1918. <a href="https://www.gutenberg.org/ebooks/33525">Project Gutenberg #33525</a>.</li>
             <li>Spivak, Gayatri Chakravorty. &ldquo;Can the Subaltern Speak?&rdquo; <em>Marxism and the Interpretation of Culture</em>, edited by Cary Nelson and Lawrence Grossberg, University of Illinois Press, 1988, pp. 271&ndash;313.</li>
             <li>Rubin, Gayle. &ldquo;The Traffic in Women: Notes on the &lsquo;Political Economy&rsquo; of Sex.&rdquo; <em>Toward an Anthropology of Women</em>, edited by Rayna R. Reiter, Monthly Review Press, 1975, pp. 157&ndash;210.</li>
             <li>Plumwood, Val. <em>Feminism and the Mastery of Nature</em>. Routledge, 1993.</li>
             <li>Garland-Thomson, Rosemarie. <em>Extraordinary Bodies</em>. Columbia University Press, 1997.</li>
             <li>Ghosh, Sourav, Shanmugapriya T, and Sanatan Mandal. &ldquo;Synthetic Reading: Towards a Hermeneutic-Computational Method for Literary Interpretation through Tagore&rsquo;s &lsquo;A Wife&rsquo;s Letter&rsquo;.&rdquo; <em>International Journal of Humanities and Arts Computing</em>, vol. 20, no. 2, 2026, pp. 216&ndash;237, <a href="https://doi.org/10.3366/ijhac.2026.0378">doi:10.3366/ijhac.2026.0378</a>. Example repository: <a href="https://github.com/SouravGhosh-digital-humanities/Wifes_Letter_JSON_themes">Wifes_Letter_JSON_themes</a>.</li>
-            <li>Tools: <a href="https://ollama.com">Ollama</a>, Qwen2.5 (Alibaba Cloud), nomic-embed-text (Nomic AI), Matplotlib, GitHub Pages.</li>
+            <li>Tools: <a href="https://ollama.com">Ollama</a>, Qwen2.5 (Alibaba Cloud), nomic-embed-text (Nomic AI), NumPy, Matplotlib, NetworkX, GitHub Pages.</li>
           </ul>
         </section>
       </main>
