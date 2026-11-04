@@ -1,0 +1,21 @@
+index.html
+  s_5a02c502e9a5a2::t_c41020cc085ea5 338,340-343,372-373,375-379,382-386,404,406-412,419,423,427,437-438,462,464-468,473,477,491,493-496,501,505,509
+README.md
+  s_5a02c502e9a5a2::t_393802f9814649 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "39f6837aa08d4768ad95d412dfdbdb941afe0cd0",
+  "prompts": {},
+  "sessions": {
+    "s_5a02c502e9a5a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e2d63629-4982-4c11-a56f-53eb75dee1e6",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "jha-khushi <224996314+jha-khushi@users.noreply.github.com>"
+    }
+  }
+}
