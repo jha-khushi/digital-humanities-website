@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Flora and Fauna in Five Indian Books, with RAG">
+    <title>Assignment 02: Flora and fauna with RAG | Khushi Jha</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to the assignment</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="eyebrow">Digital Humanities Student Exhibition</p>
+        <p class="wordmark">IIT (ISM) Dhanbad &middot; Department of HSS</p>
+        <p class="course-line">MA in DH &middot; Session 2026&ndash;27</p>
+      </div>
+    </header>
+    <div class="layout">
+      <aside class="student-card" aria-labelledby="details-heading">
+        <h2 id="details-heading">Assignment 02</h2>
+        <dl class="metadata">
+          <div><dt>Student</dt><dd>Khushi Jha</dd></div>
+          <div><dt>Repository</dt><dd><a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna" target="_blank" rel="noopener noreferrer">dh-02-rag-flora-fauna</a></dd></div>
+          <div><dt>Models</dt><dd>nomic-embed-text, qwen2.5:7b (local, Ollama)</dd></div>
+          <div><dt>Result file</dt><dd><a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/flora_fauna.py" target="_blank" rel="noopener noreferrer"><code>flora_fauna.py</code></a></dd></div>
+          <div><dt>Course</dt><dd>MA in DH, HSS, IIT (ISM) Dhanbad</dd></div>
+        </dl>
+        <p class="student-note"><a href="index.html">Back to all assignments</a></p>
+      </aside>
+      <main id="main-content">
+        <p class="page-crumb"><a href="index.html">All assignments</a></p>
+        <section class="hero" aria-labelledby="page-title">
+          <p class="label project-kicker">Assignment 02</p>
+          <h1 id="page-title">Flora and Fauna in Five Indian Books, with RAG</h1>
+          <p class="abstract"><strong>Abstract.</strong> I collected five Indian literary texts that differ in language, period and genre, and used a Retrieval-Augmented Generation (RAG) pipeline running on my own laptop to find the plants and animals they name. The texts are Kalidasa&rsquo;s plays and poems, the Jataka tales, Bankim Chandra Chattopadhyay&rsquo;s novel <em>The Poison Tree</em>, Sarojini Naidu&rsquo;s <em>The Golden Threshold</em> and Tagore&rsquo;s <em>The Gardener</em>. The result is a list of 65 plants and 68 animals.</p>
+          <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
+        </section>
+        <section class="page-section">
+          <h2>The corpus</h2>
+<div class="figure-pair">
+<figure>
+  <img src="images/a02/corpus_share.png" alt="Pie chart of the corpus by words: Kalidasa 33%, Jataka Tales 29%, The Poison Tree 27%, The Gardener 8%, The Golden Threshold 3%." loading="lazy">
+  <figcaption>The five books, by share of words.</figcaption>
+</figure>
+<div>
+<p>All five are public-domain texts from Project Gutenberg, read in English:</p>
+<ul><li>Kalidasa, <em>Shakuntala and Other Works</em> (Sanskrit, tr. Arthur W. Ryder, 1912)</li><li><em>Buddhist Birth Stories (Jataka Tales)</em>, vol. 1 (Pali, tr. T. W. Rhys Davids, 1880)</li><li>Bankim Chandra Chattopadhyay, <em>The Poison Tree</em> (Bengali, tr. Miriam S. Knight, 1884)</li><li>Sarojini Naidu, <em>The Golden Threshold</em> (written in English, 1905)</li><li>Rabindranath Tagore, <em>The Gardener</em> (Bengali, his own translation, 1913)</li></ul>
+</div>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>The RAG pipeline</h2>
+<ol class="steps">
+<li><strong>Chunk</strong><span>Each book is split into overlapping passages of about 250 words (844 in all).</span></li>
+<li><strong>Embed</strong><span>Every passage becomes a vector with <code>nomic-embed-text</code>.</span></li>
+<li><strong>Retrieve</strong><span>For each question about trees, flowers, birds, mammals and so on, the 10 closest passages from each book are picked: 238 passages.</span></li>
+<li><strong>Generate</strong><span><code>qwen2.5:7b</code> reads each passage and lists the plants and animals named in it.</span></li>
+</ol>
+<p>The code is in <a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/rag_pipeline.py" target="_blank" rel="noopener noreferrer"><code>rag_pipeline.py</code></a>. Both models run locally, so none of the text was sent to an online service.</p>
+        </section>
+        <section class="page-section">
+          <h2>Results</h2>
+<div class="stat-row">
+  <div class="stat"><strong>65</strong><span>plants</span></div>
+  <div class="stat"><strong>68</strong><span>animals</span></div>
+  <div class="stat"><strong>5</strong><span>books</span></div>
+  <div class="stat"><strong>238</strong><span>passages read by the LLM</span></div>
+</div>
+<figure>
+  <img src="images/a02/flora_fauna_categories.png" alt="Two pie charts: flora by category (trees, flowers, herbs, crops, creepers) and fauna by category (mammals, birds, insects, reptiles, fish, amphibians)." loading="lazy">
+  <figcaption>The extracted plants and animals by category.</figcaption>
+</figure>
+<p><strong>Plants (65):</strong> amaranth, ashoka, babul (acacia), bakul, bamboo, banyan, barley, bel (wood-apple), betel-nut, brinjal, casuarina, champa, coconut, coral tree, corn, cucumber, deodar, durva grass, fig, gourd, hemp, henna, hyacinth, jackfruit, jasmine, jujube, kadam, ketak (screw-pine), kusum, lichi, lily, linseed, lodh, lotus, madder, mango, mushroom, mustard, neem, nipa, oleander, orange, palm, panic grass, peach, plantain, plum, pomegranate, poppy, pumpkin, reed, rice, rose, rose-apple, sacred grass (kusha), saffron, sandalwood, silk cotton tree, siris, spring creeper, tamal, trumpet-flower, tulip, tulsi, water lily.</p>
+<p><strong>Animals (68):</strong> antelope, ape, bat, bear, bee, bison, boar, buffalo, bull, butterfly, carp, cat, centipede, cobra, cockroach, cow, crane, crow, cuckoo, dahuk (waterhen), deer, dhadikula, dog, dove, duck, elephant, firefly, fly, frog, gazelle, goat, goose, gull, halcyon, hare, heron, horse, jackal, kite, koel, lion, lizard, monkey, mouse, musk deer, musk-rat, nightingale, oriole, owl, ox, paddy bird (pond heron), panther, papiya (hawk-cuckoo), parrot, partridge, peacock, pig, pigeon, plover, quail, rat, sheep, snake, sparrow, spider, squirrel, starling, swan.</p>
+        </section>
+        <section class="page-section">
+          <h2>Checking the LLM</h2>
+<p>I read through everything the model returned. Of the 392 names it proposed, only 225 were real plants or animals. 33 did not appear in the passage at all, and 134 were other things: food, ornaments, rivers, people, even a <em>bonti</em> (a Bengali kitchen blade) that the model called a fish.</p>
+<div class="figure-pair">
+<figure>
+  <img src="images/a02/checking_outcome.png" alt="Pie chart of all 392 names proposed by the LLM: 225 real, 134 not living things, 33 not in the passage." loading="lazy">
+  <figcaption>Everything the LLM proposed.</figcaption>
+</figure>
+<figure>
+  <img src="images/a02/checking_by_book.png" alt="Heatmap of outcomes by book. The Golden Threshold had 82% real names; the Jataka Tales only 44%, with 20% not in the passage." loading="lazy">
+  <figcaption>Heatmap: the same, book by book (row percentages).</figcaption>
+</figure>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>My interpretation</h2>
+<div class="interpretation">
+<p>The part of this assignment I learned most from was checking the model&rsquo;s answers. The mistakes were not random. In Kalidasa, plants and animals are tied to ornament and ritual (lotus-bracelets, bark dresses), so the model kept offering objects made from nature as if they were nature. In the Jataka tales the animals are characters, and the model added animals that the passage did not mention: one in five of its Jataka answers was not in the text.</p>
+<p>My favourite case is Bankim&rsquo;s heroine Kunda. Her name is a kind of jasmine, and the novel plays on it: &ldquo;what if you should discover the flower, Kunda, under the trees?&rdquo; The model listed her as a flower. I removed her, because here the flower is the girl, but the mistake shows how plants and people share names in this literature.</p>
+<p>Naidu&rsquo;s poems gave the cleanest results (82% correct). Her images are direct, with the champa, henna and koel named plainly. That made me think the model reads lyric poetry better than fables, which say one thing and mean another.</p>
+<p>The lists are also limited by translation. &ldquo;Nightingale&rdquo; in an English translation of an Indian text is the translator&rsquo;s choice, so some names tell us about the translator as much as the book.</p>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>Files</h2>
+<ul class="file-list">
+  <li><a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/flora_fauna.py" target="_blank" rel="noopener noreferrer"><code>flora_fauna.py</code></a>: the final lists, in the required format</li>
+  <li><a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/rag_pipeline.py" target="_blank" rel="noopener noreferrer"><code>rag_pipeline.py</code></a>: the RAG pipeline</li>
+  <li><a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/results/validated.json" target="_blank" rel="noopener noreferrer"><code>results/validated.json</code></a>: every name with the sentence it came from</li>
+  <li><a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/corpus/" target="_blank" rel="noopener noreferrer"><code>corpus/</code></a>: the five texts</li>
+  <li><a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/visualise.py" target="_blank" rel="noopener noreferrer"><code>visualise.py</code></a>: the charts on this page</li>
+</ul>
+        </section>
+        <nav class="page-next" aria-label="Other assignments">
+          <a href="assignment-01.html">&larr; Assignment 01: Indic stop words</a>
+          <a href="assignment-03.html">Assignment 03: Synthetic reading of “Subha” &rarr;</a>
+        </nav>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>Digital Humanities Student Exhibition &middot; Department of HSS &middot; IIT (ISM) Dhanbad</p>
+    </footer>
+  </body>
+</html>

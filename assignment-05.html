@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Testing the Stop-Word Lists on Real Text">
+    <title>Assignment 05: Stop words on real text | Khushi Jha</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to the assignment</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="eyebrow">Digital Humanities Student Exhibition</p>
+        <p class="wordmark">IIT (ISM) Dhanbad &middot; Department of HSS</p>
+        <p class="course-line">MA in DH &middot; Session 2026&ndash;27</p>
+      </div>
+    </header>
+    <div class="layout">
+      <aside class="student-card" aria-labelledby="details-heading">
+        <h2 id="details-heading">Assignment 05</h2>
+        <dl class="metadata">
+          <div><dt>Student</dt><dd>Khushi Jha</dd></div>
+          <div><dt>Repository</dt><dd><a href="https://github.com/jha-khushi/dh-05-stopword-evaluation" target="_blank" rel="noopener noreferrer">dh-05-stopword-evaluation</a></dd></div>
+          <div><dt>Texts</dt><dd>16 Wikipedia articles, CC BY-SA 4.0</dd></div>
+          <div><dt>Extends</dt><dd><a href="assignment-01.html">Assignment 01</a></dd></div>
+          <div><dt>Course</dt><dd>MA in DH, HSS, IIT (ISM) Dhanbad</dd></div>
+        </dl>
+        <p class="student-note"><a href="index.html">Back to all assignments</a></p>
+      </aside>
+      <main id="main-content">
+        <p class="page-crumb"><a href="index.html">All assignments</a></p>
+        <section class="hero" aria-labelledby="page-title">
+          <p class="label project-kicker">Assignment 05 &middot; additional</p>
+          <h1 id="page-title">Testing the Stop-Word Lists on Real Text</h1>
+          <p class="abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 01.</em> I tested my four stop-word lists by running them on real text: the same four Wikipedia articles (India, Rabindranath Tagore, Monsoon and the Ganges) in Hindi, Bengali, Gujarati and Tamil. The Hindi list removes 41.2% of all words, but the Tamil list only 14.5%, because Tamil joins its grammar to the noun.</p>
+          <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
+        </section>
+        <section class="page-section">
+          <h2>Results</h2>
+<div class="stat-row">
+  <div class="stat"><strong>41.2%</strong><span>of Hindi words removed</span></div>
+  <div class="stat"><strong>28.6%</strong><span>of Gujarati words</span></div>
+  <div class="stat"><strong>19.3%</strong><span>of Bengali words</span></div>
+  <div class="stat"><strong>14.5%</strong><span>of Tamil words</span></div>
+</div>
+<figure>
+  <img src="images/a05/coverage_pies.png" alt="Four donut charts: stop words are 41.2% of Hindi tokens, 19.3% of Bengali, 28.6% of Gujarati and 14.5% of Tamil." loading="lazy">
+  <figcaption>Share of all words removed by each list.</figcaption>
+</figure>
+<figure>
+  <img src="images/a05/category_pies.png" alt="Four pie charts of which kinds of stop words do the work. Postpositions are 46% in Hindi and 9% in Tamil." loading="lazy">
+  <figcaption>Which kinds of stop words do the removing.</figcaption>
+</figure>
+<figure>
+  <img src="images/a05/category_heatmap.png" alt="Heatmap of the share of all tokens removed by each kind of stop word. Hindi postpositions 19.1%, Tamil 1.3%." loading="lazy">
+  <figcaption>Heatmap: share of all words removed by each kind of stop word. Postpositions remove 19.1% of Hindi but 1.3% of Tamil.</figcaption>
+</figure>
+<figure>
+  <img src="images/a05/list_usage.png" alt="Bar chart: 71% of the Hindi list, 63% of Bengali, 65% of Gujarati and 59% of Tamil appear in the texts." loading="lazy">
+  <figcaption>How much of each list actually appears in the texts.</figcaption>
+</figure>
+        </section>
+        <section class="page-section">
+          <h2>My interpretation</h2>
+<div class="interpretation">
+<p>The lists are about the same size, so I expected them to do about the same work. They did not. In Hindi &ldquo;of India&rdquo; is <span lang="hi">भारत के</span>, two words, and the list removes <span lang="hi">के</span>. In Tamil it is <span lang="ta">இந்தியாவின்</span> and in Bengali <span lang="bn">ভারতের</span>: one word, and nothing to remove. The heatmap shows this in a single row. Postpositions alone remove 19.1% of Hindi but only 1.3% of Tamil.</p>
+<p>This changed how I see a step that is usually treated as technical. Stop-word removal assumes that grammar is written as separate words. That suits Hindi and English but not Tamil, which needs a tool that can split words into parts. Tools built around one language quietly work less well for others.</p>
+<p>The test also showed what my lists were missing, such as the Hindi passive <span lang="hi">जाता</span> and Bengali <span lang="bn">সালে</span> (&ldquo;in the year&rdquo;). And about a third of each list never appeared, mostly informal words like <span lang="hi">तू</span> that an encyclopaedia does not use. The right list depends on the kind of text.</p>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>Files</h2>
+<ul class="file-list">
+  <li><a href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/evaluate_stopwords.py" target="_blank" rel="noopener noreferrer"><code>evaluate_stopwords.py</code></a>: runs the lists on the texts</li>
+  <li><a href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/heatmaps.py" target="_blank" rel="noopener noreferrer"><code>heatmaps.py</code></a>: the heatmap</li>
+  <li><a href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/findings.md" target="_blank" rel="noopener noreferrer"><code>findings.md</code></a>: the full write-up</li>
+  <li><a href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/results/top_words.md" target="_blank" rel="noopener noreferrer"><code>results/top_words.md</code></a>: frequency tables</li>
+  <li><a href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/texts/" target="_blank" rel="noopener noreferrer"><code>texts/</code></a>: the 16 articles</li>
+</ul>
+        </section>
+        <nav class="page-next" aria-label="Other assignments">
+          <a href="assignment-04.html">&larr; Assignment 04: SKILL: case-brief writer</a>
+          <a href="assignment-06.html">Assignment 06: Comparing five books &rarr;</a>
+        </nav>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>Digital Humanities Student Exhibition &middot; Department of HSS &middot; IIT (ISM) Dhanbad</p>
+    </footer>
+  </body>
+</html>

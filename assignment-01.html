@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Indic Stop Words: Hindi, Bengali, Gujarati and Tamil">
+    <title>Assignment 01: Indic stop words | Khushi Jha</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to the assignment</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="eyebrow">Digital Humanities Student Exhibition</p>
+        <p class="wordmark">IIT (ISM) Dhanbad &middot; Department of HSS</p>
+        <p class="course-line">MA in DH &middot; Session 2026&ndash;27</p>
+      </div>
+    </header>
+    <div class="layout">
+      <aside class="student-card" aria-labelledby="details-heading">
+        <h2 id="details-heading">Assignment 01</h2>
+        <dl class="metadata">
+          <div><dt>Student</dt><dd>Khushi Jha</dd></div>
+          <div><dt>Repository</dt><dd><a href="https://github.com/jha-khushi/dh-01-indic-stopwords" target="_blank" rel="noopener noreferrer">dh-01-indic-stopwords</a></dd></div>
+          <div><dt>Languages</dt><dd>Hindi, Bengali, Gujarati, Tamil</dd></div>
+          <div><dt>Files</dt><dd><code>&lt;language&gt;_stopwords.py</code></dd></div>
+          <div><dt>Course</dt><dd>MA in DH, HSS, IIT (ISM) Dhanbad</dd></div>
+        </dl>
+        <p class="student-note"><a href="index.html">Back to all assignments</a></p>
+      </aside>
+      <main id="main-content">
+        <p class="page-crumb"><a href="index.html">All assignments</a></p>
+        <section class="hero" aria-labelledby="page-title">
+          <p class="label project-kicker">Assignment 01</p>
+          <h1 id="page-title">Indic Stop Words: Hindi, Bengali, Gujarati and Tamil</h1>
+          <p class="abstract"><strong>Abstract.</strong> Stop words are the small, very frequent words of a language, such as &ldquo;and&rdquo;, &ldquo;of&rdquo; and &ldquo;is&rdquo;, that are usually removed before counting or comparing the words of a text. I wrote stop-word lists for four Indic languages in four scripts: Hindi, Bengali and Gujarati, which are Indo-Aryan, and Tamil, which is Dravidian. Each list is grouped by kind of word and comes with a small function that removes the stop words from a sentence.</p>
+          <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
+        </section>
+        <section class="page-section">
+          <h2>What I did</h2>
+<p>I followed the template in the instructions: one file per language, named after the language, with the header and the list. Inside each list the words are grouped by type (pronouns, postpositions, conjunctions, question words, quantifiers, auxiliary verbs and particles), so it is easy to see what the list contains and to change it later.</p>
+<div class="stat-row">
+  <div class="stat"><strong>235</strong><span>Hindi words</span></div>
+  <div class="stat"><strong>210</strong><span>Bengali words</span></div>
+  <div class="stat"><strong>196</strong><span>Gujarati words</span></div>
+  <div class="stat"><strong>179</strong><span>Tamil words</span></div>
+</div>
+<p>Two practical details mattered. Spellings vary, so I kept common variants together (<span lang="hi">गए / गये</span>, <span lang="bn">কখনো / কখনও</span>). And the same letter can be typed in two ways in Unicode, so the Bengali, Gujarati and Tamil files normalise the text before comparing words.</p>
+        </section>
+        <section class="page-section">
+          <h2>Visualisations</h2>
+<figure>
+  <img src="images/a01/list_sizes.png" alt="Bar chart of list sizes: Hindi 235, Bengali 210, Gujarati 196, Tamil 179." loading="lazy">
+  <figcaption>How many words each list has.</figcaption>
+</figure>
+<figure>
+  <img src="images/a01/list_composition.png" alt="Four pie charts showing the share of pronouns, postpositions, verbs, conjunctions, question words and quantifiers in each list." loading="lazy">
+  <figcaption>What each list is made of. Pronouns and verb forms are the largest groups in every language.</figcaption>
+</figure>
+<figure>
+  <img src="images/a01/composition_heatmap.png" alt="Heatmap of the number of words per category in each list. Tamil has the fewest postpositions (18) and question words (9)." loading="lazy">
+  <figcaption>Heatmap: number of words in each category. Tamil has clearly fewer postpositions and question words.</figcaption>
+</figure>
+        </section>
+        <section class="page-section">
+          <h2>My interpretation</h2>
+<div class="interpretation">
+<p>Making four lists side by side showed me that a &ldquo;small word&rdquo; is not the same thing in every language. In Hindi, postpositions like <span lang="hi">का, में, से</span> are separate words, so they fit easily into a list. In Tamil the same meanings are mostly endings joined to the noun, which is why the Tamil list has only 18 postpositions and 9 question words: many Tamil questions are made with a suffix rather than a separate word.</p>
+<p>I also had to decide what a stop word is for. Negation words such as <span lang="hi">नहीं</span> are very frequent, but removing them reverses the meaning of a sentence. I kept them in the lists and marked them, so that someone doing sentiment analysis knows to take them out.</p>
+<p>A list only tells you what I expected the language to need. To see how the lists behave on real text I tested them in <a href="assignment-05.html">Assignment 05</a>.</p>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>Files</h2>
+<ul class="file-list">
+  <li><a href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/hindi_stopwords.py" target="_blank" rel="noopener noreferrer"><code>hindi_stopwords.py</code></a>: Hindi, Devanagari script</li>
+  <li><a href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/bengali_stopwords.py" target="_blank" rel="noopener noreferrer"><code>bengali_stopwords.py</code></a>: Bengali, Bengali script</li>
+  <li><a href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/gujarati_stopwords.py" target="_blank" rel="noopener noreferrer"><code>gujarati_stopwords.py</code></a>: Gujarati, Gujarati script</li>
+  <li><a href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/tamil_stopwords.py" target="_blank" rel="noopener noreferrer"><code>tamil_stopwords.py</code></a>: Tamil, Tamil script</li>
+  <li><a href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/visualise.py" target="_blank" rel="noopener noreferrer"><code>visualise.py</code></a>: the charts on this page</li>
+</ul>
+        </section>
+        <nav class="page-next" aria-label="Other assignments">
+          <span></span>
+          <a href="assignment-02.html">Assignment 02: Flora and fauna with RAG &rarr;</a>
+        </nav>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>Digital Humanities Student Exhibition &middot; Department of HSS &middot; IIT (ISM) Dhanbad</p>
+    </footer>
+  </body>
+</html>

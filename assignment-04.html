@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A SKILL for an LLM: Indian Case-Brief Writer">
+    <title>Assignment 04: SKILL: case-brief writer | Khushi Jha</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to the assignment</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="eyebrow">Digital Humanities Student Exhibition</p>
+        <p class="wordmark">IIT (ISM) Dhanbad &middot; Department of HSS</p>
+        <p class="course-line">MA in DH &middot; Session 2026&ndash;27</p>
+      </div>
+    </header>
+    <div class="layout">
+      <aside class="student-card" aria-labelledby="details-heading">
+        <h2 id="details-heading">Assignment 04</h2>
+        <dl class="metadata">
+          <div><dt>Student</dt><dd>Khushi Jha</dd></div>
+          <div><dt>Repository</dt><dd><a href="https://github.com/jha-khushi/dh-04-skill-case-brief" target="_blank" rel="noopener noreferrer">dh-04-skill-case-brief</a></dd></div>
+          <div><dt>File</dt><dd><a href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/SKILL.md" target="_blank" rel="noopener noreferrer"><code>SKILL.md</code></a></dd></div>
+          <div><dt>Example cases</dt><dd>Kharak Singh (1962), Govind (1975), R. Rajagopal (1994)</dd></div>
+          <div><dt>Course</dt><dd>MA in DH, HSS, IIT (ISM) Dhanbad</dd></div>
+        </dl>
+        <p class="student-note"><a href="index.html">Back to all assignments</a></p>
+      </aside>
+      <main id="main-content">
+        <p class="page-crumb"><a href="index.html">All assignments</a></p>
+        <section class="hero" aria-labelledby="page-title">
+          <p class="label project-kicker">Assignment 04</p>
+          <h1 id="page-title">A SKILL for an LLM: Indian Case-Brief Writer</h1>
+          <p class="abstract"><strong>Abstract.</strong> A SKILL file is a set of written instructions that turns a general AI assistant into a careful helper for one task. Mine makes an LLM write case briefs of Indian Supreme Court and High Court judgments, especially fundamental-rights cases. It must work only from the judgment it is given, keep the majority separate from the dissent, and never invent a quotation or a citation.</p>
+          <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-04-skill-case-brief" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
+        </section>
+        <section class="page-section">
+          <h2>How the skill works</h2>
+<ol class="steps">
+<li><strong>Identify</strong><span>Case name, court, bench and citation, exactly as given.</span></li>
+<li><strong>Separate opinions</strong><span>Majority, concurring and dissenting.</span></li>
+<li><strong>Extract</strong><span>Facts, issues as questions of law, both sides&rsquo; arguments.</span></li>
+<li><strong>Holding and reasoning</strong><span>With the articles and tests the court used.</span></li>
+<li><strong>Ratio and obiter</strong><span>What binds, what does not, and where the case sits in precedent.</span></li>
+<li><strong>Check</strong><span>Every quotation and paragraph number against the judgment.</span></li>
+</ol>
+<p><strong>The brief always has the same sections:</strong> Facts &middot; Issues &middot; Arguments &middot; Holding &middot; Reasoning &middot; Ratio decidendi &middot; Obiter dicta &middot; Dissent &middot; Place in doctrine &middot; Key quotations. When several cases are briefed together, it adds a comparison table.</p>
+        </section>
+        <section class="page-section">
+          <h2>My interpretation</h2>
+<div class="interpretation">
+<p>I chose legal briefs because I was reading the privacy cases (<em>Kharak Singh</em>, <em>Govind</em> and <em>R. Rajagopal</em>) for another course, and briefing them by hand is slow. An LLM can do the first draft quickly, but the mistakes that matter most in law are exactly the ones these models make: a citation that does not exist, or a dissent reported as if it were the judgment.</p>
+<p>So most of the skill is about what the model must not do. It works only from the text it is given, it says so when something is missing, and it keeps the court&rsquo;s reasoning apart from any commentary. Writing it was the same lesson as the other assignments, put into instructions: the model is useful only when it is made to stay close to its source.</p>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>Files</h2>
+<ul class="file-list">
+  <li><a href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/SKILL.md" target="_blank" rel="noopener noreferrer"><code>SKILL.md</code></a>: the skill, with the workflow, rules, output format and an example request</li>
+</ul>
+        </section>
+        <nav class="page-next" aria-label="Other assignments">
+          <a href="assignment-03.html">&larr; Assignment 03: Synthetic reading of “Subha”</a>
+          <a href="assignment-05.html">Assignment 05: Stop words on real text &rarr;</a>
+        </nav>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>Digital Humanities Student Exhibition &middot; Department of HSS &middot; IIT (ISM) Dhanbad</p>
+    </footer>
+  </body>
+</html>

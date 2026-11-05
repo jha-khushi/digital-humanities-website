@@ -13,244 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A student digital humanities portfolio exhibition.">
     <title>Khushi Jha | Digital Humanities Portfolio</title>
-    <style>
-      :root {
-        --page-gutter: clamp(1rem, 4vw, 2rem);
-        --content-width: 1180px;
-        --ink: #2b1a22;
-        --muted: #6d5260;
-        --paper: #fff8f3;
-        --surface: #ffffff;
-        --line: #eed8d0;
-        --accent: #ad1457;
-        --accent-deep: #880e4f;
-        --highlight: #d4a72c;
-        --highlight-text: #8a6500;
-        --focus: #6a1b9a;
-        --shadow: 0 18px 45px rgb(136 14 79 / 10%);
-      }
-
-      *, *::before, *::after { box-sizing: border-box; }
-
-      html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-
-      body {
-        margin: 0;
-        color: var(--ink);
-        background:
-          linear-gradient(90deg, transparent 0, transparent 24px, rgb(212 167 44 / 8%) 25px, transparent 26px) 0 0 / 100% 100%,
-          var(--paper);
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(1rem, 0.2vw + 0.95rem, 1.125rem);
-        line-height: 1.65;
-        overflow-wrap: break-word;
-      }
-
-      a { color: var(--accent); text-underline-offset: 0.16em; }
-      a:hover { color: var(--accent-deep); }
-      a:focus-visible, summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-      img, picture, video, iframe, svg, canvas { max-width: 100%; }
-      img, video, svg, canvas { height: auto; }
-      iframe { width: 100%; border: 0; }
-
-      .skip-link {
-        position: absolute;
-        top: -5rem;
-        left: 1rem;
-        z-index: 10;
-        padding: 0.65rem 0.9rem;
-        color: #fff;
-        background: var(--accent-deep);
-      }
-      .skip-link:focus { top: 1rem; }
-
-      .site-header {
-        color: #fff;
-        background: var(--accent-deep);
-        border-bottom: 5px solid var(--highlight);
-      }
-      .header-inner, .layout, .site-footer { width: min(100%, var(--content-width)); margin: 0 auto; }
-      .header-inner { padding: 1.25rem var(--page-gutter) 1.4rem; }
-      .eyebrow, .label {
-        margin: 0;
-        color: inherit;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.74rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        line-height: 1.25;
-        text-transform: uppercase;
-      }
-      .eyebrow { color: #ffd54f; }
-      .wordmark { margin: 0.2rem 0 0; font-size: 1.05rem; }
-      .course-line { margin: 0.25rem 0 0; color: #fce4ec; font-size: 0.92rem; }
-
-      .layout {
-        display: grid;
-        grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
-        gap: clamp(1.5rem, 5vw, 5rem);
-        padding: clamp(2rem, 6vw, 5.5rem) var(--page-gutter) 4rem;
-      }
-
-      .student-card {
-        align-self: start;
-        padding: 1.4rem;
-        background: var(--surface);
-        border-top: 5px solid var(--highlight);
-        box-shadow: var(--shadow);
-      }
-      .student-card h2 { margin: 0 0 1rem; font-size: 1.25rem; }
-      .metadata { margin: 0; }
-      .metadata > div { padding: 0.75rem 0; border-top: 1px solid var(--line); }
-      .metadata > div:first-child { border-top: 0; }
-      .metadata dt { font-family: Arial, Helvetica, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-      .metadata dd { margin: 0.16rem 0 0; font-size: 0.98rem; }
-      .student-note { margin: 1rem 0 0; color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
-
-      main { min-width: 0; container-type: inline-size; }
-      .hero { padding: 0 0 2.7rem; border-bottom: 1px solid var(--line); }
-      .project-kicker { color: var(--accent); }
-      h1, h2, h3 { color: var(--ink); line-height: 1.15; }
-      h1 { max-width: 17ch; margin: 0.55rem 0 1.25rem; font-size: clamp(2.4rem, 6vw, 5.4rem); letter-spacing: -0.045em; }
-      h2 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.4rem); letter-spacing: -0.025em; }
-      h3 { margin: 0 0 0.45rem; font-size: 1.2rem; }
-      .abstract { max-width: 68ch; margin: 0; font-size: clamp(1.12rem, 2vw, 1.35rem); line-height: 1.6; }
-      .abstract strong { color: var(--accent-deep); }
-
-      .content-section { padding: 3.2rem 0; border-bottom: 1px solid var(--line); }
-      .section-heading { display: flex; gap: 1rem; align-items: baseline; margin-bottom: 1.25rem; }
-      .section-number { color: var(--highlight-text); font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; font-weight: 700; }
-      .content-section p, .content-section li { max-width: 72ch; }
-
-      /* EDIT HERE: Replace this example box with your essay, timeline, image gallery, map,
-         data visualisation, embedded media, or another form of project work. */
-      .edit-placeholder {
-        margin-top: 1.5rem;
-        padding: clamp(1.25rem, 4vw, 2.25rem);
-        background: #fce4ec;
-        border: 2px dashed #d4a72c;
-      }
-      .edit-placeholder > :first-child { margin-top: 0; }
-      .edit-placeholder > :last-child { margin-bottom: 0; }
-      .edit-callout { color: var(--accent-deep); font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
-
-      .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1.75rem; }
-      .project-grid article { padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); }
-      .project-grid p { margin-bottom: 0; font-size: 0.95rem; }
-
-      .assignment-list { display: grid; gap: clamp(1rem, 3vw, 1.5rem); margin-top: 1.8rem; }
-      .assignment {
-        padding: clamp(1.3rem, 4vw, 2.1rem);
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-left: 6px solid var(--accent);
-      }
-      .assignment header { display: grid; grid-template-columns: auto 1fr; gap: 0.8rem 1rem; align-items: baseline; }
-      .assignment-index { color: var(--highlight-text); font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; }
-      .assignment h3 { margin: 0; font-size: clamp(1.35rem, 2.5vw, 1.9rem); }
-      .assignment .assignment-abstract { margin: 1rem 0 0; font-size: 1.04rem; }
-      .assignment-repository { margin: 1.15rem 0 0; }
-      .repository-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        max-width: 100%;
-        padding: 0.55rem 0.8rem;
-        color: #fff;
-        background: var(--accent);
-        border: 1px solid var(--accent);
-        border-radius: 0.2rem;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.84rem;
-        font-weight: 700;
-        line-height: 1.25;
-        text-decoration: none;
-      }
-      .repository-link::after { content: "\00a0\2197"; font-size: 1rem; }
-      .repository-link:hover { color: #fff; background: var(--accent-deep); border-color: var(--accent-deep); }
-      .assignment-body { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
-      .assignment-body > :last-child { margin-bottom: 0; }
-      .contents-nav { margin-top: 2rem; padding: 1.15rem 1.25rem; background: #fdf3dc; border-left: 4px solid var(--highlight); }
-      .contents-nav ul { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; margin: 0.5rem 0 0; padding-left: 1.2rem; }
-      .contents-nav[hidden] { display: none; }
-
-      figure { margin: 1.75rem 0; }
-      figure img { display: block; width: 100%; max-width: 900px; height: auto; border: 1px solid var(--line); }
-      figcaption { margin-top: 0.65rem; color: var(--muted); font-size: 0.9rem; }
-      .media-frame {
-        position: relative;
-        overflow: hidden;
-        aspect-ratio: 16 / 9;
-        margin: 1.5rem 0;
-        background: var(--ink);
-      }
-      .media-frame > iframe, .media-frame > video { width: 100%; height: 100%; object-fit: contain; }
-
-      details { margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--surface); border-left: 4px solid var(--highlight); }
-      summary { cursor: pointer; color: var(--accent-deep); font-family: Arial, Helvetica, sans-serif; font-weight: 700; }
-      details p { margin-bottom: 0; }
-
-      .citation-list { padding-left: 1.3rem; }
-      .citation-list li { margin: 0.65rem 0; }
-      .site-footer { padding: 2.25rem var(--page-gutter) 3rem; color: var(--muted); font-size: 0.88rem; }
-      .site-footer p { margin: 0; }
-
-      @media (min-width: 900px) {
-        .student-card { position: sticky; top: 1.25rem; }
-      }
-
-      @media (max-width: 860px) {
-        .layout { display: block; padding-top: 2rem; }
-        .student-card { margin-bottom: 2.5rem; }
-      }
-
-      /* Container queries keep assignment cards legible even when embedded in a narrow layout. */
-      @container (max-width: 34rem) {
-        .assignment header { grid-template-columns: 1fr; gap: 0.35rem; }
-        .contents-nav ul { display: grid; gap: 0.45rem; }
-      }
-
-      @media (max-width: 480px) {
-        .section-heading { gap: 0.6rem; }
-        .assignment { border-left-width: 4px; }
-        .contents-nav { padding: 1rem; }
-        .project-grid { grid-template-columns: 1fr; }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --ink: #fdeef4;
-          --muted: #d7b8c6;
-          --paper: #1a1015;
-          --surface: #24161d;
-          --line: #553443;
-          --accent: #f48fb1;
-          --accent-deep: #f8bbd0;
-          --highlight: #e5bd68;
-          --highlight-text: #e5bd68;
-          --focus: #ffd180;
-          --shadow: 0 18px 45px rgb(0 0 0 / 24%);
-        }
-        .site-header { color: #fff5f8; background: #3d0a24; }
-        .eyebrow { color: #f3d78c; }
-        .course-line { color: #f3d9e4; }
-        .edit-placeholder, .contents-nav { background: #3a1a2a; }
-        .edit-callout, .abstract strong, summary { color: #f8bbd0; }
-        .repository-link { color: #fff; background: #c2185b; border-color: #c2185b; }
-        .repository-link:hover { color: #fff; background: #ad1457; border-color: #ad1457; }
-      }
-
-      @media print {
-        .site-header { color: var(--ink); background: transparent; border: 0; }
-        .layout { display: block; padding: 1rem 0; }
-        .student-card { margin: 1rem 0 2rem; box-shadow: none; border: 1px solid var(--line); }
-        a { color: var(--ink); }
-      }
-    </style>
+    <link rel="stylesheet" href="assets/site.css">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to project</a>
@@ -332,184 +95,78 @@
             <article class="assignment" id="assignment-1" aria-labelledby="assignment-1-title">
               <header>
                 <span class="assignment-index">Assignment 01</span>
-                <h3 id="assignment-1-title">NLP: Indic Stop Words &mdash; Hindi, Bengali, Gujarati and Tamil</h3>
+                <h3 id="assignment-1-title"><a href="assignment-01.html">Indic Stop Words: Hindi, Bengali, Gujarati and Tamil</a></h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> Stop words are high-frequency function words that carry little content on their own and are usually removed before keyword extraction, topic modelling or frequency analysis. I compiled stop-word lists for four Indic languages in four scripts: Hindi (Devanagari), Bengali (Bengali script) and Gujarati (Gujarati script), which are Indo-Aryan, and Tamil (Tamil script), which is Dravidian. Each list is grouped by grammatical category (conjunctions, pronouns, possessives, postpositions, question words, quantifiers, auxiliary verbs and particles), and each file has a small function that removes the stop words from a sentence.</p>
-              <p class="assignment-repository">Repository: <a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords" target="_blank" rel="noopener noreferrer">dh-01-indic-stopwords</a></p>
-              <p class="assignment-repository">Files:
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/hindi_stopwords.py" target="_blank" rel="noopener noreferrer">hindi_stopwords.py</a> (235 words) &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/bengali_stopwords.py" target="_blank" rel="noopener noreferrer">bengali_stopwords.py</a> (210) &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/gujarati_stopwords.py" target="_blank" rel="noopener noreferrer">gujarati_stopwords.py</a> (196) &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords/blob/main/tamil_stopwords.py" target="_blank" rel="noopener noreferrer">tamil_stopwords.py</a> (179)
-              </p>
-              <div class="assignment-body">
-                <p class="edit-callout">Visible assignment work</p>
-                <p><strong>A sample from each list:</strong></p>
-                <ul>
-                  <li>Hindi: <span lang="hi">और &middot; लेकिन &middot; मैं &middot; वह &middot; का &middot; में &middot; से &middot; क्या &middot; है &middot; नहीं</span></li>
-                  <li>Bengali: <span lang="bn">এবং &middot; কিন্তু &middot; আমি &middot; সে &middot; থেকে &middot; জন্য &middot; কী &middot; আছে &middot; ছিল &middot; না</span></li>
-                  <li>Gujarati: <span lang="gu">અને &middot; પરંતુ &middot; હું &middot; તે &middot; માં &middot; થી &middot; શું &middot; છે &middot; હતું &middot; નથી</span></li>
-                  <li>Tamil: <span lang="ta">மற்றும் &middot; ஆனால் &middot; நான் &middot; அவர் &middot; இந்த &middot; பற்றி &middot; என்ன &middot; உள்ளது &middot; இல்லை</span></li>
-                </ul>
-                <p><strong>Example.</strong> The same sentence, &ldquo;Today I went to the market with my friend and bought books there&rdquo;, before and after removing stop words:</p>
-                <ul>
-                  <li>Hindi: <span lang="hi">मैं आज अपने दोस्त के साथ बाज़ार गई और वहाँ से किताबें खरीदीं &rarr; दोस्त बाज़ार किताबें खरीदीं</span></li>
-                  <li>Bengali: <span lang="bn">আমি আজ বন্ধুর সঙ্গে বাজারে গিয়েছিলাম এবং সেখানে কিছু বই কিনলাম &rarr; বন্ধুর বাজারে গিয়েছিলাম বই কিনলাম</span></li>
-                  <li>Gujarati: <span lang="gu">હું આજે મારા મિત્ર સાથે બજારમાં ગઈ અને ત્યાંથી પુસ્તકો ખરીદ્યાં &rarr; મિત્ર બજારમાં ત્યાંથી પુસ્તકો ખરીદ્યાં</span></li>
-                  <li>Tamil: <span lang="ta">நான் இன்று என் நண்பருடன் சந்தைக்குச் சென்றேன் மற்றும் அங்கு சில புத்தகங்கள் வாங்கினேன் &rarr; நண்பருடன் சந்தைக்குச் சென்றேன் புத்தகங்கள் வாங்கினேன்</span></li>
-                </ul>
-                <p><strong>What comparing the languages showed.</strong> A stop-word list works best where grammar words stand apart from content words. In Hindi, postpositions are written as separate words (<span lang="hi">दोस्त के साथ</span>), so they are removed cleanly. In Bengali and Gujarati, case endings are often joined to the noun (<span lang="bn">বাজারে</span>, <span lang="gu">બજારમાં</span>, &ldquo;in the market&rdquo;). In Tamil, which is agglutinative, &ldquo;with my friend&rdquo; is one word (<span lang="ta">நண்பருடன்</span>). For these languages a list catches only the free-standing words, and fuller cleaning needs a stemmer or morphological analyser.</p>
-                <p><strong>Limitations.</strong> Spelling varies (<span lang="hi">गए / गये</span>, <span lang="bn">কখনো / কখনও</span>), so common variants are listed together. The Bengali, Gujarati and Tamil files normalise text to Unicode NFC, because the same letter can be typed in two ways. Negation words such as <span lang="hi">नहीं</span>, <span lang="bn">না</span>, <span lang="gu">નથી</span> and <span lang="ta">இல்லை</span> change meaning, so they should be kept for tasks like sentiment analysis.</p>
+              <p class="assignment-abstract">Stop-word lists for four Indic languages in four scripts, grouped by kind of word, with a function that removes them from a sentence.</p>
+              <p><strong>Key finding:</strong> Tamil has far fewer separate postpositions than Hindi, because its grammar is joined to the noun.</p>
+              <div class="button-row">
+                <a class="repository-link page-link" href="assignment-01.html">Open the assignment page</a>
+                <a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords" target="_blank" rel="noopener noreferrer">dh-01-indic-stopwords</a>
               </div>
             </article>
 
             <article class="assignment" id="assignment-2" aria-labelledby="assignment-2-title">
               <header>
                 <span class="assignment-index">Assignment 02</span>
-                <h3 id="assignment-2-title">Extraction of Indian Cultural Elements Using RAG: Flora and Fauna in Five Indian Books</h3>
+                <h3 id="assignment-2-title"><a href="assignment-02.html">Flora and Fauna in Five Indian Books, with RAG</a></h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> I built a repository of five Indian literary texts that differ in language of origin, period and genre: Kalidasa&rsquo;s Sanskrit drama and poetry, the Pali Jataka fables, Bankim Chandra Chattopadhyay&rsquo;s Bengali novel <em>The Poison Tree</em>, Sarojini Naidu&rsquo;s <em>The Golden Threshold</em> and Tagore&rsquo;s <em>The Gardener</em>. A Retrieval-Augmented Generation (RAG) pipeline that runs entirely on a local machine retrieved the passages most relevant to plants and animals in each book, and a local LLM extracted their names. Every name was checked against its source passage and validated, giving 65 plants and 68 animals.</p>
-              <p class="assignment-repository">Repository: <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna" target="_blank" rel="noopener noreferrer">dh-02-rag-flora-fauna</a></p>
-              <p class="assignment-repository">Result file: <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/flora_fauna.py" target="_blank" rel="noopener noreferrer">flora_fauna.py</a></p>
-              <p class="assignment-repository">Corpus:
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/corpus/kalidasa_shakuntala_and_other_works.txt" target="_blank" rel="noopener noreferrer">Kalidasa</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/corpus/jataka_buddhist_birth_stories.txt" target="_blank" rel="noopener noreferrer">Jataka Tales</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/corpus/bankim_the_poison_tree.txt" target="_blank" rel="noopener noreferrer">The Poison Tree</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/corpus/naidu_the_golden_threshold.txt" target="_blank" rel="noopener noreferrer">The Golden Threshold</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/corpus/tagore_the_gardener.txt" target="_blank" rel="noopener noreferrer">The Gardener</a>
-              </p>
-              <p class="assignment-repository">Pipeline:
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/preprocess.py" target="_blank" rel="noopener noreferrer">preprocess.py</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/rag_pipeline.py" target="_blank" rel="noopener noreferrer">rag_pipeline.py</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/validate_results.py" target="_blank" rel="noopener noreferrer">validate_results.py</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/make_flora_fauna.py" target="_blank" rel="noopener noreferrer">make_flora_fauna.py</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/results/validated.json" target="_blank" rel="noopener noreferrer">validated.json</a> (each name with its evidence sentence)
-              </p>
-              <div class="assignment-body">
-                <p class="edit-callout">Visible assignment work</p>
-                <p><strong>Pipeline.</strong> (1) Pre-process: remove the Project Gutenberg licence and keep only the literary text, cutting translators&rsquo; introductions, prefaces, indexes and footnotes. (2) Chunk into 844 overlapping passages of about 250 words. (3) Embed each passage with <code>nomic-embed-text</code>. (4) Retrieve the 10 most similar passages from <em>each book</em> for each of 12 queries (trees, flowers, creepers, crops, mammals, birds, reptiles, fish, insects&hellip;), 238 passages in all, so that long books cannot crowd out short ones. (5) Generate: <code>qwen2.5:7b</code> lists the plant and animal names in each passage as JSON. (6) Verify that each name occurs in its passage. (7) Validate it (the model, plus 88 recorded author corrections) and merge variants. (8) Save as <code>flora_fauna.py</code>.</p>
-                <p><strong>Flora (65):</strong> amaranth, ashoka, babul (acacia), bakul, bamboo, banyan, barley, bel (wood-apple), betel-nut, brinjal, casuarina, champa, coconut, coral tree, corn, cucumber, deodar, durva grass, fig, gourd, hemp, henna, hyacinth, jackfruit, jasmine, jujube, kadam, ketak (screw-pine), kusum, lichi, lily, linseed, lodh, lotus, madder, mango, mushroom, mustard, neem, nipa, oleander, orange, palm, panic grass, peach, plantain, plum, pomegranate, poppy, pumpkin, reed, rice, rose, rose-apple, sacred grass (kusha), saffron, sandalwood, silk cotton tree, siris, spring creeper, tamal, trumpet-flower, tulip, tulsi, water lily.</p>
-                <p><strong>Fauna (68):</strong> antelope, ape, bat, bear, bee, bison, boar, buffalo, bull, butterfly, carp, cat, centipede, cobra, cockroach, cow, crane, crow, cuckoo, dahuk (waterhen), deer, dhadikula, dog, dove, duck, elephant, firefly, fly, frog, gazelle, goat, goose, gull, halcyon, hare, heron, horse, jackal, kite, koel, lion, lizard, monkey, mouse, musk deer, musk-rat, nightingale, oriole, owl, ox, paddy bird (pond heron), panther, papiya (hawk-cuckoo), parrot, partridge, peacock, pig, pigeon, plover, quail, rat, sheep, snake, sparrow, spider, squirrel, starling, swan.</p>
-                <p><strong>What the validation step showed.</strong> Of 392 names proposed by the LLM, 33 did not occur in the passage at all, and 134 were not living things: ornaments (&ldquo;lotus-bracelet&rdquo;), food (&ldquo;sausages&rdquo;, &ldquo;molasses&rdquo;, which the model filed as an insect), objects (a <em>bonti</em>, the Bengali fish-cutter, filed as a fish), places, rivers and characters. Only 225 were real plants or animals. Some errors are themselves findings. In Kalidasa, nature is bound up with ornament and ritual (bark dresses, the &ldquo;vine-bride&rdquo;). In Bankim, the heroine Kunda is named after a jasmine, and the text plays on it: &ldquo;what if you should discover the flower, Kunda, under the trees?&rdquo;</p>
-                <p><strong>Limitations.</strong> Names come from English translations, so some are the translators&rsquo; choices (&ldquo;nightingale&rdquo; for an Indian bird). Retrieval finds the most relevant passages, not every mention, which is why Assignment 06 counts mentions in the full texts.</p>
+              <p class="assignment-abstract">A local RAG pipeline finds the plants and animals named in five Indian books: Kalidasa, the Jataka tales, Bankim&rsquo;s <em>The Poison Tree</em>, Naidu&rsquo;s <em>The Golden Threshold</em> and Tagore&rsquo;s <em>The Gardener</em>.</p>
+              <p><strong>Key finding:</strong> 65 plants and 68 animals. Only 225 of the 392 names the model proposed were real.</p>
+              <div class="button-row">
+                <a class="repository-link page-link" href="assignment-02.html">Open the assignment page</a>
+                <a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna" target="_blank" rel="noopener noreferrer">dh-02-rag-flora-fauna</a>
               </div>
             </article>
 
             <article class="assignment" id="assignment-3" aria-labelledby="assignment-3-title">
               <header>
                 <span class="assignment-index">Assignment 03</span>
-                <h3 id="assignment-3-title">Synthetic Reading: Voice, Silence and Nature in Tagore&rsquo;s &ldquo;Subha&rdquo;</h3>
+                <h3 id="assignment-3-title"><a href="assignment-03.html">A Synthetic Reading of Tagore&rsquo;s &ldquo;Subha&rdquo;</a></h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> &ldquo;Subha&rdquo; is the story of a mute village girl whose family treats her as a &ldquo;silent weight&rdquo; and finally marries her off without revealing her muteness. After a partial reading of 20% of the story, I asked how the text makes speech the condition for being recognised as a feeling person, and where Subha&rsquo;s own language goes when no human hears it. A local LLM extracted expressions along four dimensions (voice and silence, nature and non-human kinship, social and patriarchal structure, affect) across three stages of the story. The visualisation shows that Subha&rsquo;s language lives with the river and the cows, and that this vocabulary vanishes the moment marriage takes her to Calcutta, where the language of value, inspection and exchange takes over.</p>
-              <p class="assignment-repository">Repository: <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha" target="_blank" rel="noopener noreferrer">dh-03-synthetic-reading-subha</a></p>
-              <p class="assignment-repository">Files:
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/subha.txt" target="_blank" rel="noopener noreferrer">subha.txt</a> (corpus) &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/partial_reading.txt" target="_blank" rel="noopener noreferrer">partial_reading.txt</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/initial_impression.md" target="_blank" rel="noopener noreferrer">initial_impression.md</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/prompt.txt" target="_blank" rel="noopener noreferrer">prompt.txt</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/subha_themes.py" target="_blank" rel="noopener noreferrer">subha_themes.py</a> (extracted themes) &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/visualise.py" target="_blank" rel="noopener noreferrer">visualise.py</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/interpretation.md" target="_blank" rel="noopener noreferrer">interpretation.md</a>
-              </p>
-              <div class="assignment-body">
-                <p class="edit-callout">Visible assignment work</p>
-                <p><strong>Method (seven steps).</strong> (1) Partial reading: the story&rsquo;s 118 sentences were split into three equal parts and only 20% of each was read (first, random, last). (2) Initial impression and research problem, with frameworks from Spivak, ecofeminism and disability studies. (3) The full text was uploaded and cleaned. (4) A detailed prompt was written. (5) A local LLM (qwen2.5:7b via Ollama) extracted expressions, which were checked against the text and then annotated by the author. (6) Python visualisations. (7) Interpretation.</p>
-                <p><strong>Statement tested:</strong> as the story moves from Chandipur to Calcutta, the vocabulary of nature and non-human kinship gives way to the vocabulary of social and patriarchal structure.</p>
-                <figure>
-                  <img src="images/03_theme_trace.png" alt="Line chart of four vocabulary dimensions across the 118 sentences of Subha. Voice and nature peak together late in Stage I; social structure surges with the marriage talk at the end of Stage II and peaks in Stage III, where the nature line falls to zero after the farewell to the river and cows." loading="lazy">
-                  <figcaption>Where each dimension&rsquo;s vocabulary occurs, sentence by sentence (9-sentence moving average).</figcaption>
-                </figure>
-                <figure>
-                  <img src="images/03_theme_heatmap.png" alt="Heat map of expressions per dimension and stage: voice 18, 13, 11; nature 13, 8, 9; social structure 12, 8, 17; affect 10, 12, 10." loading="lazy">
-                  <figcaption>Number of extracted expressions per dimension and stage.</figcaption>
-                </figure>
-                <p><strong>Findings.</strong> Voice and nature peak together where &ldquo;there were only dumb Nature and a dumb girl&rdquo;: the cows &ldquo;understood her gentle murmuring better than all speech&rdquo;. Nature returns once as farewell to her &ldquo;dear river&rdquo; and to &ldquo;earth, her strong silent mother&rdquo;, then drops to zero in the Calcutta section. There social structure peaks: she is inspected, found to be a &ldquo;useful possession&rdquo; and &ldquo;delivered over&hellip; into another&rsquo;s hands&rdquo;. Her voice survives only as tears and gaze that &ldquo;no one understood&rdquo;.</p>
-                <p><strong>Interpretation.</strong> Read with Spivak&rsquo;s &ldquo;Can the Subaltern Speak?&rdquo;, Subha&rsquo;s problem is not that she cannot speak but that no structure exists to hear her: &ldquo;because she did not speak, therefore she did not feel&rdquo; is epistemic violence. Gayle Rubin&rsquo;s &ldquo;traffic in women&rdquo; explains the commercial vocabulary of the marriage, and ecofeminism (Plumwood) shows the double edge of her bond with nature: it sustains her, yet she ends as &ldquo;a stricken doe&rdquo; before &ldquo;the hunter&rsquo;s face&rdquo;. The full argument, limitations and works cited are in <a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/interpretation.md" target="_blank" rel="noopener noreferrer">interpretation.md</a>.</p>
+              <p class="assignment-abstract">A synthetic reading of Tagore&rsquo;s story about a mute girl: a partial reading, a hypothesis, a local LLM, charts, and an interpretation with Spivak, Rubin and ecofeminism.</p>
+              <p><strong>Key finding:</strong> Nature words stop completely after sentence 98 of 118, when marriage takes Subha to Calcutta.</p>
+              <div class="button-row">
+                <a class="repository-link page-link" href="assignment-03.html">Open the assignment page</a>
+                <a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha" target="_blank" rel="noopener noreferrer">dh-03-synthetic-reading-subha</a>
               </div>
             </article>
 
             <article class="assignment" id="assignment-4" aria-labelledby="assignment-4-title">
               <header>
                 <span class="assignment-index">Assignment 04</span>
-                <h3 id="assignment-4-title">Creating a SKILL for an LLM: Indian Case-Brief Writer</h3>
+                <h3 id="assignment-4-title"><a href="assignment-04.html">A SKILL for an LLM: Indian Case-Brief Writer</a></h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> A SKILL file is a set of Markdown instructions that turns a general-purpose LLM into a reliable assistant for one specific task. This skill teaches an LLM to write structured case briefs of Indian Supreme Court and High Court judgments, especially fundamental-rights cases such as the privacy line from <em>Kharak Singh</em> to <em>Govind</em> and <em>R. Rajagopal</em>. It requires the model to work only from the judgment text supplied, to separate the <em>ratio decidendi</em> from <em>obiter dicta</em> and majority from dissent, and to quote and cite nothing that is not in that text.</p>
-              <p class="assignment-repository">Repository: <a class="repository-link" href="https://github.com/jha-khushi/dh-04-skill-case-brief" target="_blank" rel="noopener noreferrer">dh-04-skill-case-brief</a></p>
-              <p class="assignment-repository">File: <a class="repository-link" href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/SKILL.md" target="_blank" rel="noopener noreferrer">SKILL.md</a></p>
-              <div class="assignment-body">
-                <p class="edit-callout">Visible assignment work</p>
-                <p><strong>Name of the work:</strong> writing citation-faithful case briefs of Indian constitutional-law judgments.</p>
-                <p><strong>What the skill makes the LLM do</strong> (eleven-step workflow):</p>
-                <ol>
-                  <li>Identify the case, court, bench and citation exactly as given, never inventing them.</li>
-                  <li>Separate the majority, concurring and dissenting opinions.</li>
-                  <li>Extract the material facts, the issues as questions of law, and both sides&rsquo; arguments.</li>
-                  <li>State the holding and reasoning, naming the constitutional provisions and tests used (e.g. Art. 21, reasonable restriction, proportionality).</li>
-                  <li>Isolate the <em>ratio decidendi</em>, distinguish <em>obiter dicta</em>, and place the case among earlier and later precedents.</li>
-                  <li>Check that every quotation and paragraph number really appears in the judgment before answering.</li>
-                </ol>
-                <p><strong>Output:</strong> a fixed Markdown brief (Facts &middot; Issues &middot; Arguments &middot; Holding &middot; Reasoning &middot; Ratio &middot; Obiter &middot; Dissent &middot; Place in doctrine &middot; Key quotations), with a comparison table when several cases are briefed together.</p>
-                <p><strong>Design choice.</strong> Most errors in AI legal summaries are invented citations and dissents presented as law. The skill therefore puts accuracy rules ahead of style and keeps the court&rsquo;s reasoning separate from any commentary.</p>
+              <p class="assignment-abstract">A SKILL file that makes an LLM write case briefs of Indian constitutional judgments without inventing citations or presenting a dissent as the law.</p>
+              <p><strong>Key finding:</strong> Most of the skill is about what the model must not do.</p>
+              <div class="button-row">
+                <a class="repository-link page-link" href="assignment-04.html">Open the assignment page</a>
+                <a class="repository-link" href="https://github.com/jha-khushi/dh-04-skill-case-brief" target="_blank" rel="noopener noreferrer">dh-04-skill-case-brief</a>
               </div>
             </article>
 
             <article class="assignment" id="assignment-5" aria-labelledby="assignment-5-title">
               <header>
                 <span class="assignment-index">Assignment 05</span>
-                <h3 id="assignment-5-title">Testing the Stop-Word Lists on Real Text: Why Tamil Resists a List</h3>
+                <h3 id="assignment-5-title"><a href="assignment-05.html">Testing the Stop-Word Lists on Real Text</a></h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 01.</em> I tested the four stop-word lists from Assignment 01 by using them on comparable texts: the same four Wikipedia articles (India, Rabindranath Tagore, Monsoon, Ganges) in Hindi, Bengali, Gujarati and Tamil, about 48,000 tokens in all. The Hindi list removes 41.2% of all tokens, the Gujarati list 28.6%, the Bengali list 19.3% and the Tamil list only 14.5%. The difference comes from grammar: Hindi writes its postpositions as separate words, while Tamil and Bengali join case endings to the noun (<span lang="ta">இந்தியாவின்</span>, <span lang="bn">ভারতের</span>, &ldquo;of India&rdquo;), where a whitespace-based list cannot reach them.</p>
-              <p class="assignment-repository">Repository: <a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation" target="_blank" rel="noopener noreferrer">dh-05-stopword-evaluation</a></p>
-              <p class="assignment-repository">Files:
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/evaluate_stopwords.py" target="_blank" rel="noopener noreferrer">evaluate_stopwords.py</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/findings.md" target="_blank" rel="noopener noreferrer">findings.md</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/results/top_words.md" target="_blank" rel="noopener noreferrer">top_words.md</a> (frequency tables) &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation/blob/main/results/coverage.json" target="_blank" rel="noopener noreferrer">coverage.json</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation/tree/main/texts" target="_blank" rel="noopener noreferrer">texts/</a>
-              </p>
-              <div class="assignment-body">
-                <p class="edit-callout">Visible assignment work</p>
-                <figure>
-                  <img src="images/05_coverage_pies.png" alt="Four donut charts: stop words make up 41% of tokens in Hindi, 19% in Bengali, 29% in Gujarati and 14% in Tamil." loading="lazy">
-                  <figcaption>Share of all word tokens removed by each list.</figcaption>
-                </figure>
-                <figure>
-                  <img src="images/05_category_pies.png" alt="Four pie charts of stop-word categories. Postpositions are 46% of removed tokens in Hindi but 16% in Bengali, 15% in Gujarati and 9% in Tamil." loading="lazy">
-                  <figcaption>Which kinds of stop words do the work. Postpositions dominate only in Hindi.</figcaption>
-                </figure>
-                <p><strong>Findings.</strong> (1) Lists of similar size remove very different shares of text, so the gap is caused by grammar, not by list length. (2) Postpositions do 46% of the removal work in Hindi but only 9% in Tamil, where &ldquo;of India&rdquo; and &ldquo;in India&rdquo; are single words. (3) The most frequent words the lists did not remove point to additions, such as Hindi <span lang="hi">जाता</span>, Bengali <span lang="bn">সালে</span>, Gujarati <span lang="gu">તરીકે</span> and Tamil <span lang="ta">இல்</span>. (4) Between 59% and 71% of each list occurs in the texts. Colloquial forms such as <span lang="hi">तू</span> and <span lang="bn">তুই</span> never appear in encyclopaedia prose, so the right list depends on the genre.</p>
-                <p><strong>Conclusion.</strong> Stop-word removal is not language-neutral. It suits languages that write grammar as separate words, and for agglutinative languages such as Tamil it needs a morphological analyser rather than a longer list.</p>
+              <p class="assignment-abstract"><em>Additional, extends Assignment 01.</em> The four stop-word lists tested on the same four Wikipedia articles in each language.</p>
+              <p><strong>Key finding:</strong> The Hindi list removes 41.2% of words; the Tamil list only 14.5%.</p>
+              <div class="button-row">
+                <a class="repository-link page-link" href="assignment-05.html">Open the assignment page</a>
+                <a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation" target="_blank" rel="noopener noreferrer">dh-05-stopword-evaluation</a>
               </div>
             </article>
 
             <article class="assignment" id="assignment-6" aria-labelledby="assignment-6-title">
               <header>
                 <span class="assignment-index">Assignment 06</span>
-                <h3 id="assignment-6-title">Comparing the Natural Worlds of Five Indian Books</h3>
+                <h3 id="assignment-6-title"><a href="assignment-06.html">Comparing the Natural Worlds of Five Books</a></h3>
               </header>
-              <p class="assignment-abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 02.</em> The RAG pipeline found which plants and animals the five books name. This assignment counts how often each name is mentioned in the full text of every book, and compares the books. Each genre turns out to have its own nature: the Jataka fables are 77% animals, Sarojini Naidu&rsquo;s poems are 65% plants (38% flowers alone) and the densest at 17 mentions per 1,000 words, and Bankim&rsquo;s novel is full of household creatures (owls, sparrows, lizards, rats, cats). Only six names occur in all five books: deer, lotus, mango, peacock, rice and snake.</p>
-              <p class="assignment-repository">Repository: <a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books" target="_blank" rel="noopener noreferrer">dh-06-comparing-books</a></p>
-              <p class="assignment-repository">Files:
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/compare_books.py" target="_blank" rel="noopener noreferrer">compare_books.py</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/findings.md" target="_blank" rel="noopener noreferrer">findings.md</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/results/summary.md" target="_blank" rel="noopener noreferrer">summary.md</a> &middot;
-                <a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/results/mentions.json" target="_blank" rel="noopener noreferrer">mentions.json</a>
-              </p>
-              <div class="assignment-body">
-                <p class="edit-callout">Visible assignment work</p>
-                <figure>
-                  <img src="images/06_flora_fauna_share.png" alt="Five donut charts of the share of plant mentions: Kalidasa 42%, Jataka Tales 23%, The Poison Tree 44%, The Golden Threshold 65%, The Gardener 45%." loading="lazy">
-                  <figcaption>Plants or animals? Share of mentions in each book.</figcaption>
-                </figure>
-                <figure>
-                  <img src="images/06_category_by_book.png" alt="Five pie charts of mentions by category. Mammals are 65% of the Jataka Tales; flowers are 38% of The Golden Threshold." loading="lazy">
-                  <figcaption>What kind of nature? Mentions by category.</figcaption>
-                </figure>
-                <figure>
-                  <img src="images/06_cooccurrence_network.png" alt="Network of the 40 most frequent plant and animal names. Lotus, elephant and deer are the most connected; bee, swan, lily and jasmine cluster around the lotus." loading="lazy">
-                  <figcaption>Which plants and animals share a passage (at least twice). The lotus is the centre.</figcaption>
-                </figure>
-                <p><strong>Counting needs reading.</strong> Some names are also English words or characters. A first count gave Naidu&rsquo;s poems six bears, from &ldquo;we <em>bear</em> her along&rdquo;, and found the flower &ldquo;kunda&rdquo; 400 times in <em>The Poison Tree</em>, where Kunda is the heroine. Such names are counted only in plant or animal contexts. Every rule is in the code.</p>
+              <p class="assignment-abstract"><em>Additional, extends Assignment 02.</em> How often each book names its plants and animals, compared across the five books.</p>
+              <p><strong>Key finding:</strong> The fables are 77% animals, Naidu&rsquo;s poems 65% plants. Only six names appear in all five books.</p>
+              <div class="button-row">
+                <a class="repository-link page-link" href="assignment-06.html">Open the assignment page</a>
+                <a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books" target="_blank" rel="noopener noreferrer">dh-06-comparing-books</a>
               </div>
             </article>
           </div>

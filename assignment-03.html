@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A Synthetic Reading of Tagore&rsquo;s &ldquo;Subha&rdquo;">
+    <title>Assignment 03: Synthetic reading of &ldquo;Subha&rdquo; | Khushi Jha</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to the assignment</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="eyebrow">Digital Humanities Student Exhibition</p>
+        <p class="wordmark">IIT (ISM) Dhanbad &middot; Department of HSS</p>
+        <p class="course-line">MA in DH &middot; Session 2026&ndash;27</p>
+      </div>
+    </header>
+    <div class="layout">
+      <aside class="student-card" aria-labelledby="details-heading">
+        <h2 id="details-heading">Assignment 03</h2>
+        <dl class="metadata">
+          <div><dt>Student</dt><dd>Khushi Jha</dd></div>
+          <div><dt>Repository</dt><dd><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha" target="_blank" rel="noopener noreferrer">dh-03-synthetic-reading-subha</a></dd></div>
+          <div><dt>Text</dt><dd>&ldquo;Subha&rdquo;, <em>Stories from Tagore</em> (1918)</dd></div>
+          <div><dt>Model</dt><dd>qwen2.5:7b (local, Ollama)</dd></div>
+          <div><dt>Method</dt><dd>Ghosh, Shanmugapriya T and Mandal, <em>IJHAC</em> 20.2 (2026)</dd></div>
+          <div><dt>Course</dt><dd>MA in DH, HSS, IIT (ISM) Dhanbad</dd></div>
+        </dl>
+        <p class="student-note"><a href="index.html">Back to all assignments</a></p>
+      </aside>
+      <main id="main-content">
+        <p class="page-crumb"><a href="index.html">All assignments</a></p>
+        <section class="hero" aria-labelledby="page-title">
+          <p class="label project-kicker">Assignment 03</p>
+          <h1 id="page-title">A Synthetic Reading of Tagore&rsquo;s &ldquo;Subha&rdquo;</h1>
+          <p class="abstract"><strong>Abstract.</strong> &ldquo;Subha&rdquo; is about a mute village girl whose family treats her as a &ldquo;silent weight&rdquo; and who is married off in Calcutta without anyone saying that she cannot speak. Following the synthetic-reading method of Ghosh, Shanmugapriya T and Mandal (2026), I read only 20% of the story first, formed a hypothesis about voice, silence and nature, and then tested it on the full text with a local LLM and charts.</p>
+          <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
+        </section>
+        <section class="page-section">
+          <h2>Method</h2>
+<ol class="steps">
+<li><strong>Partial reading</strong><span>20% of each third of the story: 24 of 118 sentences.</span></li>
+<li><strong>Research problem</strong><span>A question, my positionality and the frameworks.</span></li>
+<li><strong>Full text</strong><span>The 1918 English translation, cleaned.</span></li>
+<li><strong>Prompt</strong><span>A detailed prompt for the local LLM.</span></li>
+<li><strong>Extraction</strong><span>The model&rsquo;s expressions, checked and annotated by me.</span></li>
+<li><strong>Visualisation</strong><span>Charts of where each theme occurs.</span></li>
+<li><strong>Interpretation</strong><span>Reading the charts with theory.</span></li>
+</ol>
+<p><strong>The statement I tested</strong>, written after the partial reading:</p>
+<p class="quote">&ldquo;Across the three stages of the story, Subha&rsquo;s language moves from being understood by a non-human community to being unheard altogether, and the vocabulary of nature gives way to the vocabulary of social and patriarchal structure.&rdquo;</p>
+<p>My first impressions and positionality are in <a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/initial_impression.md" target="_blank" rel="noopener noreferrer"><code>initial_impression.md</code></a>.</p>
+        </section>
+        <section class="page-section">
+          <h2>Visualisations</h2>
+<div class="figure-pair">
+<figure>
+  <img src="images/a03/dimension_share.png" alt="Pie chart of the 141 expressions by dimension: voice and silence 42, nature 30, social structure 37, affect 32." loading="lazy">
+  <figcaption>The 141 extracted expressions, by dimension.</figcaption>
+</figure>
+<figure>
+  <img src="images/a03/theme_heatmap.png" alt="Heatmap of expressions per dimension and stage. Social structure is highest in Stage III (17)." loading="lazy">
+  <figcaption>Heatmap: expressions per dimension and stage.</figcaption>
+</figure>
+</div>
+<figure>
+  <img src="images/a03/theme_trace.png" alt="Line chart of the four dimensions across 118 sentences. Nature drops to zero after the farewell scene." loading="lazy">
+  <figcaption>Where each dimension&rsquo;s words occur, sentence by sentence (9-sentence moving average).</figcaption>
+</figure>
+<figure>
+  <img src="images/a03/sentence_barcode.png" alt="Heatmap with one column per sentence. Nature words stop after sentence 98 of 118." loading="lazy">
+  <figcaption>Heatmap (&ldquo;barcode&rdquo;): every sentence of the story. Nature words stop completely after sentence 98.</figcaption>
+</figure>
+        </section>
+        <section class="page-section">
+          <h2>My interpretation</h2>
+<div class="interpretation">
+<p>I expected nature to fade out slowly as Subha grows up. The charts showed something sharper. Nature stays with her as long as she is in her village, comes back once when she says goodbye to her &ldquo;dear river&rdquo; and the cows, and after sentence 98 it is gone. What she loses depends on where she is, not on her age: marriage takes her away from the only listeners she had.</p>
+<p>Spivak&rsquo;s &ldquo;Can the Subaltern Speak?&rdquo; helped me name this. Subha is not without language; her eyes &ldquo;told them everything, though no one understood her.&rdquo; The problem is that no one is willing to hear her, and the family&rsquo;s belief that &ldquo;because she did not speak, therefore she did not feel&rdquo; is what Spivak calls epistemic violence.</p>
+<p>The last stage of the story is full of the language of buying and selling: a &ldquo;useful possession&rdquo;, her value &ldquo;increased&rdquo;, &ldquo;delivered over into another&rsquo;s hands&rdquo;. Gayle Rubin&rsquo;s &ldquo;traffic in women&rdquo; describes this exactly. And the same bond with nature that comforted her becomes the image of her capture, &ldquo;a stricken doe&rdquo; looking at &ldquo;the hunter&rsquo;s face&rdquo;.</p>
+<p>I read the story in English, the numbers are small, and the four categories are my own. The charts did not give me the reading, but they showed me where to look.</p>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>Files</h2>
+<ul class="file-list">
+  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/partial_reading.txt" target="_blank" rel="noopener noreferrer"><code>partial_reading.txt</code></a>: the 20% I read first</li>
+  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/initial_impression.md" target="_blank" rel="noopener noreferrer"><code>initial_impression.md</code></a>: research problem and positionality</li>
+  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/prompt.txt" target="_blank" rel="noopener noreferrer"><code>prompt.txt</code></a>: the prompt for the LLM</li>
+  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/subha_themes.py" target="_blank" rel="noopener noreferrer"><code>subha_themes.py</code></a>: the extracted and annotated themes</li>
+  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/visualise.py" target="_blank" rel="noopener noreferrer"><code>visualise.py</code></a>: the charts</li>
+  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/interpretation.md" target="_blank" rel="noopener noreferrer"><code>interpretation.md</code></a>: the full interpretation with works cited</li>
+</ul>
+        </section>
+        <nav class="page-next" aria-label="Other assignments">
+          <a href="assignment-02.html">&larr; Assignment 02: Flora and fauna with RAG</a>
+          <a href="assignment-04.html">Assignment 04: SKILL: case-brief writer &rarr;</a>
+        </nav>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>Digital Humanities Student Exhibition &middot; Department of HSS &middot; IIT (ISM) Dhanbad</p>
+    </footer>
+  </body>
+</html>

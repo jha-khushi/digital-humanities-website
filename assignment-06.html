@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Comparing the Natural Worlds of Five Books">
+    <title>Assignment 06: Comparing five books | Khushi Jha</title>
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to the assignment</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="eyebrow">Digital Humanities Student Exhibition</p>
+        <p class="wordmark">IIT (ISM) Dhanbad &middot; Department of HSS</p>
+        <p class="course-line">MA in DH &middot; Session 2026&ndash;27</p>
+      </div>
+    </header>
+    <div class="layout">
+      <aside class="student-card" aria-labelledby="details-heading">
+        <h2 id="details-heading">Assignment 06</h2>
+        <dl class="metadata">
+          <div><dt>Student</dt><dd>Khushi Jha</dd></div>
+          <div><dt>Repository</dt><dd><a href="https://github.com/jha-khushi/dh-06-comparing-books" target="_blank" rel="noopener noreferrer">dh-06-comparing-books</a></dd></div>
+          <div><dt>Books</dt><dd>5</dd></div>
+          <div><dt>Extends</dt><dd><a href="assignment-02.html">Assignment 02</a></dd></div>
+          <div><dt>Course</dt><dd>MA in DH, HSS, IIT (ISM) Dhanbad</dd></div>
+        </dl>
+        <p class="student-note"><a href="index.html">Back to all assignments</a></p>
+      </aside>
+      <main id="main-content">
+        <p class="page-crumb"><a href="index.html">All assignments</a></p>
+        <section class="hero" aria-labelledby="page-title">
+          <p class="label project-kicker">Assignment 06 &middot; additional</p>
+          <h1 id="page-title">Comparing the Natural Worlds of Five Books</h1>
+          <p class="abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 02.</em> The RAG pipeline found which plants and animals the five books name. Here I counted how often each one is mentioned in the full text of every book, and compared the books. Each genre turns out to have its own nature: the Jataka fables are mostly animals, Naidu&rsquo;s poems mostly flowers, and Bankim&rsquo;s novel is full of household creatures.</p>
+          <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
+        </section>
+        <section class="page-section">
+          <h2>Plants or animals?</h2>
+<div class="stat-row">
+  <div class="stat"><strong>77%</strong><span>animals in the Jataka Tales</span></div>
+  <div class="stat"><strong>65%</strong><span>plants in Naidu&rsquo;s poems</span></div>
+  <div class="stat"><strong>17.0</strong><span>mentions per 1,000 words in Naidu, the densest</span></div>
+  <div class="stat"><strong>6</strong><span>names found in all five books</span></div>
+</div>
+<figure>
+  <img src="images/a06/flora_fauna_share.png" alt="Five donut charts of plant share: Kalidasa 42%, Jataka Tales 23%, The Poison Tree 44%, The Golden Threshold 65%, The Gardener 45%." loading="lazy">
+  <figcaption>Share of plant and animal mentions in each book.</figcaption>
+</figure>
+<figure>
+  <img src="images/a06/category_by_book.png" alt="Five pie charts of mentions by category. Mammals are 65% of the Jataka Tales; flowers 38% of The Golden Threshold." loading="lazy">
+  <figcaption>Mentions by category in each book.</figcaption>
+</figure>
+<figure>
+  <img src="images/a06/category_heatmap.png" alt="Heatmap of mentions per 1,000 words by category and book. Jataka mammals 7.3 and Naidu flowers 6.5 are the darkest cells." loading="lazy">
+  <figcaption>Heatmap: mentions per 1,000 words, by category.</figcaption>
+</figure>
+        </section>
+        <section class="page-section">
+          <h2>Which names belong to which book</h2>
+<figure>
+  <img src="images/a06/name_fingerprint.png" alt="Heatmap of the 20 most mentioned names per 10,000 words in each book. Deer is darkest in the Jataka Tales, lotus in The Golden Threshold." loading="lazy">
+  <figcaption>Heatmap: the 20 most mentioned names in each book, per 10,000 words.</figcaption>
+</figure>
+<figure>
+  <img src="images/a06/shared_names.png" alt="Bar chart: most names appear in only one book; six appear in all five." loading="lazy">
+  <figcaption>Most names belong to one book. Only six appear in all five: deer, lotus, mango, peacock, rice, snake.</figcaption>
+</figure>
+        </section>
+        <section class="page-section">
+          <h2>Which names appear together</h2>
+<figure>
+  <img src="images/a06/cooccurrence_network.png" alt="Network of the 40 most frequent names; lotus, elephant and deer are at the centre." loading="lazy">
+  <figcaption>Network: names linked when they share a passage at least twice.</figcaption>
+</figure>
+<figure>
+  <img src="images/a06/cooccurrence_matrix.png" alt="Heatmap of how often the top 15 names share a passage. Lotus-lily and deer-elephant are the strongest pairs (10 each)." loading="lazy">
+  <figcaption>Heatmap: how often two names share a passage. The strongest pairs are lotus&ndash;lily and deer&ndash;elephant.</figcaption>
+</figure>
+        </section>
+        <section class="page-section">
+          <h2>My interpretation</h2>
+<div class="interpretation">
+<p>I expected the books to share one &ldquo;Indian&rdquo; nature. Instead each genre has its own. The Jataka fables are three-quarters animals, because the animals are the characters and the Buddha is reborn as a deer, a quail or a monkey. Naidu&rsquo;s poems are two-thirds plants, and she names nature more densely than anyone else. Bankim&rsquo;s novel, set in a Bengali household, has owls, sparrows, lizards and rats that no other book has.</p>
+<p>The shared core is small: deer, lotus, mango, peacock, rice and snake. The lotus sits at the centre of the network with the lily and the bee around it. That is the lotus pond of Indian poetry, and the deer and the elephant form the forest.</p>
+<p>Counting was harder than I thought, because a word can be several things. My first count gave Naidu six bears, all from the verb in &ldquo;we bear her along&rdquo;, and found the jasmine &ldquo;kunda&rdquo; 400 times in <em>The Poison Tree</em>, where Kunda is the heroine. I had to read before I could count, and each of these rules is written into the code.</p>
+</div>
+        </section>
+        <section class="page-section">
+          <h2>Files</h2>
+<ul class="file-list">
+  <li><a href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/compare_books.py" target="_blank" rel="noopener noreferrer"><code>compare_books.py</code></a>: the counts and the first charts</li>
+  <li><a href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/heatmaps.py" target="_blank" rel="noopener noreferrer"><code>heatmaps.py</code></a>: the three heatmaps</li>
+  <li><a href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/findings.md" target="_blank" rel="noopener noreferrer"><code>findings.md</code></a>: the full write-up</li>
+  <li><a href="https://github.com/jha-khushi/dh-06-comparing-books/blob/main/results/summary.md" target="_blank" rel="noopener noreferrer"><code>results/summary.md</code></a>: the summary table</li>
+</ul>
+        </section>
+        <nav class="page-next" aria-label="Other assignments">
+          <a href="assignment-05.html">&larr; Assignment 05: Stop words on real text</a>
+          <a href="index.html">Back to all assignments &rarr;</a>
+        </nav>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>Digital Humanities Student Exhibition &middot; Department of HSS &middot; IIT (ISM) Dhanbad</p>
+    </footer>
+  </body>
+</html>
