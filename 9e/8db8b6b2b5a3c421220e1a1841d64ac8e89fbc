@@ -1,0 +1,27 @@
+assignment-02.html
+  s_5a02c502e9a5a2::t_2362129cf051ff 71-102
+assets/site.css
+  s_5a02c502e9a5a2::t_71809de30dc37d 285-312
+  s_5a02c502e9a5a2::t_566d823d481810 313-345
+assignment-01.html
+  s_5a02c502e9a5a2::t_2362129cf051ff 48,51-121
+  s_5a02c502e9a5a2::t_47d35b078e6925 49-50
+assignment-03.html
+  s_5a02c502e9a5a2::t_e424c2c2e4f827 40-43,62-118,149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9e8db8b6b2b5a3c421220e1a1841d64ac8e89fbc",
+  "prompts": {},
+  "sessions": {
+    "s_5a02c502e9a5a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e2d63629-4982-4c11-a56f-53eb75dee1e6",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "jha-khushi <224996314+jha-khushi@users.noreply.github.com>"
+    }
+  }
+}
