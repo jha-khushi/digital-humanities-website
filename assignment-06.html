@@ -33,15 +33,20 @@
         <section class="hero" aria-labelledby="page-title">
           <p class="label project-kicker">Assignment 06 &middot; additional</p>
           <h1 id="page-title">Comparing the Natural Worlds of Five Books</h1>
-          <p class="abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 02.</em> The RAG pipeline found which plants and animals the five books name. Here I counted how often each one is mentioned in the full text of every book, and compared the books. Each genre turns out to have its own nature: the Jataka fables are mostly animals, Naidu&rsquo;s poems mostly flowers, and Bankim&rsquo;s novel is full of household creatures.</p>
+          <p class="abstract"><strong>Abstract.</strong> <em>An additional assignment that extends Assignment 02.</em> The RAG pipeline found which plants and animals the five books name. Here I counted how often each one is mentioned in each book and compared them. Each genre has its own kind of nature: the Jataka fables are mostly animals, Naidu&rsquo;s poems mostly flowers.</p>
           <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-06-comparing-books" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
         </section>
         <section class="page-section">
-          <h2>Plants or animals?</h2>
+          <h2>Method</h2>
+<p>I took the 133 names from Assignment 02 and counted every mention of each in the full text of every book, not just in the retrieved passages. Because the books are very different lengths, I compared them per 1,000 words. For the network, two names are linked if they appear in the same passage at least twice.</p>
+<p>Some names are also ordinary English words or characters, so I only counted them in plant or animal contexts. The word &ldquo;bear&rdquo; in &ldquo;we bear her along&rdquo; is a verb, and Kunda in <em>The Poison Tree</em> is the heroine. Each rule is written in the code.</p>
+        </section>
+        <section class="page-section">
+          <h2>Findings</h2>
 <div class="stat-row">
   <div class="stat"><strong>77%</strong><span>animals in the Jataka Tales</span></div>
   <div class="stat"><strong>65%</strong><span>plants in Naidu&rsquo;s poems</span></div>
-  <div class="stat"><strong>17.0</strong><span>mentions per 1,000 words in Naidu, the densest</span></div>
+  <div class="stat"><strong>17.0</strong><span>mentions per 1,000 words in Naidu, the most of any book</span></div>
   <div class="stat"><strong>6</strong><span>names found in all five books</span></div>
 </div>
 <figure>
@@ -56,9 +61,6 @@
   <img src="images/a06/category_heatmap.png" alt="Heatmap of mentions per 1,000 words by category and book. Jataka mammals 7.3 and Naidu flowers 6.5 are the darkest cells." loading="lazy">
   <figcaption>Heatmap: mentions per 1,000 words, by category.</figcaption>
 </figure>
-        </section>
-        <section class="page-section">
-          <h2>Which names belong to which book</h2>
 <figure>
   <img src="images/a06/name_fingerprint.png" alt="Heatmap of the 20 most mentioned names per 10,000 words in each book. Deer is darkest in the Jataka Tales, lotus in The Golden Threshold." loading="lazy">
   <figcaption>Heatmap: the 20 most mentioned names in each book, per 10,000 words.</figcaption>
@@ -67,25 +69,31 @@
   <img src="images/a06/shared_names.png" alt="Bar chart: most names appear in only one book; six appear in all five." loading="lazy">
   <figcaption>Most names belong to one book. Only six appear in all five: deer, lotus, mango, peacock, rice, snake.</figcaption>
 </figure>
-        </section>
-        <section class="page-section">
-          <h2>Which names appear together</h2>
 <figure>
   <img src="images/a06/cooccurrence_network.png" alt="Network of the 40 most frequent names; lotus, elephant and deer are at the centre." loading="lazy">
   <figcaption>Network: names linked when they share a passage at least twice.</figcaption>
 </figure>
 <figure>
   <img src="images/a06/cooccurrence_matrix.png" alt="Heatmap of how often the top 15 names share a passage. Lotus-lily and deer-elephant are the strongest pairs (10 each)." loading="lazy">
-  <figcaption>Heatmap: how often two names share a passage. The strongest pairs are lotus&ndash;lily and deer&ndash;elephant.</figcaption>
+  <figcaption>Heatmap: how often two names share a passage.</figcaption>
 </figure>
         </section>
         <section class="page-section">
           <h2>My interpretation</h2>
 <div class="interpretation">
-<p>I expected the books to share one &ldquo;Indian&rdquo; nature. Instead each genre has its own. The Jataka fables are three-quarters animals, because the animals are the characters and the Buddha is reborn as a deer, a quail or a monkey. Naidu&rsquo;s poems are two-thirds plants, and she names nature more densely than anyone else. Bankim&rsquo;s novel, set in a Bengali household, has owls, sparrows, lizards and rats that no other book has.</p>
-<p>The shared core is small: deer, lotus, mango, peacock, rice and snake. The lotus sits at the centre of the network with the lily and the bee around it. That is the lotus pond of Indian poetry, and the deer and the elephant form the forest.</p>
-<p>Counting was harder than I thought, because a word can be several things. My first count gave Naidu six bears, all from the verb in &ldquo;we bear her along&rdquo;, and found the jasmine &ldquo;kunda&rdquo; 400 times in <em>The Poison Tree</em>, where Kunda is the heroine. I had to read before I could count, and each of these rules is written into the code.</p>
+<p>I expected the five books to share one &ldquo;Indian&rdquo; nature, but each genre has its own. The Jataka fables are three-quarters animals, because the animals are the characters and the Buddha is reborn as a deer, a quail or a monkey. Naidu&rsquo;s poems are two-thirds plants. Bankim&rsquo;s novel, set in a Bengali household, has owls, sparrows, lizards and rats that no other book has.</p>
+<p>What they share is small: deer, lotus, mango, peacock, rice and snake. The lotus sits in the middle of the network with the lily and the bee, like a lotus pond, and the deer and the elephant make up the forest.</p>
+<p>Counting turned out to need reading first. My first count gave Naidu six bears and found the jasmine &ldquo;kunda&rdquo; 400 times, all of them Bankim&rsquo;s heroine.</p>
 </div>
+        </section>
+        <section class="page-section">
+          <h2>Limitations</h2>
+<ul>
+  <li>Four of the books are translations, so the names are partly the translators&rsquo; choices.</li>
+  <li>Only the names the RAG step found are counted; anything it missed is missing here too.</li>
+  <li>My rules for words like &ldquo;bear&rdquo; and &ldquo;rose&rdquo; may still let a few wrong mentions through, or leave out some right ones.</li>
+  <li><em>The Golden Threshold</em> is short (about 5,400 words), so its numbers move a lot with a few mentions.</li>
+</ul>
         </section>
         <section class="page-section">
           <h2>Files</h2>

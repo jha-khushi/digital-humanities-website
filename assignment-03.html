@@ -34,30 +34,31 @@
         <section class="hero" aria-labelledby="page-title">
           <p class="label project-kicker">Assignment 03</p>
           <h1 id="page-title">A Synthetic Reading of Tagore&rsquo;s &ldquo;Subha&rdquo;</h1>
-          <p class="abstract"><strong>Abstract.</strong> &ldquo;Subha&rdquo; is about a mute village girl whose family treats her as a &ldquo;silent weight&rdquo; and who is married off in Calcutta without anyone saying that she cannot speak. Following the synthetic-reading method of Ghosh, Shanmugapriya T and Mandal (2026), I read only 20% of the story first, formed a hypothesis about voice, silence and nature, and then tested it on the full text with a local LLM and charts.</p>
+          <p class="abstract"><strong>Abstract.</strong> &ldquo;Subha&rdquo; is Tagore&rsquo;s story of a mute village girl whose family treats her as a &ldquo;silent weight&rdquo; and marries her off in Calcutta without telling anyone she cannot speak. I read only a fifth of it first, wrote down a hypothesis about voice, silence and nature, and then tested it on the whole story with a local LLM and some charts.</p>
           <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
         </section>
         <section class="page-section">
           <h2>Method</h2>
+<p>I followed the seven steps of synthetic reading from Ghosh, Shanmugapriya T and Mandal (2026):</p>
 <ol class="steps">
 <li><strong>Partial reading</strong><span>20% of each third of the story: 24 of 118 sentences.</span></li>
-<li><strong>Research problem</strong><span>A question, my positionality and the frameworks.</span></li>
+<li><strong>Research problem</strong><span>A question, my positionality and frameworks.</span></li>
 <li><strong>Full text</strong><span>The 1918 English translation, cleaned.</span></li>
 <li><strong>Prompt</strong><span>A detailed prompt for the local LLM.</span></li>
-<li><strong>Extraction</strong><span>The model&rsquo;s expressions, checked and annotated by me.</span></li>
-<li><strong>Visualisation</strong><span>Charts of where each theme occurs.</span></li>
+<li><strong>Extraction</strong><span>The model&rsquo;s expressions, checked and sorted by me.</span></li>
+<li><strong>Visualisation</strong><span>Charts of where each theme appears.</span></li>
 <li><strong>Interpretation</strong><span>Reading the charts with theory.</span></li>
 </ol>
-<p><strong>The statement I tested</strong>, written after the partial reading:</p>
+<p>After the partial reading, this is what I set out to test:</p>
 <p class="quote">&ldquo;Across the three stages of the story, Subha&rsquo;s language moves from being understood by a non-human community to being unheard altogether, and the vocabulary of nature gives way to the vocabulary of social and patriarchal structure.&rdquo;</p>
 <p>My first impressions and positionality are in <a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/initial_impression.md" target="_blank" rel="noopener noreferrer"><code>initial_impression.md</code></a>.</p>
         </section>
         <section class="page-section">
-          <h2>Visualisations</h2>
+          <h2>Findings</h2>
 <div class="figure-pair">
 <figure>
   <img src="images/a03/dimension_share.png" alt="Pie chart of the 141 expressions by dimension: voice and silence 42, nature 30, social structure 37, affect 32." loading="lazy">
-  <figcaption>The 141 extracted expressions, by dimension.</figcaption>
+  <figcaption>The 141 expressions, by dimension.</figcaption>
 </figure>
 <figure>
   <img src="images/a03/theme_heatmap.png" alt="Heatmap of expressions per dimension and stage. Social structure is highest in Stage III (17)." loading="lazy">
@@ -66,21 +67,35 @@
 </div>
 <figure>
   <img src="images/a03/theme_trace.png" alt="Line chart of the four dimensions across 118 sentences. Nature drops to zero after the farewell scene." loading="lazy">
-  <figcaption>Where each dimension&rsquo;s words occur, sentence by sentence (9-sentence moving average).</figcaption>
+  <figcaption>Where each dimension&rsquo;s words appear, sentence by sentence (9-sentence moving average).</figcaption>
 </figure>
 <figure>
   <img src="images/a03/sentence_barcode.png" alt="Heatmap with one column per sentence. Nature words stop after sentence 98 of 118." loading="lazy">
-  <figcaption>Heatmap (&ldquo;barcode&rdquo;): every sentence of the story. Nature words stop completely after sentence 98.</figcaption>
+  <figcaption>Heatmap (&ldquo;barcode&rdquo;): every sentence of the story.</figcaption>
 </figure>
+<ul>
+<li>Voice and nature peak together in the first part, where &ldquo;there were only dumb Nature and a dumb girl&rdquo;.</li>
+<li>Words about family, marriage and value rise when the marriage is arranged and are highest in the last part (17).</li>
+<li>Nature words come back once, when Subha says goodbye to the river and the cows, and stop completely after sentence 98.</li>
+</ul>
+<p>So the hypothesis mostly holds, with one correction. Nature does not fade slowly; it disappears when Subha leaves her village.</p>
         </section>
         <section class="page-section">
           <h2>My interpretation</h2>
 <div class="interpretation">
-<p>I expected nature to fade out slowly as Subha grows up. The charts showed something sharper. Nature stays with her as long as she is in her village, comes back once when she says goodbye to her &ldquo;dear river&rdquo; and the cows, and after sentence 98 it is gone. What she loses depends on where she is, not on her age: marriage takes her away from the only listeners she had.</p>
-<p>Spivak&rsquo;s &ldquo;Can the Subaltern Speak?&rdquo; helped me name this. Subha is not without language; her eyes &ldquo;told them everything, though no one understood her.&rdquo; The problem is that no one is willing to hear her, and the family&rsquo;s belief that &ldquo;because she did not speak, therefore she did not feel&rdquo; is what Spivak calls epistemic violence.</p>
-<p>The last stage of the story is full of the language of buying and selling: a &ldquo;useful possession&rdquo;, her value &ldquo;increased&rdquo;, &ldquo;delivered over into another&rsquo;s hands&rdquo;. Gayle Rubin&rsquo;s &ldquo;traffic in women&rdquo; describes this exactly. And the same bond with nature that comforted her becomes the image of her capture, &ldquo;a stricken doe&rdquo; looking at &ldquo;the hunter&rsquo;s face&rdquo;.</p>
-<p>I read the story in English, the numbers are small, and the four categories are my own. The charts did not give me the reading, but they showed me where to look.</p>
+<p>What Subha loses depends on where she is, not on her age. The river and the cows were the only ones who understood her, and marriage takes her away from them.</p>
+<p>Spivak&rsquo;s &ldquo;Can the Subaltern Speak?&rdquo; helped me put this into words. Subha does have a language; her eyes &ldquo;told them everything, though no one understood her.&rdquo; The problem is that nobody is willing to listen, and her family&rsquo;s belief that &ldquo;because she did not speak, therefore she did not feel&rdquo; is what Spivak calls epistemic violence.</p>
+<p>The last part of the story talks about her the way you would talk about goods: a &ldquo;useful possession&rdquo;, her value &ldquo;increased&rdquo;, &ldquo;delivered over into another&rsquo;s hands&rdquo;. Gayle Rubin&rsquo;s idea of the &ldquo;traffic in women&rdquo; fits this closely. And the closeness to nature that comforted her ends up describing her capture: she looks at her parents like &ldquo;a stricken doe&rdquo; in &ldquo;the hunter&rsquo;s face&rdquo;.</p>
 </div>
+        </section>
+        <section class="page-section">
+          <h2>Limitations</h2>
+<ul>
+  <li>I read an anonymous 1918 English translation, not Tagore&rsquo;s Bengali.</li>
+  <li>The numbers are small (141 expressions in about 2,250 words), so the charts show tendencies, not proof.</li>
+  <li>The four categories are my own, and I corrected the model&rsquo;s lists by hand. My research question shaped what was found, which the method asks the reader to say openly.</li>
+  <li>The model&rsquo;s first run failed (it started copying the text). I kept it in the repository.</li>
+</ul>
         </section>
         <section class="page-section">
           <h2>Files</h2>
@@ -88,7 +103,7 @@
   <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/partial_reading.txt" target="_blank" rel="noopener noreferrer"><code>partial_reading.txt</code></a>: the 20% I read first</li>
   <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/initial_impression.md" target="_blank" rel="noopener noreferrer"><code>initial_impression.md</code></a>: research problem and positionality</li>
   <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/prompt.txt" target="_blank" rel="noopener noreferrer"><code>prompt.txt</code></a>: the prompt for the LLM</li>
-  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/subha_themes.py" target="_blank" rel="noopener noreferrer"><code>subha_themes.py</code></a>: the extracted and annotated themes</li>
+  <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/subha_themes.py" target="_blank" rel="noopener noreferrer"><code>subha_themes.py</code></a>: the extracted and sorted themes</li>
   <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/visualise.py" target="_blank" rel="noopener noreferrer"><code>visualise.py</code></a>: the charts</li>
   <li><a href="https://github.com/jha-khushi/dh-03-synthetic-reading-subha/blob/main/interpretation.md" target="_blank" rel="noopener noreferrer"><code>interpretation.md</code></a>: the full interpretation with works cited</li>
 </ul>

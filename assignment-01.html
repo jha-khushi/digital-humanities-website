@@ -33,42 +33,50 @@
         <section class="hero" aria-labelledby="page-title">
           <p class="label project-kicker">Assignment 01</p>
           <h1 id="page-title">Indic Stop Words: Hindi, Bengali, Gujarati and Tamil</h1>
-          <p class="abstract"><strong>Abstract.</strong> Stop words are the small, very frequent words of a language, such as &ldquo;and&rdquo;, &ldquo;of&rdquo; and &ldquo;is&rdquo;, that are usually removed before counting or comparing the words of a text. I wrote stop-word lists for four Indic languages in four scripts: Hindi, Bengali and Gujarati, which are Indo-Aryan, and Tamil, which is Dravidian. Each list is grouped by kind of word and comes with a small function that removes the stop words from a sentence.</p>
+          <p class="abstract"><strong>Abstract.</strong> Stop words are the small, very common words of a language, like &ldquo;and&rdquo;, &ldquo;of&rdquo; and &ldquo;is&rdquo;. They are usually removed before counting or comparing the words of a text. I wrote stop-word lists for four Indic languages in four scripts: Hindi, Bengali and Gujarati, which are Indo-Aryan, and Tamil, which is Dravidian.</p>
           <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-01-indic-stopwords" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
         </section>
         <section class="page-section">
-          <h2>What I did</h2>
-<p>I followed the template in the instructions: one file per language, named after the language, with the header and the list. Inside each list the words are grouped by type (pronouns, postpositions, conjunctions, question words, quantifiers, auxiliary verbs and particles), so it is easy to see what the list contains and to change it later.</p>
+          <h2>Method</h2>
+<p>I followed the template in the instructions: one file per language, named after the language. Inside each list I grouped the words by type (pronouns, postpositions, conjunctions, question words, quantifiers, verb forms and particles), so it is easy to see what is there and to change it later. Each file also has a small function that removes the stop words from a sentence.</p>
+<p>Spellings vary, so common variants sit together (<span lang="hi">गए / गये</span>, <span lang="bn">কখনো / কখনও</span>). The Bengali, Gujarati and Tamil files also normalise the text first, because the same letter can be typed in two ways in Unicode.</p>
 <div class="stat-row">
   <div class="stat"><strong>235</strong><span>Hindi words</span></div>
   <div class="stat"><strong>210</strong><span>Bengali words</span></div>
   <div class="stat"><strong>196</strong><span>Gujarati words</span></div>
   <div class="stat"><strong>179</strong><span>Tamil words</span></div>
 </div>
-<p>Two practical details mattered. Spellings vary, so I kept common variants together (<span lang="hi">गए / गये</span>, <span lang="bn">কখনো / কখনও</span>). And the same letter can be typed in two ways in Unicode, so the Bengali, Gujarati and Tamil files normalise the text before comparing words.</p>
         </section>
         <section class="page-section">
-          <h2>Visualisations</h2>
+          <h2>Findings</h2>
 <figure>
   <img src="images/a01/list_sizes.png" alt="Bar chart of list sizes: Hindi 235, Bengali 210, Gujarati 196, Tamil 179." loading="lazy">
   <figcaption>How many words each list has.</figcaption>
 </figure>
 <figure>
   <img src="images/a01/list_composition.png" alt="Four pie charts showing the share of pronouns, postpositions, verbs, conjunctions, question words and quantifiers in each list." loading="lazy">
-  <figcaption>What each list is made of. Pronouns and verb forms are the largest groups in every language.</figcaption>
+  <figcaption>What each list is made of.</figcaption>
 </figure>
 <figure>
   <img src="images/a01/composition_heatmap.png" alt="Heatmap of the number of words per category in each list. Tamil has the fewest postpositions (18) and question words (9)." loading="lazy">
-  <figcaption>Heatmap: number of words in each category. Tamil has clearly fewer postpositions and question words.</figcaption>
+  <figcaption>Heatmap: number of words in each category.</figcaption>
 </figure>
+<p>Pronouns and verb forms are the biggest groups in all four lists. The odd one out is Tamil, with only 18 postpositions and 9 question words, against 27 of each in Hindi.</p>
         </section>
         <section class="page-section">
           <h2>My interpretation</h2>
 <div class="interpretation">
-<p>Making four lists side by side showed me that a &ldquo;small word&rdquo; is not the same thing in every language. In Hindi, postpositions like <span lang="hi">का, में, से</span> are separate words, so they fit easily into a list. In Tamil the same meanings are mostly endings joined to the noun, which is why the Tamil list has only 18 postpositions and 9 question words: many Tamil questions are made with a suffix rather than a separate word.</p>
-<p>I also had to decide what a stop word is for. Negation words such as <span lang="hi">नहीं</span> are very frequent, but removing them reverses the meaning of a sentence. I kept them in the lists and marked them, so that someone doing sentiment analysis knows to take them out.</p>
-<p>A list only tells you what I expected the language to need. To see how the lists behave on real text I tested them in <a href="assignment-05.html">Assignment 05</a>.</p>
+<p>Writing the four lists side by side showed me that a &ldquo;small word&rdquo; is not the same thing in every language. Hindi writes postpositions like <span lang="hi">का, में, से</span> as separate words, so they fit neatly into a list. Tamil mostly attaches them to the noun, and many Tamil questions are made with a suffix, so there is less to list.</p>
+<p>I also had to decide what to do with negation. <span lang="hi">नहीं</span> is one of the most common Hindi words, but removing it flips the meaning of a sentence. I kept it in the list and marked it, so anyone doing sentiment analysis knows to take it out.</p>
 </div>
+        </section>
+        <section class="page-section">
+          <h2>Limitations</h2>
+<ul>
+  <li>The lists come from grammar and my own judgement, not from counting a large corpus, so they show what I expected each language to need.</li>
+  <li>The Bengali, Gujarati and Tamil lists should still be checked by native speakers.</li>
+  <li>A list cannot remove endings that are joined to a word. I tested how much this matters in <a href="assignment-05.html">Assignment 05</a>.</li>
+</ul>
         </section>
         <section class="page-section">
           <h2>Files</h2>

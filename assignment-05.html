@@ -33,11 +33,16 @@
         <section class="hero" aria-labelledby="page-title">
           <p class="label project-kicker">Assignment 05 &middot; additional</p>
           <h1 id="page-title">Testing the Stop-Word Lists on Real Text</h1>
-          <p class="abstract"><strong>Abstract.</strong> <em>An additional assignment extending Assignment 01.</em> I tested my four stop-word lists by running them on real text: the same four Wikipedia articles (India, Rabindranath Tagore, Monsoon and the Ganges) in Hindi, Bengali, Gujarati and Tamil. The Hindi list removes 41.2% of all words, but the Tamil list only 14.5%, because Tamil joins its grammar to the noun.</p>
+          <p class="abstract"><strong>Abstract.</strong> <em>An additional assignment that extends Assignment 01.</em> I ran my four stop-word lists on real text to see how they behave. The Hindi list removes 41.2% of all words, but the Tamil list only 14.5%, because Tamil joins its grammar to the noun.</p>
           <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-05-stopword-evaluation" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
         </section>
         <section class="page-section">
-          <h2>Results</h2>
+          <h2>Method</h2>
+<p>To compare the languages fairly I needed texts on the same subjects, so I took the same four Wikipedia articles (India, Rabindranath Tagore, Monsoon and the Ganges) in Hindi, Bengali, Gujarati and Tamil.</p>
+<p>For each language I counted the words, worked out what share the list removes and which kinds of stop word do the removing, checked how much of the list appears at all, and looked at the most common words the list missed.</p>
+        </section>
+        <section class="page-section">
+          <h2>Findings</h2>
 <div class="stat-row">
   <div class="stat"><strong>41.2%</strong><span>of Hindi words removed</span></div>
   <div class="stat"><strong>28.6%</strong><span>of Gujarati words</span></div>
@@ -54,20 +59,34 @@
 </figure>
 <figure>
   <img src="images/a05/category_heatmap.png" alt="Heatmap of the share of all tokens removed by each kind of stop word. Hindi postpositions 19.1%, Tamil 1.3%." loading="lazy">
-  <figcaption>Heatmap: share of all words removed by each kind of stop word. Postpositions remove 19.1% of Hindi but 1.3% of Tamil.</figcaption>
+  <figcaption>Heatmap: share of all words removed by each kind of stop word.</figcaption>
 </figure>
 <figure>
   <img src="images/a05/list_usage.png" alt="Bar chart: 71% of the Hindi list, 63% of Bengali, 65% of Gujarati and 59% of Tamil appear in the texts." loading="lazy">
-  <figcaption>How much of each list actually appears in the texts.</figcaption>
+  <figcaption>How much of each list appears in the texts.</figcaption>
 </figure>
+<ul>
+<li>Postpositions alone remove 19.1% of Hindi words but only 1.3% of Tamil words.</li>
+<li>The lists missed some common words, such as the Hindi passive <span lang="hi">जाता</span> and Bengali <span lang="bn">সালে</span> (&ldquo;in the year&rdquo;).</li>
+<li>Only 59&ndash;71% of each list appears in the texts at all.</li>
+</ul>
         </section>
         <section class="page-section">
           <h2>My interpretation</h2>
 <div class="interpretation">
-<p>The lists are about the same size, so I expected them to do about the same work. They did not. In Hindi &ldquo;of India&rdquo; is <span lang="hi">भारत के</span>, two words, and the list removes <span lang="hi">के</span>. In Tamil it is <span lang="ta">இந்தியாவின்</span> and in Bengali <span lang="bn">ভারতের</span>: one word, and nothing to remove. The heatmap shows this in a single row. Postpositions alone remove 19.1% of Hindi but only 1.3% of Tamil.</p>
-<p>This changed how I see a step that is usually treated as technical. Stop-word removal assumes that grammar is written as separate words. That suits Hindi and English but not Tamil, which needs a tool that can split words into parts. Tools built around one language quietly work less well for others.</p>
-<p>The test also showed what my lists were missing, such as the Hindi passive <span lang="hi">जाता</span> and Bengali <span lang="bn">সালে</span> (&ldquo;in the year&rdquo;). And about a third of each list never appeared, mostly informal words like <span lang="hi">तू</span> that an encyclopaedia does not use. The right list depends on the kind of text.</p>
+<p>The lists are about the same size, so I expected them to do about the same work. In Hindi, &ldquo;of India&rdquo; is <span lang="hi">भारत के</span>, two words, and the list removes <span lang="hi">के</span>. In Tamil it is <span lang="ta">இந்தியாவின்</span> and in Bengali <span lang="bn">ভারতের</span>, a single word with nothing to remove.</p>
+<p>Stop-word removal is usually treated as a technical step, but it assumes grammar is written as separate words. That works for Hindi and English and much less well for Tamil, which needs a tool that can split words into parts.</p>
+<p>The words that never appeared were mostly informal ones like <span lang="hi">तू</span>, which an encyclopaedia does not use. A list for fiction would look different.</p>
 </div>
+        </section>
+        <section class="page-section">
+          <h2>Limitations</h2>
+<ul>
+  <li>These are encyclopaedia articles, not literature.</li>
+  <li>The Gujarati articles are short, so that sample is about half the size of the others.</li>
+  <li>The articles cover the same subjects but are not translations of each other.</li>
+  <li>Splitting on spaces sometimes breaks abbreviations; for example the Tamil <span lang="ta">பொ.ஊ.</span> (Common Era) became two &ldquo;words&rdquo;.</li>
+</ul>
         </section>
         <section class="page-section">
           <h2>Files</h2>

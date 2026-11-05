@@ -33,69 +33,70 @@
         <section class="hero" aria-labelledby="page-title">
           <p class="label project-kicker">Assignment 02</p>
           <h1 id="page-title">Flora and Fauna in Five Indian Books, with RAG</h1>
-          <p class="abstract"><strong>Abstract.</strong> I collected five Indian literary texts that differ in language, period and genre, and used a Retrieval-Augmented Generation (RAG) pipeline running on my own laptop to find the plants and animals they name. The texts are Kalidasa&rsquo;s plays and poems, the Jataka tales, Bankim Chandra Chattopadhyay&rsquo;s novel <em>The Poison Tree</em>, Sarojini Naidu&rsquo;s <em>The Golden Threshold</em> and Tagore&rsquo;s <em>The Gardener</em>. The result is a list of 65 plants and 68 animals.</p>
+          <p class="abstract"><strong>Abstract.</strong> I put together five Indian literary texts from different languages, periods and genres, and used a Retrieval-Augmented Generation (RAG) pipeline on my own laptop to find the plants and animals they name. The result is a list of 65 plants and 68 animals.</p>
           <div class="button-row"><a class="repository-link" href="https://github.com/jha-khushi/dh-02-rag-flora-fauna" target="_blank" rel="noopener noreferrer">View the repository on GitHub</a></div>
         </section>
         <section class="page-section">
-          <h2>The corpus</h2>
+          <h2>Method</h2>
 <div class="figure-pair">
+<div>
+<p><strong>The texts.</strong> All five are public-domain books from Project Gutenberg, read in English:</p>
+<ul><li>Kalidasa, <em>Shakuntala and Other Works</em> (Sanskrit, tr. Arthur W. Ryder, 1912)</li><li><em>Jataka Tales</em>, vol. 1 (Pali, tr. T. W. Rhys Davids, 1880)</li><li>Bankim Chandra Chattopadhyay, <em>The Poison Tree</em> (Bengali, tr. Miriam S. Knight, 1884)</li><li>Sarojini Naidu, <em>The Golden Threshold</em> (written in English, 1905)</li><li>Rabindranath Tagore, <em>The Gardener</em> (Bengali, his own translation, 1913)</li></ul>
+</div>
 <figure>
   <img src="images/a02/corpus_share.png" alt="Pie chart of the corpus by words: Kalidasa 33%, Jataka Tales 29%, The Poison Tree 27%, The Gardener 8%, The Golden Threshold 3%." loading="lazy">
   <figcaption>The five books, by share of words.</figcaption>
 </figure>
-<div>
-<p>All five are public-domain texts from Project Gutenberg, read in English:</p>
-<ul><li>Kalidasa, <em>Shakuntala and Other Works</em> (Sanskrit, tr. Arthur W. Ryder, 1912)</li><li><em>Buddhist Birth Stories (Jataka Tales)</em>, vol. 1 (Pali, tr. T. W. Rhys Davids, 1880)</li><li>Bankim Chandra Chattopadhyay, <em>The Poison Tree</em> (Bengali, tr. Miriam S. Knight, 1884)</li><li>Sarojini Naidu, <em>The Golden Threshold</em> (written in English, 1905)</li><li>Rabindranath Tagore, <em>The Gardener</em> (Bengali, his own translation, 1913)</li></ul>
 </div>
-</div>
-        </section>
-        <section class="page-section">
-          <h2>The RAG pipeline</h2>
+<p><strong>The RAG pipeline</strong> (<a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/rag_pipeline.py" target="_blank" rel="noopener noreferrer"><code>rag_pipeline.py</code></a>):</p>
 <ol class="steps">
-<li><strong>Chunk</strong><span>Each book is split into overlapping passages of about 250 words (844 in all).</span></li>
-<li><strong>Embed</strong><span>Every passage becomes a vector with <code>nomic-embed-text</code>.</span></li>
-<li><strong>Retrieve</strong><span>For each question about trees, flowers, birds, mammals and so on, the 10 closest passages from each book are picked: 238 passages.</span></li>
-<li><strong>Generate</strong><span><code>qwen2.5:7b</code> reads each passage and lists the plants and animals named in it.</span></li>
+<li><strong>Chunk</strong><span>Split each book into overlapping passages of about 250 words (844 in all).</span></li>
+<li><strong>Embed</strong><span>Turn every passage into a vector with <code>nomic-embed-text</code>.</span></li>
+<li><strong>Retrieve</strong><span>For each question about trees, flowers, birds, mammals and so on, pick the 10 closest passages from each book (238 in all).</span></li>
+<li><strong>Generate</strong><span><code>qwen2.5:7b</code> reads each passage and lists the plants and animals in it.</span></li>
 </ol>
-<p>The code is in <a href="https://github.com/jha-khushi/dh-02-rag-flora-fauna/blob/main/rag_pipeline.py" target="_blank" rel="noopener noreferrer"><code>rag_pipeline.py</code></a>. Both models run locally, so none of the text was sent to an online service.</p>
+<p>Both models run locally, so none of the text went to an online service.</p>
         </section>
         <section class="page-section">
-          <h2>Results</h2>
+          <h2>Findings</h2>
 <div class="stat-row">
   <div class="stat"><strong>65</strong><span>plants</span></div>
   <div class="stat"><strong>68</strong><span>animals</span></div>
-  <div class="stat"><strong>5</strong><span>books</span></div>
-  <div class="stat"><strong>238</strong><span>passages read by the LLM</span></div>
+  <div class="stat"><strong>225 of 392</strong><span>names from the model were real</span></div>
 </div>
 <figure>
   <img src="images/a02/flora_fauna_categories.png" alt="Two pie charts: flora by category (trees, flowers, herbs, crops, creepers) and fauna by category (mammals, birds, insects, reptiles, fish, amphibians)." loading="lazy">
-  <figcaption>The extracted plants and animals by category.</figcaption>
+  <figcaption>The plants and animals by category.</figcaption>
 </figure>
 <p><strong>Plants (65):</strong> amaranth, ashoka, babul (acacia), bakul, bamboo, banyan, barley, bel (wood-apple), betel-nut, brinjal, casuarina, champa, coconut, coral tree, corn, cucumber, deodar, durva grass, fig, gourd, hemp, henna, hyacinth, jackfruit, jasmine, jujube, kadam, ketak (screw-pine), kusum, lichi, lily, linseed, lodh, lotus, madder, mango, mushroom, mustard, neem, nipa, oleander, orange, palm, panic grass, peach, plantain, plum, pomegranate, poppy, pumpkin, reed, rice, rose, rose-apple, sacred grass (kusha), saffron, sandalwood, silk cotton tree, siris, spring creeper, tamal, trumpet-flower, tulip, tulsi, water lily.</p>
 <p><strong>Animals (68):</strong> antelope, ape, bat, bear, bee, bison, boar, buffalo, bull, butterfly, carp, cat, centipede, cobra, cockroach, cow, crane, crow, cuckoo, dahuk (waterhen), deer, dhadikula, dog, dove, duck, elephant, firefly, fly, frog, gazelle, goat, goose, gull, halcyon, hare, heron, horse, jackal, kite, koel, lion, lizard, monkey, mouse, musk deer, musk-rat, nightingale, oriole, owl, ox, paddy bird (pond heron), panther, papiya (hawk-cuckoo), parrot, partridge, peacock, pig, pigeon, plover, quail, rat, sheep, snake, sparrow, spider, squirrel, starling, swan.</p>
-        </section>
-        <section class="page-section">
-          <h2>Checking the LLM</h2>
-<p>I read through everything the model returned. Of the 392 names it proposed, only 225 were real plants or animals. 33 did not appear in the passage at all, and 134 were other things: food, ornaments, rivers, people, even a <em>bonti</em> (a Bengali kitchen blade) that the model called a fish.</p>
+<p>I went through everything the model returned. 33 of its 392 names were not in the passage at all, and 134 were not living things: food, ornaments, rivers, people, and even a <em>bonti</em> (a Bengali kitchen blade) that it called a fish.</p>
 <div class="figure-pair">
 <figure>
   <img src="images/a02/checking_outcome.png" alt="Pie chart of all 392 names proposed by the LLM: 225 real, 134 not living things, 33 not in the passage." loading="lazy">
-  <figcaption>Everything the LLM proposed.</figcaption>
+  <figcaption>Everything the model proposed.</figcaption>
 </figure>
 <figure>
   <img src="images/a02/checking_by_book.png" alt="Heatmap of outcomes by book. The Golden Threshold had 82% real names; the Jataka Tales only 44%, with 20% not in the passage." loading="lazy">
-  <figcaption>Heatmap: the same, book by book (row percentages).</figcaption>
+  <figcaption>Heatmap: the same, book by book.</figcaption>
 </figure>
 </div>
         </section>
         <section class="page-section">
           <h2>My interpretation</h2>
 <div class="interpretation">
-<p>The part of this assignment I learned most from was checking the model&rsquo;s answers. The mistakes were not random. In Kalidasa, plants and animals are tied to ornament and ritual (lotus-bracelets, bark dresses), so the model kept offering objects made from nature as if they were nature. In the Jataka tales the animals are characters, and the model added animals that the passage did not mention: one in five of its Jataka answers was not in the text.</p>
-<p>My favourite case is Bankim&rsquo;s heroine Kunda. Her name is a kind of jasmine, and the novel plays on it: &ldquo;what if you should discover the flower, Kunda, under the trees?&rdquo; The model listed her as a flower. I removed her, because here the flower is the girl, but the mistake shows how plants and people share names in this literature.</p>
-<p>Naidu&rsquo;s poems gave the cleanest results (82% correct). Her images are direct, with the champa, henna and koel named plainly. That made me think the model reads lyric poetry better than fables, which say one thing and mean another.</p>
-<p>The lists are also limited by translation. &ldquo;Nightingale&rdquo; in an English translation of an Indian text is the translator&rsquo;s choice, so some names tell us about the translator as much as the book.</p>
+<p>I learned the most from checking the model&rsquo;s answers, because its mistakes followed a pattern. In Kalidasa, plants and animals are tied up with ornament and ritual (lotus-bracelets, bark dresses), and the model kept offering these objects as if they were nature. In the Jataka tales the animals are the characters, and the model added animals the passage never mentioned: one in five of its Jataka answers.</p>
+<p>My favourite case is Bankim&rsquo;s heroine, Kunda. Her name is a kind of jasmine, and the novel plays on it: &ldquo;what if you should discover the flower, Kunda, under the trees?&rdquo; The model listed her as a flower. I took her out, since the flower here is the girl, but I like how the mistake shows plants and people sharing names in this writing.</p>
+<p>Naidu&rsquo;s poems gave the cleanest results (82% correct), maybe because she names the champa, henna and koel plainly, where the fables say one thing and mean another.</p>
 </div>
+        </section>
+        <section class="page-section">
+          <h2>Limitations</h2>
+<ul>
+  <li>Everything was read in English, and four of the books are translations. &ldquo;Nightingale&rdquo; for an Indian bird is the translator&rsquo;s word, not the author&rsquo;s.</li>
+  <li>The model only read the 238 passages that retrieval picked, so some plants and animals may be missing. <a href="assignment-06.html">Assignment 06</a> counts mentions in the full books.</li>
+  <li>The model is small (7 billion parameters), and the final list depends on my own corrections. Each one is written down in the repository.</li>
+</ul>
         </section>
         <section class="page-section">
           <h2>Files</h2>
