@@ -50,8 +50,24 @@
         </section>
         <section class="page-section">
           <h2>Findings</h2>
-<p>The result is a brief with the same sections every time: Facts, Issues, Arguments, Holding, Reasoning, Ratio decidendi, Obiter dicta, Dissent, Place in doctrine and Key quotations. When several cases are briefed together it adds a comparison table.</p>
-<p>Most of the file ended up being rules about what the model must not do: invent a citation, report a dissent as the law, or mix its own opinion into the court&rsquo;s reasoning.</p>
+<p>I tested the skill on <em>Govind v. State of Madhya Pradesh</em> (1975), one of the privacy cases, with the request from the skill&rsquo;s own example: brief the case, focusing on privacy, and compare it with <em>Kharak Singh</em>.</p>
+<div class="stat-row">
+  <div class="stat"><strong>9 of 9</strong><span>quotations found word for word in the judgment</span></div>
+  <div class="stat"><strong>0</strong><span>invented paragraph numbers</span></div>
+  <div class="stat"><strong>2</strong><span>points marked &ldquo;to be verified&rdquo;</span></div>
+</div>
+<p>The brief followed every section of the format. It noticed that the Court only <em>assumed</em> a right to privacy without deciding it, and said that this makes the ratio open to argument. The judgment text has no paragraph numbers, so instead of inventing them it cited page numbers and said so under Limitations. Where the text did not say something, such as the bench size in <em>Kharak Singh</em>, it wrote &ldquo;to be verified&rdquo; instead of guessing.</p>
+<p>To check the quotations I wrote a small script, <code>check_quotes.py</code>, that looks for every quotation in the judgment. It found all nine, and when I changed one quotation on purpose it marked it NOT FOUND.</p>
+<p><a class="repository-link" href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/examples/govind_brief.md" target="_blank" rel="noopener noreferrer">Read the full brief</a></p>
+        </section>
+        <section class="page-section">
+          <h2>Try it yourself</h2>
+<ol>
+<li>Copy the text of <a href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/SKILL.md" target="_blank" rel="noopener noreferrer"><code>SKILL.md</code></a> and paste it into ChatGPT, Gemini or Claude, with &ldquo;Follow these instructions for the rest of this chat.&rdquo;</li>
+<li>Upload a judgment PDF, for example from Indian Kanoon.</li>
+<li>Ask: &ldquo;Brief this judgment, focusing on the right to privacy.&rdquo;</li>
+<li>Save the answer as <code>brief.md</code> and run <code>python check_quotes.py brief.md judgment.pdf</code> to check every quotation.</li>
+</ol>
         </section>
         <section class="page-section">
           <h2>My interpretation</h2>
@@ -63,7 +79,7 @@
         <section class="page-section">
           <h2>Limitations</h2>
 <ul>
-  <li>I tried it only on a few judgments, mostly the privacy cases.</li>
+  <li>I have tested it on one full judgment (<em>Govind</em>); it still needs testing on more, including long judgments with several opinions.</li>
   <li>It cannot check a citation or a later case that is not in the text it is given.</li>
   <li>Even with these rules an LLM can make mistakes, so every brief still needs a person to check it against the judgment.</li>
 </ul>
@@ -72,6 +88,8 @@
           <h2>Files</h2>
 <ul class="file-list">
   <li><a href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/SKILL.md" target="_blank" rel="noopener noreferrer"><code>SKILL.md</code></a>: the skill, with the workflow, rules, output format and an example request</li>
+  <li><a href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/examples/govind_brief.md" target="_blank" rel="noopener noreferrer"><code>examples/govind_brief.md</code></a>: the test: a brief of <em>Govind</em> written with the skill</li>
+  <li><a href="https://github.com/jha-khushi/dh-04-skill-case-brief/blob/main/check_quotes.py" target="_blank" rel="noopener noreferrer"><code>check_quotes.py</code></a>: checks every quotation against the judgment</li>
 </ul>
         </section>
         <nav class="page-next" aria-label="Other assignments">
