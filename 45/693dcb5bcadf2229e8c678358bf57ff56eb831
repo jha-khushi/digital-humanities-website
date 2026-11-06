@@ -1,0 +1,21 @@
+assets/site.css
+  s_5a02c502e9a5a2::t_9978467ba764e6 346-373
+assignment-04.html
+  s_5a02c502e9a5a2::t_5e04bcb4f1c74a 60,63-219
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "45693dcb5bcadf2229e8c678358bf57ff56eb831",
+  "prompts": {},
+  "sessions": {
+    "s_5a02c502e9a5a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e2d63629-4982-4c11-a56f-53eb75dee1e6",
+        "model": "unknown"
+      },
+      "human_author": "jha-khushi <224996314+jha-khushi@users.noreply.github.com>"
+    }
+  }
+}
