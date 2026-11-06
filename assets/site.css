@@ -343,3 +343,31 @@ button.chip:hover, button.chip[aria-pressed="true"] { color: #fff; background: v
 .page-section h3 { margin-top: 2rem; }
 .page-section > h3:first-of-type, .kingdom h3, .moments h3, .info-panel h3 { margin-top: 0; }
 @media (max-width: 760px) { .tiles { grid-template-columns: repeat(20, minmax(0, 1fr)); row-gap: 9px; } .tile { width: auto; } }
+
+/* Assignment 04: run the skill */
+.demo-step { margin-top: 1.6rem; padding: clamp(1rem, 3vw, 1.4rem); background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); }
+.demo-step h3 { display: flex; gap: 0.6rem; align-items: center; margin: 0 0 0.6rem; }
+.demo-step h3 span { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; color: #fff; background: var(--accent); border-radius: 50%; font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; }
+.demo-step p { margin: 0.4rem 0; }
+.demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.9rem; }
+.demo-grid fieldset { margin: 0; padding: 0.8rem 1rem; border: 1px solid var(--line); }
+.demo-grid legend { padding: 0 0.3rem; color: var(--accent-deep); font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.demo-grid label { display: block; margin: 0.35rem 0; font-size: 0.95rem; }
+.field { display: block; margin: 0.6rem 0; font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--muted); }
+.field[hidden], .demo-step [hidden] { display: none; }
+.demo-step input[type=text], .demo-step select, .demo-step textarea { display: block; box-sizing: border-box; width: 100%; margin-top: 0.3rem; padding: 0.5rem 0.6rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line); font: 400 0.95rem/1.45 inherit; font-family: inherit; }
+.demo-step textarea { resize: vertical; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.82rem; }
+.demo-step input:focus-visible, .demo-step select:focus-visible, .demo-step textarea:focus-visible, .demo-button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.request-preview { margin-top: 1rem !important; padding: 0.8rem 1rem; background: #fdf3dc; border-left: 4px solid var(--highlight); font-style: italic; }
+.demo-button { padding: 0.6rem 1.1rem; color: #fff; background: var(--accent); border: 1px solid var(--accent); cursor: pointer; font-family: Arial, Helvetica, sans-serif; font-size: 0.9rem; font-weight: 700; }
+.demo-button:hover { background: var(--accent-deep); }
+.demo-button.secondary { color: var(--accent); background: var(--surface); }
+.demo-button.secondary:hover { color: #fff; background: var(--accent-deep); }
+.demo-status { min-height: 1.2em; color: var(--accent-deep); font-family: Arial, Helvetica, sans-serif; font-size: 0.88rem; font-weight: 700; }
+.demo-step details { margin-top: 0.8rem; }
+.check-list { margin: 0.6rem 0 0; padding: 0; list-style: none; }
+.check-list li { display: grid; grid-template-columns: 8.5rem 1fr; gap: 0.6rem; max-width: none; padding: 0.4rem 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
+.check-list .ok strong { color: #2e7d32; }
+.check-list .bad strong { color: #c62828; }
+@media (max-width: 560px) { .check-list li { grid-template-columns: 1fr; gap: 0.1rem; } }
+#check-result h3 { text-transform: none; font-size: 1.1rem; }
